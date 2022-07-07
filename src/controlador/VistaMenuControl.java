@@ -2,20 +2,24 @@ package controlador;
 
 import vista.VentanaPrincipal;
 
-public class PrincipalControl {
+public class VistaMenuControl {
 
     private static VentanaPrincipal ventana = new VentanaPrincipal();
 
     public static void mostrar() {
-        PrincipalControl.ventana.setVisible(true);
+        VistaMenuControl.ventana.setVisible(true);
     }
 
     public static void ocultar() {
-        PrincipalControl.ventana.setVisible(false);
+        VistaMenuControl.ventana.setVisible(false);
     }
 
     public static void cerrarSesion() {
-        PrincipalControl.ocultar();
+        VistaMenuControl.ocultar();
         LoginControl.mostrar();
+    }
+    
+    public static void mostrarVistaCliente() {
+    	ventana.setContenedorPrincipal(null);
     }
 }

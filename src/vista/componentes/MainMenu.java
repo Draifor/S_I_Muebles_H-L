@@ -3,6 +3,7 @@ package vista.componentes;
 import java.awt.GridLayout;
 import javax.swing.*;
 import utilidades.Color;
+import java.awt.FlowLayout;
 
 public class MainMenu extends JPanel {
 
@@ -13,9 +14,14 @@ public class MainMenu extends JPanel {
 	private SeccionPanel[] menu;
 	
 	public MainMenu() {
- 
+		FlowLayout flowLayout = (FlowLayout) getLayout();
+		flowLayout.setVgap(30);
+
+		this.setBackground(Color.AZUL_50.getColor());
+		
 		this.contenedorMenu = new JPanel();
-		this.contenedorMenu.setBackground(Color.AZUL_50.getColor());
+//		this.contenedorMenu.setBackground(Color.AZUL_50.getColor());
+		this.contenedorMenu.setOpaque(false);
         this.contenedorMenu.setLayout(new GridLayout(3, 2, 180, 70));
         
         this.menu = new SeccionPanel[length]; 

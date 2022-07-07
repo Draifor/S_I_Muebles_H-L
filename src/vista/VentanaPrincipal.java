@@ -10,8 +10,10 @@ public class VentanaPrincipal extends JFrame {
 
 	private String TITULO = "SISTEMA DE INVENTARIOS MUEBLES H&L";
 	private JPanel contenedor;
+	private JPanel contenedorPrincipal;
 	private Header encabezado;
-	private ContenedorPrincipal contenedorPrincipal;
+	private VistaMenu menuPrincipal;
+	private VistaCliente seccionCliente;
 
 	/**
 	 * Launch the application.
@@ -35,7 +37,7 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		iniciarComponentes();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setMinimumSize(new Dimension(650, 530));
+		setMinimumSize(new Dimension(1100, 700));
 		setSize(860, 570);
 		setLocationRelativeTo(null);
 		setTitle(this.TITULO);
@@ -44,13 +46,23 @@ public class VentanaPrincipal extends JFrame {
 	private void iniciarComponentes() {
 
 		this.encabezado = new Header();
-		this.contenedorPrincipal = new ContenedorPrincipal();
+		this.menuPrincipal = new VistaMenu();
 
 		this.contenedor = new JPanel();
 		this.contenedor.setLayout(new BorderLayout(0, 0));
 		this.setContentPane(contenedor);
+		
+		this.contenedorPrincipal = new JPanel();
+		this.contenedorPrincipal.setLayout(new BorderLayout(0, 0));
+		this.contenedorPrincipal.add(this.menuPrincipal, BorderLayout.CENTER);
+		
 		this.contenedor.add(this.encabezado, BorderLayout.NORTH);
 		this.contenedor.add(this.contenedorPrincipal, BorderLayout.CENTER);
+	}
+
+	public void setContenedorPrincipal(JPanel nuevoContenido) {
+		this.contenedorPrincipal.removeAll();
+		this.add(nuevoContenido, BorderLayout.CENTER);
 	}
 
 }
