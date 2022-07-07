@@ -14,6 +14,11 @@ public class VentanaPrincipal extends JFrame {
 	private Header encabezado;
 	private VistaMenu menuPrincipal;
 	private VistaCliente seccionCliente;
+//	private VistaDiseño seccionDiseño;
+//	private VistaMaterial seccionMaterial;
+//	private VistaOrdenCompra seccionOrdenCompra;
+//	private VistaProducto seccionProducto;
+//	private VistaVenta seccionVenta;
 
 	/**
 	 * Launch the application.
