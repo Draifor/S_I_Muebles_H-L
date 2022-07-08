@@ -8,26 +8,22 @@ import controlador.Operacion;
 
 public class ItemNav extends JPanel implements MouseListener {
 
-	private JLabel botonTxt;
+	private Texto itemTxt;
 	private Operacion onClick;
 
 	public ItemNav(String name, Operacion onClick) {
 
-		this.setBackground(Color.VERDE_50.getColor());
-		this.setBorder(BorderFactory.createLineBorder(Color.VERDE_100.getColor(), 2));
+		this.setBackground(Color.AZUL_30.getColor());
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		this.setDoubleBuffered(false);
 		this.setLayout(new BorderLayout(0, 0));
 		this.addMouseListener(this);
 
 		this.onClick = onClick;
-		this.botonTxt = new JLabel(name);
+		this.itemTxt = new Texto(name, 0, 15);
 
-		botonTxt.setFont(new Font("Times New Roman", 0, 15)); // NOI18N
-		botonTxt.setForeground(Color.WHITE.getColor());
-		botonTxt.setHorizontalAlignment(SwingConstants.CENTER);
+		itemTxt.setForeground(Color.WHITE.getColor());
 
-		this.add(botonTxt);
+		this.add(itemTxt);
 	}
 
 	@Override

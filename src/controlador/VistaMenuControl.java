@@ -19,7 +19,38 @@ public class VistaMenuControl {
         LoginControl.mostrar();
     }
     
+    public static void mostrarVistaMenu() {
+    	ventana.setContenidoPrincipal("");
+    	System.out.println("Mostrar Menu");
+    }
+    
     public static void mostrarVistaCliente() {
-    	ventana.setContenedorPrincipal(null);
+    	ventana.setContenidoPrincipal("Cliente");
+    	System.out.println("Mostrar Cliente");
+    }
+
+    public static void mostrarVistaDiseño() {
+    	ventana.setContenidoPrincipal("Diseño");
+    	System.out.println("Mostrar Diseño");
+    }
+
+    public static void mostrarVistaMaterial() {
+    	ventana.setContenidoPrincipal("Material");
+    	System.out.println("Mostrar Material");
+    }
+
+    public static void mostrarVistaOrdenCompra() {
+    	ventana.setContenidoPrincipal("OrdenCompra");
+    	System.out.println("Mostrar OrdenCompra");
+    }
+
+    public static void mostrarVistaProducto() {
+    	ventana.setContenidoPrincipal("Producto");
+    	System.out.println("Mostrar Producto");
+    }
+
+    public static void mostrarVistaVenta() {
+    	ventana.setContenidoPrincipal("Venta");
+    	System.out.println("Mostrar Venta");
     }
 }

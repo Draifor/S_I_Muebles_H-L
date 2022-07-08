@@ -1,16 +1,16 @@
 package vista.componentes;
 
+import controlador.Operacion; 
+import utilidades.Color;
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
-import utilidades.Color;
 
 public class SeccionPanel extends JPanel {
 
 	private Texto lblSeccion;
 
-	public SeccionPanel(String seccion) {
+	public SeccionPanel(String seccion, Operacion onClick) {
 
 		this.setBackground(Color.AZUL_30.getColor());
 		this.setBorder(BorderFactory.createLineBorder(Color.VERDE_100.getColor(), 2));
@@ -30,13 +30,13 @@ public class SeccionPanel extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
+				onClick.onMouseClicked();
 
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
+				onClick.onMouseClicked();
 
 			}
 
@@ -58,5 +58,5 @@ public class SeccionPanel extends JPanel {
 	private void seccionTxtMouseExited(MouseEvent evt) {
 		this.setBackground(Color.AZUL_30.getColor());
 	}
-
+	
 }

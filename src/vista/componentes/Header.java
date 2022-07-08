@@ -13,17 +13,19 @@ public class Header extends JPanel {
 	private Texto nombreEmpresa;
 	private Imagen logo;
 	private Fecha fecha;
+	private PaginaActual paginaActual;
 
 	public Header() {
 		this.setBackground(Color.AZUL_100.getColor());
-		this.setBorder(BorderFactory.createLineBorder(Color.VERDE_100.getColor(), 2));
 		this.setLayout(new BorderLayout(0, 0));
 
 		this.nombreEmpresa = new Texto("MUEBLES H&L", 1, 36);
 		this.logo = new Imagen(this.RUTA_IMAGEN);
 		this.fecha = new Fecha();
+		this.paginaActual = new PaginaActual("INVENTARIOS");
 
 		this.contenedor = new JPanel();
+//		this.contenedor.setBorder(BorderFactory.createLineBorder(Color.VERDE_100.getColor(), 2));
 		this.contenedor.setLayout(new BorderLayout(0, 0));
 		this.contenedor.setOpaque(false);
 		this.contenedor.add(this.logo, BorderLayout.WEST);
@@ -33,6 +35,7 @@ public class Header extends JPanel {
 		this.add(new JLabel("            "), BorderLayout.WEST);
 		this.add(this.contenedor, BorderLayout.CENTER);
 		this.add(new JLabel("            "), BorderLayout.EAST);
+		this.add(this.paginaActual, BorderLayout.SOUTH);
 	}
 
 }
