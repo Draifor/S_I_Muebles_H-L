@@ -8,10 +8,10 @@ public class NavMenu extends JPanel {
 
 	private String[] OPCIONES_MENU = { "Inicio", "Clientes", "Diseños", "Materiales", "Productos", "Ventas",
 			"Orden de Compra" };
-	private Operacion[] FUNCIONES_ON_CLICK = { () -> VistaMenuControl.mostrarVistaMenu(),
-			() -> VistaMenuControl.mostrarVistaCliente(), () -> VistaMenuControl.mostrarVistaDiseño(),
-			() -> VistaMenuControl.mostrarVistaMaterial(), () -> VistaMenuControl.mostrarVistaProducto(),
-			() -> VistaMenuControl.mostrarVistaOrdenCompra(), () -> VistaMenuControl.mostrarVistaVenta() };
+	private Operacion[] FUNCIONES_ON_CLICK = { () -> VentanaPrincipalControl.mostrarVistaMenu(),
+			() -> VentanaPrincipalControl.mostrarVistaCliente(), () -> VentanaPrincipalControl.mostrarVistaDiseño(),
+			() -> VentanaPrincipalControl.mostrarVistaMaterial(), () -> VentanaPrincipalControl.mostrarVistaProducto(),
+			() -> VentanaPrincipalControl.mostrarVistaOrdenCompra(), () -> VentanaPrincipalControl.mostrarVistaVenta() };
 	private int length = OPCIONES_MENU.length;
 
 	private ItemNav[] menu;

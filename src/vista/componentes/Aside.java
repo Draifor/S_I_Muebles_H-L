@@ -31,7 +31,7 @@ public class Aside extends JPanel {
 		this.lblCargo = new Texto("CARGO", 1, 18); 
 		this.lblCargo.setBounds(47, 207, 105, 29);
 		
-        this.onClick = () -> VistaMenuControl.cerrarSesion();
+        this.onClick = () -> VentanaPrincipalControl.cerrarSesion();
         this.btnCerrarSesion = new Boton("Cerrar Sesión", this.onClick);
         this.btnCerrarSesion.setBounds(47, 245, 105, 27);
         

@@ -16,6 +16,7 @@ public class LoginControl {
 
     public static void iniciarSesion() {
         LoginControl.ocultar();
-        VistaMenuControl.mostrar();
+        VentanaPrincipalControl.mostrar();
+        VentanaPrincipalControl.mostrarVistaMenu();
     }
 }

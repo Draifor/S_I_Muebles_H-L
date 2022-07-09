@@ -8,10 +8,10 @@ import controlador.*;
 public class MainMenu extends JPanel {
 
 	private String[] MENU_ITEMS = { "CLIENTES", "DISEÑOS", "MATERIALES", "PRODUCTOS", "ORDEN DE COMPRA", "VENTAS" };
-	private Operacion[] FUNCIONES_ON_CLICK = { () -> VistaMenuControl.mostrarVistaCliente(),
-			() -> VistaMenuControl.mostrarVistaDiseño(), () -> VistaMenuControl.mostrarVistaMaterial(),
-			() -> VistaMenuControl.mostrarVistaProducto(), () -> VistaMenuControl.mostrarVistaOrdenCompra(),
-			() -> VistaMenuControl.mostrarVistaVenta() };
+	private Operacion[] FUNCIONES_ON_CLICK = { () -> VentanaPrincipalControl.mostrarVistaCliente(),
+			() -> VentanaPrincipalControl.mostrarVistaDiseño(), () -> VentanaPrincipalControl.mostrarVistaMaterial(),
+			() -> VentanaPrincipalControl.mostrarVistaProducto(), () -> VentanaPrincipalControl.mostrarVistaOrdenCompra(),
+			() -> VentanaPrincipalControl.mostrarVistaVenta() };
 	private int length = MENU_ITEMS.length;
 
 	private JPanel contenedorMenu;
