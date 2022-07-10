@@ -26,17 +26,17 @@ public class Tabla extends JPanel implements MouseListener {
 	private int columnasTabla;
 
 	public Tabla() {
-		
+
 		this.setLayout(new BorderLayout(0, 0));
 
 		this.tabla = new JTable();
 		this.tabla.setBackground(Color.WHITE.getColor());
 		this.tabla.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		this.tabla.addMouseListener(this);
-		
+
 		this.scrollPaneTabla = new JScrollPane();
 		this.scrollPaneTabla.setViewportView(this.tabla);
-		
+
 		this.add(this.scrollPaneTabla);
 
 		this.construirTabla();
@@ -54,12 +54,25 @@ public class Tabla extends JPanel implements MouseListener {
 	private ArrayList<? extends Object> consultarLista() {
 		ArrayList<Cliente> lista = new ArrayList<>();
 
-		lista.add(new Cliente("Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
 		return lista;
 	}
 
 	private Object[][] obtenerMatrizDatos(String[] titulosColumnas, String tipoLista) {
-		this.cantidadFilas = this.lista.size() < this.MIN_FILAS ? this.lista.size() : this.MIN_FILAS;
+		this.cantidadFilas = this.lista.size() > this.MIN_FILAS ? this.lista.size() : this.MIN_FILAS;
 
 		String informacion[][] = new String[this.cantidadFilas][titulosColumnas.length];
 
@@ -75,7 +88,6 @@ public class Tabla extends JPanel implements MouseListener {
 				informacion[i][ClientesColumnas.CELULAR] = ((Cliente) lista.get(i)).getCelular() + "";
 				informacion[i][ClientesColumnas.DIRECCION] = ((Cliente) lista.get(i)).getDireccion() + "";
 			}
-
 		}
 
 		return informacion;
@@ -89,9 +101,14 @@ public class Tabla extends JPanel implements MouseListener {
 		this.columnasTabla = tabla.getColumnCount();
 
 		// se recorre y asignan las celdas que almacenan datos de tipo texto
-		for (int i = 0; i < titulos.length; i++) {
-			System.out.println(i);
-			tabla.getColumnModel().getColumn(i).setCellRenderer(new GestionCeldas());
+		for (int i = 0; i < ClientesColumnas.TIPO_TEXTO.length; i++) {
+			tabla.getColumnModel().getColumn(ClientesColumnas.TIPO_TEXTO[i]).setCellRenderer(new GestionCeldas());
+		}
+
+		// Se recorre para asignar datos de tipo numero
+		for (int i = 0; i < ClientesColumnas.TIPO_NUMERO.length; i++) {
+			tabla.getColumnModel().getColumn(ClientesColumnas.TIPO_NUMERO[i])
+					.setCellRenderer(new GestionCeldas("numero"));
 		}
 
 		this.tabla.getTableHeader().setReorderingAllowed(false);
@@ -99,10 +116,10 @@ public class Tabla extends JPanel implements MouseListener {
 		this.tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
 		this.tabla.getColumnModel().getColumn(ClientesColumnas.COD_CLIENTE).setPreferredWidth(115);// documento
-		this.tabla.getColumnModel().getColumn(ClientesColumnas.NOMBRE).setPreferredWidth(280);// nombre
-		this.tabla.getColumnModel().getColumn(ClientesColumnas.APELLIDO).setPreferredWidth(250);// direccion
+		this.tabla.getColumnModel().getColumn(ClientesColumnas.NOMBRE).setPreferredWidth(230);// nombre
+		this.tabla.getColumnModel().getColumn(ClientesColumnas.APELLIDO).setPreferredWidth(230);// direccion
 		this.tabla.getColumnModel().getColumn(ClientesColumnas.IDENTIFICACION).setPreferredWidth(150);// telefono
-		this.tabla.getColumnModel().getColumn(ClientesColumnas.CELULAR).setPreferredWidth(280);// profesion
+		this.tabla.getColumnModel().getColumn(ClientesColumnas.CELULAR).setPreferredWidth(150);// profesion
 		this.tabla.getColumnModel().getColumn(ClientesColumnas.DIRECCION).setPreferredWidth(280);// edad
 
 		// personaliza el encabezado

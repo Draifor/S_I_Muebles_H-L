@@ -13,6 +13,7 @@ public class ContenedorVista extends JPanel {
 	public ContenedorVista(String paginaActual, JPanel contenidoVista) {
 
 		setLayout(new BorderLayout(0, 0));
+		this.setOpaque(false);
 
 		this.paginaActual = new PaginaActual(paginaActual);
 		this.navegacion = new NavMenu();

@@ -13,6 +13,7 @@ public class VistaCliente extends JPanel {
 	public VistaCliente() {
 
 		this.setLayout(new BorderLayout(0, 0));
+		this.setOpaque(false);
 		
 		this.tabla = new Tabla();
 		
