@@ -56,7 +56,8 @@ public class VentanaPrincipal extends JFrame {
         this.contenedor.add(contenidoPrincipal, BorderLayout.CENTER);
     }
     
-    public void setContenidoPrincipal(JPanel nuevoContenido) {
+    public void setContenidoPrincipal(JPanel nuevoContenido, String nombrePaginaActual) {
     	this.contenidoPrincipal.setViewportView(nuevoContenido);
+    	PaginaActual.setPaginaActual(nombrePaginaActual);
     }
 }

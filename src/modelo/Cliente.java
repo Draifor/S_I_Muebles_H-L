@@ -4,14 +4,16 @@ public class Cliente {
 
     private int IdCliente;
     private String nombre;
-    private double identificacion;
+    private String apellido;
+	private double identificacion;
     private String direccion;
     private double celular;
     private static int contadorClientes;
 
-    public Cliente(String nombre, double identificacion, String direccion, double celular) {
+    public Cliente(String nombre, String apellido, double identificacion, String direccion, double celular) {
         this.IdCliente = ++Cliente.contadorClientes;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.identificacion = identificacion;
         this.direccion = direccion;
         this.celular = celular;
@@ -29,6 +31,14 @@ public class Cliente {
         this.nombre = nombre;
     }
 
+    public String getApellido() {
+    	return apellido;
+    }
+    
+    public void setApellido(String apellido) {
+    	this.apellido = apellido;
+    }
+    
     public double getIdentificacion() {
         return this.identificacion;
     }

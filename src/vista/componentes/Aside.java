@@ -2,6 +2,7 @@ package vista.componentes;
 
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import controlador.*;
 import utilidades.Color;
@@ -21,6 +22,7 @@ public class Aside extends JPanel {
 		this.setBackground(Color.AZUL_70.getColor());
 		this.setLayout(null);
 		this.setPreferredSize(new Dimension(200, 290));
+		this.setBorder(BorderFactory.createLineBorder(Color.AZUL_100.getColor(), 1));
 		
 		this.imgPerfil = new Imagen(RUTA_IMAGEN);
 		this.imgPerfil.setBounds(35, 11, 130, 150);

@@ -22,6 +22,7 @@ public class MainMenu extends JPanel {
 		flowLayout.setVgap(30);
 
 		this.setBackground(Color.AZUL_50.getColor());
+		this.setBorder(BorderFactory.createLineBorder(Color.AZUL_100.getColor(), 1));
 
 		this.contenedorMenu = new JPanel();
 //		this.contenedorMenu.setBackground(Color.AZUL_50.getColor());
