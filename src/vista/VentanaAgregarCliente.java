@@ -1,13 +1,17 @@
-package vista.componentes;
-
-import javax.swing.*;
-import java.awt.*;
+package vista;
 
 import utilidades.Color;
 import utilidades.Operacion;
+import vista.componentes.Boton;
+import vista.componentes.CampoInput;
+import vista.componentes.Label;
+import vista.componentes.Texto;
+
+import javax.swing.*;
+import java.awt.*;
 import controlador.*;
 
-public class MainLogin extends JPanel {
+public class VentanaAgregarCliente extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contenedorLogin;
@@ -19,7 +23,7 @@ public class MainLogin extends JPanel {
     private Boton btnIngresar;
     private Operacion onClick;
     
-	public MainLogin() {
+	public VentanaAgregarCliente() {
 		setBackground(Color.AZUL_50.getColor());
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
 

@@ -1,7 +1,8 @@
 package vista.componentes;
 
-import controlador.Operacion; 
 import utilidades.Color;
+import utilidades.Operacion;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

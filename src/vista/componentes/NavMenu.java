@@ -8,6 +8,7 @@ import javax.swing.border.MatteBorder;
 
 import controlador.*;
 import utilidades.Color;
+import utilidades.Operacion;
 
 public class NavMenu extends JPanel {
 

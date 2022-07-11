@@ -1,4 +1,4 @@
-package controlador;
+package utilidades;
 
 @FunctionalInterface
 public interface Operacion {

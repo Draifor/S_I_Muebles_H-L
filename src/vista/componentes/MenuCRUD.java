@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import controlador.*;
 import utilidades.Color;
+import utilidades.Operacion;
 
 public class MenuCRUD extends JPanel {
 

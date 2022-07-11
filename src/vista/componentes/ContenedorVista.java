@@ -3,8 +3,6 @@ package vista.componentes;
 import java.awt.*;
 import javax.swing.*;
 
-import utilidades.Color;
-
 public class ContenedorVista extends JPanel {
 
 	private static final long serialVersionUID = 1L;

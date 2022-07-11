@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 import controlador.*;
+import utilidades.Operacion;
 
 public class SesionUsuario extends JPanel {
 

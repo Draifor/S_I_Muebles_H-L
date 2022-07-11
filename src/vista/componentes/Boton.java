@@ -1,10 +1,11 @@
 package vista.componentes;
 
 import utilidades.Color;
+import utilidades.Operacion;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import controlador.Operacion;
 
 public class Boton extends JPanel implements MouseListener {
 

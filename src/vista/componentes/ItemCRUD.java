@@ -6,8 +6,8 @@ import java.awt.Cursor;
 import java.awt.event.*;
 import javax.swing.border.LineBorder;
 
-import controlador.Operacion;
 import utilidades.Color;
+import utilidades.Operacion;
 
 public class ItemCRUD extends JPanel implements MouseListener {
 

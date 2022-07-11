@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
 import utilidades.Color;
+import utilidades.Operacion;
 import controlador.*;
 
 public class MainMenu extends JPanel {

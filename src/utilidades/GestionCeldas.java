@@ -12,9 +12,9 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 	private static DecimalFormatSymbols simbolos;
 	private static DecimalFormat formato;
 
-	public GestionCeldas() {
-		this.tipo = "texto";
-	}
+//	public GestionCeldas() {
+//		this.tipo = "texto";
+//	}
 
 	public GestionCeldas(String tipo) {
 		this.tipo = tipo;
@@ -30,9 +30,9 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 			simbolos.setGroupingSeparator('.');
 			formato = new DecimalFormat("0000", simbolos);
 			value = formato.format(Double.parseDouble((String) value));
+			super.getTableCellRendererComponent(table, value, isSelected, isFocused, row, column);
 		}
 		
-		super.getTableCellRendererComponent(table, value, isSelected, isFocused, row, column);
 		
 		/*
 		 * Este metodo controla toda la tabla, podemos obtener el valor que contiene

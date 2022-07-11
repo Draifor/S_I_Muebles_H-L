@@ -5,17 +5,15 @@ import java.util.*;
 
 import modelo.conexion.Conexion;
 import modelo.vo.ClienteVo;
+import utilidades.ClientesColumnas;
 
 public class ClienteDao {
-	
-	private String[] TITULOS_COLUMNAS = {""};
-	
+
 	public void agregarCliente() {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
-		
-		
+
 		conexion.desconectar();
 	}
 
@@ -32,14 +30,18 @@ public class ClienteDao {
 			ResultSet resultado = statement.executeQuery("SELECT * FROM clientes");
 
 			while (resultado.next()) {
-				ClienteVo cliente = new ClienteVo(resultado.getInt("Cod_Cliente"), resultado.getString("Nombre"),
-						resultado.getString("Apellido"), (double) resultado.getInt("Identificacion"),
-						resultado.getString("Direccion"), resultado.getString("Celular"));
+				ClienteVo cliente = new ClienteVo(
+						resultado.getInt(ClientesColumnas.TITULOS_COLUMNAS[ClientesColumnas.CODIGO]),
+						resultado.getString(ClientesColumnas.TITULOS_COLUMNAS[ClientesColumnas.NOMBRE]),
+						resultado.getString(ClientesColumnas.TITULOS_COLUMNAS[ClientesColumnas.APELLIDO]),
+						(double) resultado.getInt(ClientesColumnas.TITULOS_COLUMNAS[ClientesColumnas.IDENTIFICACION]),
+						resultado.getString(ClientesColumnas.TITULOS_COLUMNAS[ClientesColumnas.CELULAR]),
+						resultado.getString(ClientesColumnas.TITULOS_COLUMNAS[ClientesColumnas.DIRECCION]));
 
 				clientes.add(cliente);
 
 			}
-			
+
 			statement.close();
 			conexion.desconectar();
 		} catch (SQLException e) {
@@ -48,8 +50,4 @@ public class ClienteDao {
 
 		return clientes;
 	}
-	
-//	public String[] obtenerTitulosColumnas() {
-////		String titulosColumnas
-//	}
 }

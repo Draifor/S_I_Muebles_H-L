@@ -9,13 +9,13 @@ public class ClienteVo {
     private String direccion;
     private String celular;
 
-    public ClienteVo(int IdCliente, String nombre, String apellido, double identificacion, String direccion, String celular) {
+    public ClienteVo(int IdCliente, String nombre, String apellido, double identificacion, String celular, String direccion) {
         this.IdCliente = IdCliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.identificacion = identificacion;
-        this.direccion = direccion;
         this.celular = celular;
+        this.direccion = direccion;
     }
 
     public int getIdCliente() {

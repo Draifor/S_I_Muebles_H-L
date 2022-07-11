@@ -1,13 +1,13 @@
 package vista.componentes;
 
 import utilidades.Color;
+import utilidades.Operacion;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
-
-import controlador.Operacion;
 
 public class ItemNav extends JPanel implements MouseListener {
 
