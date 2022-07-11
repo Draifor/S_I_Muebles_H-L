@@ -16,13 +16,10 @@ public class Tabla extends JPanel implements MouseListener {
 	private final int MIN_FILAS = 18;
 	private JScrollPane scrollPaneTabla;
 	private JTable tabla;
-	private int cantidadFilas;
 	List<? extends Object> lista;
 	private ModeloTabla modelo;
 
-	// No se esto para que me sirve
 	private int filasTabla;
-//	private int columnasTabla;
 
 	public Tabla() {
 
@@ -66,9 +63,8 @@ public class Tabla extends JPanel implements MouseListener {
 //	}
 
 	private Object[][] obtenerMatrizDatos(String[] titulosColumnas, String tipoLista) {
-		this.cantidadFilas = this.lista.size() < this.MIN_FILAS ? this.lista.size() : this.MIN_FILAS;
 
-		String informacion[][] = new String[this.cantidadFilas][titulosColumnas.length];
+		String informacion[][] = new String[this.lista.size()][titulosColumnas.length];
 
 		switch (tipoLista.toLowerCase()) {
 
