@@ -1,11 +1,9 @@
 package vista.componentes;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.table.JTableHeader;
 
 import modelo.Cliente;
@@ -14,7 +12,7 @@ import utilidades.*;
 public class Tabla extends JPanel implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
-	private final int MIN_FILAS = 10;
+	private final int MIN_FILAS = 17;
 	private JScrollPane scrollPaneTabla;
 	private JTable tabla;
 	private int cantidadFilas;
@@ -23,21 +21,22 @@ public class Tabla extends JPanel implements MouseListener {
 
 	// No se esto para que me sirve
 	private int filasTabla;
-	private int columnasTabla;
+//	private int columnasTabla;
 
 	public Tabla() {
 
-		this.setLayout(new BorderLayout(0, 0));
+		setLayout(new BorderLayout(0, 0));
 
 		this.tabla = new JTable();
 		this.tabla.setBackground(Color.WHITE.getColor());
-		this.tabla.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		this.tabla.setBorder(null);
 		this.tabla.addMouseListener(this);
 
 		this.scrollPaneTabla = new JScrollPane();
+		scrollPaneTabla.setBorder(null);
 		this.scrollPaneTabla.setViewportView(this.tabla);
 
-		this.add(this.scrollPaneTabla);
+		add(this.scrollPaneTabla);
 
 		this.construirTabla();
 	}
@@ -62,17 +61,11 @@ public class Tabla extends JPanel implements MouseListener {
 		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
 		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
 		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
 		return lista;
 	}
 
 	private Object[][] obtenerMatrizDatos(String[] titulosColumnas, String tipoLista) {
-		this.cantidadFilas = this.lista.size() > this.MIN_FILAS ? this.lista.size() : this.MIN_FILAS;
+		this.cantidadFilas = this.lista.size() < this.MIN_FILAS ? this.lista.size() : this.MIN_FILAS;
 
 		String informacion[][] = new String[this.cantidadFilas][titulosColumnas.length];
 
@@ -98,8 +91,15 @@ public class Tabla extends JPanel implements MouseListener {
 		this.tabla.setModel(this.modelo);
 
 		this.filasTabla = tabla.getRowCount();
-		this.columnasTabla = tabla.getColumnCount();
+//		this.columnasTabla = tabla.getColumnCount();
 
+		int filasVaciasRequeridas = this.MIN_FILAS - filasTabla;
+
+		if (filasVaciasRequeridas > 0) {
+			for (int i = 0; i < filasVaciasRequeridas; i++) {
+				modelo.addRow(new Object[] { "", "", "", "", "", "" });
+			}
+		}
 		// se recorre y asignan las celdas que almacenan datos de tipo texto
 		for (int i = 0; i < ClientesColumnas.TIPO_TEXTO.length; i++) {
 			tabla.getColumnModel().getColumn(ClientesColumnas.TIPO_TEXTO[i]).setCellRenderer(new GestionCeldas());

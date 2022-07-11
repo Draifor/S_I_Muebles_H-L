@@ -24,11 +24,11 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean isFocused,
 			int row, int column) {
 
-		if (this.tipo == "numero") {
+		if (this.tipo == "numero" && !((String) value).equals("")) {
 			simbolos = new DecimalFormatSymbols();
 			simbolos.setDecimalSeparator(',');
 			simbolos.setGroupingSeparator('.');
-			formato = new DecimalFormat("#,##0", simbolos);
+			formato = new DecimalFormat("0000", simbolos);
 			value = formato.format(Double.parseDouble((String) value));
 		}
 		

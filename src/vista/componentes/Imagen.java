@@ -5,7 +5,8 @@ import javax.swing.*;
 public class Imagen extends JLabel {
 
 	public Imagen(String source) {
-		this.setIcon(new ImageIcon(source));
+		setIcon(new ImageIcon(getClass().getResource(source)));
+		setHorizontalAlignment(SwingConstants.CENTER);
 	}
 
 }

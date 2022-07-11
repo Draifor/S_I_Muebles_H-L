@@ -1,6 +1,11 @@
 package vista.componentes;
 
+import java.awt.FlowLayout;
+
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
+
 import controlador.*;
 import utilidades.Color;
 
@@ -17,8 +22,11 @@ public class NavMenu extends JPanel {
 	private ItemNav[] menu;
 
 	public NavMenu() {
-
-		this.setBackground(Color.AZUL_30.getColor());
+		FlowLayout flowLayout = (FlowLayout) getLayout();
+		flowLayout.setHgap(30);
+		
+		setBackground(Color.AZUL_30.getColor());
+		setBorder(new MatteBorder(2, 0, 2, 0, Color.AZUL_100.getColor()));
 
 		this.menu = new ItemNav[length];
 		for (int i = 0; i < length; i++) {

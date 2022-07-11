@@ -8,7 +8,8 @@ import java.awt.BorderLayout;
 public class Header extends JPanel {
 
 //	private String RUTA_IMAGEN = "C:\\Users\\Alfredo Parra\\Documents\\Eclipse-Workspace\\S_I_Muebles_H-L\\src\\vista\\img\\logo.jpeg";
-	private String RUTA_IMAGEN = "C:\\Users\\USER\\Documents\\Eclipse-Workspace\\S_I_Muebles_H-L\\src\\utilidades\\img\\logo.jpeg";
+//	private String RUTA_IMAGEN = "C:\\Users\\USER\\Documents\\Eclipse-Workspace\\S_I_Muebles_H-L\\src\\utilidades\\img\\logo.jpeg";
+	private String RUTA_IMAGEN = "/utilidades/img/logo.jpeg";
 	private JPanel contenedor;
 	private Texto nombreEmpresa;
 	private Imagen logo;

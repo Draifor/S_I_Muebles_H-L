@@ -7,57 +7,55 @@ import vista.componentes.*;
 
 public class VentanaPrincipal extends JFrame {
 
-    private String TITULO = "SISTEMA DE INVENTARIOS MUEBLES H&L";
-    private JPanel contenedor;
-    private JScrollPane contenidoPrincipal;
-    private Header encabezado;
-    
-    public static void main(String[] args) {
-    	
-    	EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    VentanaPrincipal frame = new VentanaPrincipal();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+	private static final long serialVersionUID = 1L;
+	private String TITULO = "SISTEMA DE INVENTARIOS MUEBLES H&L";
+	private JPanel contenedor;
+	private JScrollPane contenidoPrincipal;
+	private Header encabezado;
 
-    /**
-     * Create the frame.
-     */
-    public VentanaPrincipal() {
-        iniciarComponentes();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1100, 700);
-        setMinimumSize(new Dimension(860, 630));
-        setLocationRelativeTo(null);
-        setTitle(this.TITULO);
-    }
+	public static void main(String[] args) {
 
-    private void iniciarComponentes() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaPrincipal frame = new VentanaPrincipal();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-        this.encabezado = new Header();
+	/**
+	 * Create the frame.
+	 */
+	public VentanaPrincipal() {
+		iniciarComponentes();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(1100, 717);
+		setMinimumSize(new Dimension(860, 630));
+		setLocationRelativeTo(null);
+		setTitle(this.TITULO);
+	}
 
-        this.contenedor = new JPanel();
-        this.contenedor.setLayout(new BorderLayout(0, 0));
-        this.setContentPane(contenedor);
+	private void iniciarComponentes() {
 
-        this.contenidoPrincipal = new JScrollPane();
-        contenidoPrincipal.setViewportBorder(null);
-        this.contenidoPrincipal.getViewport().setBackground(Color.AZUL_30.getColor());
-//        contenidoPrincipal.setLayout(new BorderLayout(0, 0));
-//		contenidoPrincipal.add(this.menuPrincipal, BorderLayout.CENTER);
+		this.contenedor = new JPanel();
+		this.contenedor.setLayout(new BorderLayout(0, 0));
+		setContentPane(this.contenedor);
 
-        this.contenedor.add(this.encabezado, BorderLayout.NORTH);
-        this.contenedor.add(contenidoPrincipal, BorderLayout.CENTER);
-    }
-    
-    public void setContenidoPrincipal(JPanel nuevoContenido, String nombrePaginaActual) {
-    	this.contenidoPrincipal.setViewportView(nuevoContenido);
-    	PaginaActual.setPaginaActual(nombrePaginaActual);
-    }
+		this.encabezado = new Header();
+
+		this.contenidoPrincipal = new JScrollPane();
+		this.contenidoPrincipal.getViewport().setBackground(Color.AZUL_30.getColor());
+
+		add(this.encabezado, BorderLayout.NORTH);
+		add(this.contenidoPrincipal, BorderLayout.CENTER);
+	}
+
+	public void setContenidoPrincipal(JPanel nuevoContenido, String nombrePaginaActual) {
+		this.contenidoPrincipal.setViewportView(nuevoContenido);
+		PaginaActual.setPaginaActual(nombrePaginaActual);
+	}
 }

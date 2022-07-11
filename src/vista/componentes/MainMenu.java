@@ -7,6 +7,7 @@ import controlador.*;
 
 public class MainMenu extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private String[] MENU_ITEMS = { "CLIENTES", "DISEÑOS", "MATERIALES", "PRODUCTOS", "ORDEN DE COMPRA", "VENTAS" };
 	private Operacion[] FUNCIONES_ON_CLICK = { () -> VentanaPrincipalControl.mostrarVistaCliente(),
 			() -> VentanaPrincipalControl.mostrarVistaDiseño(), () -> VentanaPrincipalControl.mostrarVistaMaterial(),
