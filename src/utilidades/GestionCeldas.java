@@ -45,7 +45,7 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 		// definimos colores por defecto
 		java.awt.Color colorFondo = null;
 		java.awt.Color colorFondoPorDefecto = Color.GRIS_50.getColor();
-		java.awt.Color colorFondoSeleccion = Color.GRIS_30.getColor();
+		java.awt.Color colorFondoSeleccion = Color.GRIS_70.getColor();
 
 		/*
 		 * Si la celda del evento es la seleccionada se asigna el fondo por defecto para

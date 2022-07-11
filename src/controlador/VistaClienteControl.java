@@ -11,8 +11,8 @@ public class VistaClienteControl implements VistaControl {
 
 	private static ClienteDao clienteDao = new ClienteDao();
 
-	public static void agregarCliente() {
-		VistaClienteControl.clienteDao.agregarCliente();
+	public static ClienteDao getClienteDao() {
+		return VistaClienteControl.clienteDao;
 	}
 
 	public static String[][] obtenerClientes() {

@@ -6,6 +6,7 @@ import vista.componentes.*;
 
 public class VentanaLogin extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private String TITULO = "LOGIN - SISTEMA DE INVENTARIOS MUEBLES H&L";
 	private JPanel contenedor;
 	private MainLogin contenidoPrincipal;
@@ -49,7 +50,8 @@ public class VentanaLogin extends JFrame {
 
 		this.contenedor = new JPanel();
 		this.contenedor.setLayout(new BorderLayout(0, 0));
-		this.setContentPane(this.contenedor);
+		setContentPane(this.contenedor);
+		
 		this.contenedor.add(this.encabezado, BorderLayout.NORTH);
 		this.contenedor.add(this.contenidoPrincipal, BorderLayout.CENTER);
 		this.contenedor.add(this.piePagina, BorderLayout.SOUTH);

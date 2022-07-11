@@ -1,6 +1,12 @@
 package controlador;
 
 import vista.*;
+import vista.cliente.VistaCliente;
+import vista.diseño.VistaDiseño;
+import vista.material.VistaMaterial;
+import vista.ordencompra.VistaOrdenCompra;
+import vista.producto.VistaProducto;
+import vista.venta.VistaVenta;
 
 public class VentanaPrincipalControl {
 

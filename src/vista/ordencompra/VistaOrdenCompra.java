@@ -1,4 +1,4 @@
-package vista;
+package vista.ordencompra;
 
 import javax.swing.JPanel;
 

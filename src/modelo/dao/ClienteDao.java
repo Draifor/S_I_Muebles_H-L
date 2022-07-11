@@ -9,7 +9,7 @@ import utilidades.ClientesColumnas;
 
 public class ClienteDao {
 
-	public void agregarCliente() {
+	public void agregarCliente(ClienteVo nuevoCliente) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();

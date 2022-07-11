@@ -1,4 +1,4 @@
-package vista;
+package vista.cliente;
 
 import java.awt.BorderLayout;
 import javax.swing.*;
