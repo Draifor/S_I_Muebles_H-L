@@ -3,17 +3,16 @@ package vista.componentes;
 import javax.swing.*;
 import java.awt.FlowLayout;
 
-import controlador.Operacion;
-import controlador.VentanaPrincipalControl;
+import controlador.*;
 import utilidades.Color;
 
 public class MenuCRUD extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private String[] MENU_LABELS = { "Buscar", "Agregar", "Modificar", "Eliminar" };
+	private String[] MENU_LABELS = { " Buscar ", "Agregar", "Modificar", " Eliminar " };
 	private String[] RUTA_IMAGENES = {"/utilidades/img/look.png", "/utilidades/img/add.png", "/utilidades/img/edit.png", "/utilidades/img/del.png"};
 	private Operacion[] FUNCIONES_ON_CLICK = { () -> VentanaPrincipalControl.mostrarVistaCliente(),
-			() -> VentanaPrincipalControl.mostrarVistaDiseño(), () -> VentanaPrincipalControl.mostrarVistaMaterial(),
+			() -> VistaClienteControl.agregarCliente(), () -> VentanaPrincipalControl.mostrarVistaMaterial(),
 			() -> VentanaPrincipalControl.mostrarVistaProducto() };
 	private int length = MENU_LABELS.length;
 	

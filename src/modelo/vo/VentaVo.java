@@ -1,19 +1,19 @@
-package modelo;
+package modelo.vo;
 
-public class Venta {
+public class VentaVo {
 
     private int IdVenta;
     private int IdCliente;
     private int IdOrden;
-    private Producto[] productos;
+    private ProductoVo[] productoVos;
     private double precio;
     private static int contadorVentas;
 
-    public Venta(int IdCliente, int IdOrden, Producto[] productos, double precio) {
-        this.IdVenta = ++Venta.contadorVentas;
+    public VentaVo(int IdCliente, int IdOrden, ProductoVo[] productos, double precio) {
+        this.IdVenta = ++VentaVo.contadorVentas;
         this.IdCliente = IdCliente;
         this.IdOrden = IdOrden;
-        this.productos = productos;
+        this.productoVos = productos;
         this.precio = precio;
     }
 
@@ -37,12 +37,12 @@ public class Venta {
         this.IdOrden = IdFactura;
     }
 
-    public Producto[] getProductos() {
-        return this.productos;
+    public ProductoVo[] getProductos() {
+        return this.productoVos;
     }
 
-    public void setProductos(Producto[] productos) {
-        this.productos = productos;
+    public void setProductos(ProductoVo[] productos) {
+        this.productoVos = productos;
     }
 
     public double getPrecio() {
@@ -60,7 +60,7 @@ public class Venta {
         sb.append("IdVenta: ").append(this.IdVenta);
         sb.append(", IdCliente: ").append(this.IdCliente);
         sb.append(", IdFactura: ").append(this.IdOrden);
-        sb.append(", refProducto: ").append(this.productos);
+        sb.append(", refProducto: ").append(this.productoVos);
         sb.append(", precio: ").append(this.precio);
         sb.append('}');
         return sb.toString();

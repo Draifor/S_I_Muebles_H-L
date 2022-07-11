@@ -18,6 +18,7 @@ public class ItemNav extends JPanel implements MouseListener {
 		
 		FlowLayout flowLayout = (FlowLayout) getLayout();
 		flowLayout.setHgap(10);
+		flowLayout.setVgap(2);
 		
 		setBackground(Color.AZUL_30.getColor());
 		setBorder(new MatteBorder(0, 0, 0, 2, Color.AZUL_100.getColor()));
@@ -25,7 +26,7 @@ public class ItemNav extends JPanel implements MouseListener {
 		addMouseListener(this);
 
 		this.onClick = onClick;
-		this.itemTxt = new Texto(name, 0, 15);
+		this.itemTxt = new Texto(name, 0, 16);
 
 		itemTxt.setForeground(Color.AZUL_100.getColor());
 

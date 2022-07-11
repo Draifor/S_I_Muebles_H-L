@@ -75,7 +75,7 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 		// this.setForeground( (selected)? new Color(255,255,255) :new Color(32,117,32)
 		// );
 		this.setBackground((isSelected) ? colorFondo : Color.WHITE.getColor());
-		this.setFont(new Font("Times New Roman", 1, 12));
+		this.setFont(new Font("Times New Roman", 0, 16));
 		// this.setFont(bold);
 
 		return this;

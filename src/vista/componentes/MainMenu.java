@@ -2,6 +2,8 @@ package vista.componentes;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
+
 import utilidades.Color;
 import controlador.*;
 
@@ -23,7 +25,8 @@ public class MainMenu extends JPanel {
 		flowLayout.setVgap(30);
 
 		this.setBackground(Color.AZUL_50.getColor());
-		this.setBorder(BorderFactory.createLineBorder(Color.AZUL_100.getColor(), 1));
+//		this.setBorder(BorderFactory.createLineBorder(Color.AZUL_100.getColor(), 1));
+		setBorder(new MatteBorder(0, 1, 1, 1, Color.AZUL_100.getColor()));
 
 		this.contenedorMenu = new JPanel();
 //		this.contenedorMenu.setBackground(Color.AZUL_50.getColor());

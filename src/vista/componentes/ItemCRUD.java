@@ -9,7 +9,7 @@ import javax.swing.border.LineBorder;
 import controlador.Operacion;
 import utilidades.Color;
 
-public class ItemCRUD extends JPanel implements ActionListener {
+public class ItemCRUD extends JPanel implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	private Imagen icono;
@@ -21,7 +21,7 @@ public class ItemCRUD extends JPanel implements ActionListener {
 		setOpaque(false);
 		setLayout(new BorderLayout(0, 0));
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
-//		this.addActionListener(this);
+		addMouseListener(this);
 		
 		
 		this.icono = new Imagen(source);
@@ -38,7 +38,31 @@ public class ItemCRUD extends JPanel implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void mouseClicked(MouseEvent e) {
 		this.onClick.onMouseClicked();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

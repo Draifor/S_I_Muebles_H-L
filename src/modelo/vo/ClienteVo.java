@@ -1,17 +1,16 @@
-package modelo;
+package modelo.vo;
 
-public class Cliente {
+public class ClienteVo {
 
     private int IdCliente;
     private String nombre;
     private String apellido;
 	private double identificacion;
     private String direccion;
-    private double celular;
-    private static int contadorClientes;
+    private String celular;
 
-    public Cliente(String nombre, String apellido, double identificacion, String direccion, double celular) {
-        this.IdCliente = ++Cliente.contadorClientes;
+    public ClienteVo(int IdCliente, String nombre, String apellido, double identificacion, String direccion, String celular) {
+        this.IdCliente = IdCliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.identificacion = identificacion;
@@ -55,11 +54,11 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public double getCelular() {
+    public String getCelular() {
         return this.celular;
     }
 
-    public void setCelular(double celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
 

@@ -25,8 +25,8 @@ public class ContenedorVista extends JPanel {
 
 		this.contenedorHeader = new JPanel();
 		this.contenedorHeader.setLayout(new BorderLayout(0, 0));
-		this.contenedorHeader.add(this.paginaActual, BorderLayout.NORTH);
-		this.contenedorHeader.add(this.navegacion, BorderLayout.SOUTH);
+		this.contenedorHeader.add(this.navegacion, BorderLayout.NORTH);
+		this.contenedorHeader.add(this.paginaActual, BorderLayout.SOUTH);
 
 		this.menuCRUD = new MenuCRUD();
 		

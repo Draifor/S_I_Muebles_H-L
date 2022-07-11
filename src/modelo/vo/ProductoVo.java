@@ -1,28 +1,34 @@
-package modelo;
+package modelo.vo;
 
-import java.util.ArrayList;
+public class ProductoVo {
 
-public class Diseño {
-
+    private int IdProducto;
     private int IdDiseño;
     private String nombre;
     private String tipo;
     private String referencia;
-    private ArrayList<String> materiales;
-    private double costo;
-    private static int contadorDiseños;
+    private double precio;
+    private static int contadorProductos;
 
-    public Diseño(String nombre, String tipo, String referencia, ArrayList<String> materiales, double costo) {
-        this.IdDiseño = ++Diseño.contadorDiseños;
+    public ProductoVo(int IdDiseño, String nombre, String tipo, String referencia, double precio) {
+        this.IdProducto = ++ProductoVo.contadorProductos;
+        this.IdDiseño = IdDiseño;
         this.nombre = nombre;
         this.tipo = tipo;
         this.referencia = referencia;
-        this.materiales = materiales;
-        this.costo = costo;
+        this.precio = precio;
+    }
+
+    public int getIdProducto() {
+        return this.IdProducto;
     }
 
     public int getIdDiseño() {
         return this.IdDiseño;
+    }
+
+    public void setIdDiseño(int IdDiseño) {
+        this.IdDiseño = IdDiseño;
     }
 
     public String getNombre() {
@@ -49,31 +55,23 @@ public class Diseño {
         this.referencia = referencia;
     }
 
-    public ArrayList<String> getMateriales() {
-        return this.materiales;
+    public double getPrecio() {
+        return this.precio;
     }
 
-    public void setMateriales(ArrayList<String> materiales) {
-        this.materiales = materiales;
-    }
-
-    public double getCosto() {
-        return this.costo;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("DiseÃ±o{");
-        sb.append("IdDiseño: ").append(IdDiseño);
+        sb.append("Producto {");
+        sb.append("IdProducto: ").append(IdProducto);
         sb.append(", nombre: ").append(nombre);
         sb.append(", tipo: ").append(tipo);
         sb.append(", referencia: ").append(referencia);
-        sb.append(", costo: ").append(costo);
+        sb.append(", precio: ").append(precio);
         sb.append('}');
         return sb.toString();
     }

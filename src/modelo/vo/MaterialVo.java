@@ -1,6 +1,6 @@
-package modelo;
+package modelo.vo;
 
-public class Material {
+public class MaterialVo {
     private int IdMaterial;
     private String nombre;
     private String referencia;
@@ -8,8 +8,8 @@ public class Material {
     private int cantidad;
     private static int contadorMateriales;
 
-    public Material(String nombre, String referencia, double costo, int cantidad) {
-        this.IdMaterial = ++Material.contadorMateriales;
+    public MaterialVo(String nombre, String referencia, double costo, int cantidad) {
+        this.IdMaterial = ++MaterialVo.contadorMateriales;
         this.nombre = nombre;
         this.referencia = referencia;
         this.costo = costo;

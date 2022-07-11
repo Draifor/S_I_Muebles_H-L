@@ -6,7 +6,8 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 
-import modelo.Cliente;
+import controlador.VistaClienteControl;
+import modelo.vo.ClienteVo;
 import utilidades.*;
 
 public class Tabla extends JPanel implements MouseListener {
@@ -42,7 +43,7 @@ public class Tabla extends JPanel implements MouseListener {
 	}
 
 	private void construirTabla() {
-		this.lista = consultarLista();
+		this.lista = VistaClienteControl.obtenerClientes();
 
 		String[] titulos = { "COD CLIENTE", "NOMBRE", "APELLIDO", "IDENTIFICACION", "CELULAR", "DIRECCION" };
 
@@ -50,19 +51,19 @@ public class Tabla extends JPanel implements MouseListener {
 		construirTabla(titulos, datos);
 	}
 
-	private ArrayList<? extends Object> consultarLista() {
-		ArrayList<Cliente> lista = new ArrayList<>();
-
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		lista.add(new Cliente("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
-		return lista;
-	}
+//	private List<? extends Object> consultarLista() {
+//		List<ClienteVo> lista = new ArrayList<>();
+//
+//		lista.add(new ClienteVo("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+//		lista.add(new ClienteVo("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+//		lista.add(new ClienteVo("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+//		lista.add(new ClienteVo("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+//		lista.add(new ClienteVo("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+//		lista.add(new ClienteVo("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+//		lista.add(new ClienteVo("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+//		lista.add(new ClienteVo("Anastasio Hermelindo", "Buen Día", 1117540545, "Calle 5 # 85", 320364045));
+//		return lista;
+//	}
 
 	private Object[][] obtenerMatrizDatos(String[] titulosColumnas, String tipoLista) {
 		this.cantidadFilas = this.lista.size() < this.MIN_FILAS ? this.lista.size() : this.MIN_FILAS;
@@ -74,12 +75,12 @@ public class Tabla extends JPanel implements MouseListener {
 		case "cliente":
 			for (int i = 0; i < informacion.length; i++) {
 
-				informacion[i][ClientesColumnas.COD_CLIENTE] = ((Cliente) lista.get(i)).getIdCliente() + "";
-				informacion[i][ClientesColumnas.NOMBRE] = ((Cliente) lista.get(i)).getNombre() + "";
-				informacion[i][ClientesColumnas.APELLIDO] = ((Cliente) lista.get(i)).getApellido() + "";
-				informacion[i][ClientesColumnas.IDENTIFICACION] = ((Cliente) lista.get(i)).getIdentificacion() + "";
-				informacion[i][ClientesColumnas.CELULAR] = ((Cliente) lista.get(i)).getCelular() + "";
-				informacion[i][ClientesColumnas.DIRECCION] = ((Cliente) lista.get(i)).getDireccion() + "";
+				informacion[i][ClientesColumnas.COD_CLIENTE] = ((ClienteVo) lista.get(i)).getIdCliente() + "";
+				informacion[i][ClientesColumnas.NOMBRE] = ((ClienteVo) lista.get(i)).getNombre() + "";
+				informacion[i][ClientesColumnas.APELLIDO] = ((ClienteVo) lista.get(i)).getApellido() + "";
+				informacion[i][ClientesColumnas.IDENTIFICACION] = ((ClienteVo) lista.get(i)).getIdentificacion() + "";
+				informacion[i][ClientesColumnas.CELULAR] = ((ClienteVo) lista.get(i)).getCelular() + "";
+				informacion[i][ClientesColumnas.DIRECCION] = ((ClienteVo) lista.get(i)).getDireccion() + "";
 			}
 		}
 

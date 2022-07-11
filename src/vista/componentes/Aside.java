@@ -4,6 +4,8 @@ import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.MatteBorder;
+
 import controlador.*;
 import utilidades.Color;
 
@@ -22,7 +24,8 @@ public class Aside extends JPanel {
 		setBackground(Color.AZUL_70.getColor());
 		setLayout(null);
 		setPreferredSize(new Dimension(200, 290));
-		setBorder(BorderFactory.createLineBorder(Color.AZUL_100.getColor(), 1));
+//		setBorder(BorderFactory.createLineBorder(Color.AZUL_100.getColor(), 1));
+		setBorder(new MatteBorder(0, 1, 1, 1, Color.AZUL_100.getColor()));
 
 		this.imgPerfil = new Imagen(RUTA_IMAGEN);
 		this.imgPerfil.setBounds(35, 11, 130, 150);

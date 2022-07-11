@@ -49,6 +49,7 @@ public class VentanaPrincipal extends JFrame {
 
 		this.contenidoPrincipal = new JScrollPane();
 		this.contenidoPrincipal.getViewport().setBackground(Color.AZUL_30.getColor());
+		this.contenidoPrincipal.setBorder(null);
 
 		add(this.encabezado, BorderLayout.NORTH);
 		add(this.contenidoPrincipal, BorderLayout.CENTER);
