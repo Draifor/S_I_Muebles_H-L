@@ -14,6 +14,9 @@ public class ClienteDao {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
+		
+		
+		conexion.desconectar();
 	}
 
 	public List<ClienteVo> obtenerClientes() {
@@ -36,6 +39,9 @@ public class ClienteDao {
 				clientes.add(cliente);
 
 			}
+			
+			statement.close();
+			conexion.desconectar();
 		} catch (SQLException e) {
 			System.out.println("Ocurrió una SQLException al intentar obtenerClientes:\n" + e.getMessage());
 		}

@@ -13,7 +13,7 @@ import utilidades.*;
 public class Tabla extends JPanel implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
-	private final int MIN_FILAS = 17;
+	private final int MIN_FILAS = 18;
 	private JScrollPane scrollPaneTabla;
 	private JTable tabla;
 	private int cantidadFilas;

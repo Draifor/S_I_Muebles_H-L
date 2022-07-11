@@ -19,6 +19,8 @@ public class NavMenu extends JPanel {
 			() -> VentanaPrincipalControl.mostrarVistaMaterial(), () -> VentanaPrincipalControl.mostrarVistaProducto(),
 			() -> VentanaPrincipalControl.mostrarVistaOrdenCompra(), () -> VentanaPrincipalControl.mostrarVistaVenta() };
 	private int length = OPCIONES_MENU.length;
+	
+	private SesionUsuario sesionUsuario;
 
 	public NavMenu() {
 		FlowLayout flowLayout = (FlowLayout) getLayout();
@@ -30,6 +32,10 @@ public class NavMenu extends JPanel {
 		for (int i = 0; i < length; i++) {
 			add(new ItemNav(OPCIONES_MENU[i], FUNCIONES_ON_CLICK[i]));
 		}
+		
+		this.sesionUsuario = new SesionUsuario();
+		add(this.sesionUsuario);
+		
 	}
 
 }

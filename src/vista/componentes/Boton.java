@@ -8,26 +8,27 @@ import controlador.Operacion;
 
 public class Boton extends JPanel implements MouseListener {
 
-	private JLabel botonTxt;
+	private static final long serialVersionUID = 1L;
+	private Texto botonTxt;
 	private Operacion onClick;
 
 	public Boton(String name, Operacion onClick) {
 
-		this.setBackground(Color.VERDE_50.getColor());
-		this.setBorder(BorderFactory.createLineBorder(Color.VERDE_100.getColor(), 2));
-		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		this.setDoubleBuffered(false);
-		this.setLayout(new BorderLayout(0, 0));
-		this.addMouseListener(this);
+		FlowLayout flowLayout = (FlowLayout) getLayout();
+		flowLayout.setHgap(10);
+		flowLayout.setVgap(2);
+		
+		setBackground(Color.VERDE_50.getColor());
+		setBorder(BorderFactory.createLineBorder(Color.VERDE_100.getColor(), 2));
+		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		setDoubleBuffered(false);
+		addMouseListener(this);
 
 		this.onClick = onClick;
-		this.botonTxt = new JLabel(name);
+		this.botonTxt = new Texto(name, 0, 15);
+		this.botonTxt.setForeground(Color.WHITE.getColor());
 
-		botonTxt.setFont(new Font("Times New Roman", 0, 15)); // NOI18N
-		botonTxt.setForeground(Color.WHITE.getColor());
-		botonTxt.setHorizontalAlignment(SwingConstants.CENTER);
-
-		this.add(botonTxt);
+		add(botonTxt);
 	}
 
 	@Override

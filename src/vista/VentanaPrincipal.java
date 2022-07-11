@@ -33,7 +33,7 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		iniciarComponentes();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1100, 717);
+		setSize(1100, 727);
 		setMinimumSize(new Dimension(860, 630));
 		setLocationRelativeTo(null);
 		setTitle(this.TITULO);

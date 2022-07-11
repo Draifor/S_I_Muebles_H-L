@@ -33,5 +33,6 @@ public class Conexion {
 	
 	public void desconectar() {
 		this.conexion = null;
+		System.out.println("Se cerró la conexión a la BD");
 	}
 }
