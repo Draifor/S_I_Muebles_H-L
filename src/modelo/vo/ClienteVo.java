@@ -5,11 +5,11 @@ public class ClienteVo {
     private int IdCliente;
     private String nombre;
     private String apellido;
-	private double identificacion;
+	private String identificacion;
     private String direccion;
     private String celular;
 
-    public ClienteVo(String nombre, String apellido, double identificacion, String celular, String direccion) {
+    public ClienteVo(String nombre, String apellido, String identificacion, String celular, String direccion) {
     	
     	this.nombre = nombre;
     	this.apellido = apellido;
@@ -17,7 +17,7 @@ public class ClienteVo {
     	this.celular = celular;
     	this.direccion = direccion;
     }
-    public ClienteVo(int IdCliente, String nombre, String apellido, double identificacion, String celular, String direccion) {
+    public ClienteVo(int IdCliente, String nombre, String apellido, String identificacion, String celular, String direccion) {
         this.IdCliente = IdCliente;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -46,11 +46,11 @@ public class ClienteVo {
     	this.apellido = apellido;
     }
     
-    public double getIdentificacion() {
+    public String getIdentificacion() {
         return this.identificacion;
     }
 
-    public void setIdentificacion(double identificacion) {
+    public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
 

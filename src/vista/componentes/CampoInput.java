@@ -29,4 +29,12 @@ public class CampoInput extends JPanel {
 	public void setTextInput(String campoInput) {
 		this.campoInput.setText(campoInput);
 	}
+	
+	public void desactivarCampo() {
+		this.campoInput.setEditable(false);
+	}
+	
+	public void modificarFuente(Font font) {
+		this.campoInput.setFont(font);
+	}
 }

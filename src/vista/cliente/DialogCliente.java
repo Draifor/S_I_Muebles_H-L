@@ -2,6 +2,7 @@ package vista.cliente;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.text.StyleConstants.FontConstants;
 
 import vista.componentes.*;
 import vista.componentes.Label;
@@ -15,6 +16,8 @@ public class DialogCliente extends JDialog {
 	private JPanel contenedor;
 	private JPanel contenedorPrincipal;
 	private Texto titulo;
+	private Label codigo;
+	private CampoInput codigoInput;
 	private Label nombre;
 	private CampoInput nombreInput;
 	private Label apellido;
@@ -26,7 +29,6 @@ public class DialogCliente extends JDialog {
 	private Label direccion;
 	private CampoInput direccionInput;
 	private Boton btnAgregar;
-	private UIManager UI;
 
 	public DialogCliente(JFrame ventanaPadre) {
 
@@ -34,7 +36,7 @@ public class DialogCliente extends JDialog {
 		
 		iniciarComponentes();
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setSize(600, 500);
+		setSize(600, 560);
 		setResizable(false);
 		setLocationRelativeTo(null);
 
@@ -45,46 +47,55 @@ public class DialogCliente extends JDialog {
 
 		this.titulo = new Texto("", 1, 24);
 		this.titulo.setBounds(2, 11, 396, 35);
+		
+		this.codigo = new Label("Código:");
+		this.codigo.setBounds(36, 78, 115, 29);
+		
+		this.codigoInput = new CampoInput("texto");
+		this.codigoInput.setBounds(183, 78, 183, 29);
+		this.codigoInput.desactivarCampo();
 
 		this.nombre = new Label("Nombre:");
-		this.nombre.setBounds(36, 78, 115, 29);
+		this.nombre.setBounds(36, 133, 115, 29);
 
 		this.nombreInput = new CampoInput("texto");
-		this.nombreInput.setBounds(183, 78, 183, 29);
+		this.nombreInput.setBounds(183, 133, 183, 29);
 
 		this.apellido = new Label("Apellido:");
-		this.apellido.setBounds(36, 133, 115, 29);
+		this.apellido.setBounds(36, 188, 115, 29);
 
 		this.apellidoInput = new CampoInput("texto");
-		this.apellidoInput.setBounds(183, 133, 183, 29);
+		this.apellidoInput.setBounds(183, 188, 183, 29);
 
 		this.identificacion = new Label("Identificación:");
-		this.identificacion.setBounds(36, 188, 115, 29);
+		this.identificacion.setBounds(36, 243, 115, 29);
 
 		this.identificacionInput = new CampoInput("texto");
-		this.identificacionInput.setBounds(183, 188, 183, 29);
+		this.identificacionInput.setBounds(183, 243, 183, 29);
 
 		this.celular = new Label("Celular:");
-		this.celular.setBounds(36, 243, 115, 29);
+		this.celular.setBounds(36, 298, 115, 29);
 
 		this.celularInput = new CampoInput("texto");
-		this.celularInput.setBounds(183, 243, 183, 29);
-
+		this.celularInput.setBounds(183, 298, 183, 29);
+		
 		this.direccion = new Label("Dirección:");
-		this.direccion.setBounds(36, 298, 115, 29);
-
+		this.direccion.setBounds(36, 353, 115, 29);
+		
 		this.direccionInput = new CampoInput("texto");
-		this.direccionInput.setBounds(183, 298, 183, 29);
+		this.direccionInput.setBounds(183, 353, 183, 29);
 
 		this.btnAgregar = new Boton("Ingresar", () -> setTitle(""));
-		this.btnAgregar.setBounds(156, 351, 105, 27);
+		this.btnAgregar.setBounds(156, 405, 105, 27);
 
 		this.contenedorPrincipal = new JPanel();
 		this.contenedorPrincipal.setBackground(Color.AZUL_30.getColor());
 		this.contenedorPrincipal.setBorder(BorderFactory.createLineBorder(Color.AZUL_100.getColor(), 2));
-		this.contenedorPrincipal.setPreferredSize(new Dimension(400, 400));
+		this.contenedorPrincipal.setPreferredSize(new Dimension(400, 460));
 		this.contenedorPrincipal.setLayout(null);
 		this.contenedorPrincipal.add(this.titulo);
+		this.contenedorPrincipal.add(this.codigo);
+		this.contenedorPrincipal.add(this.codigoInput);
 		this.contenedorPrincipal.add(this.nombre);
 		this.contenedorPrincipal.add(this.nombreInput);
 		this.contenedorPrincipal.add(this.apellido);
@@ -107,10 +118,15 @@ public class DialogCliente extends JDialog {
 	}
 	
 	public void mensajeDialogo(String mensaje, String titulo) {
-		UI = null;
-		UIManager.put("OptionPane.background", Color.AZUL_30.getColor());
-		UIManager.put("Panel.background", Color.VERDE_100.getColor());
 		JOptionPane.showMessageDialog(this, new Texto(mensaje, 0, 18), titulo, JOptionPane.PLAIN_MESSAGE);
+	}
+	
+	public String getCodigoInput() {
+		return this.codigoInput.getTextInput();
+	}
+	
+	public void setCodigoInput(String codigo) {
+		this.codigoInput.setTextInput(codigo);
 	}
 
 	public String getNombreInput() {
@@ -160,5 +176,10 @@ public class DialogCliente extends JDialog {
 	
 	public void setOnClick(Operacion onClick) {
 		this.btnAgregar.setOnClick(onClick);
+	}
+	
+	public void codigoPorDefecto() {
+		this.codigoInput.setTextInput("Generado automáticamente");
+		this.codigoInput.modificarFuente(new Font("Times New Roman", 2, 15));
 	}
 }
