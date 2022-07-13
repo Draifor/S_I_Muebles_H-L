@@ -41,7 +41,7 @@ public class ClienteDao {
 		try {
 			PreparedStatement statement = connection.prepareStatement(
 					"UPDATE clientes (Nombre, Apellido, Identificacion, Celular, Direccion) values (?, ?, ?, ?, ?)");
-			
+
 			statement.setString(1, clienteActualizado.getNombre());
 			statement.setString(2, clienteActualizado.getApellido());
 			statement.setInt(3, Integer.parseInt(clienteActualizado.getIdentificacion()));
