@@ -41,16 +41,7 @@ public class Tabla extends JPanel implements MouseListener {
 		this.modelo = new ModeloTabla(titulos, datos);
 		this.tabla.setModel(this.modelo);
 
-		this.filasTabla = tabla.getRowCount();
-//		this.columnasTabla = tabla.getColumnCount();
-
-		int filasParaCompletar = this.MIN_FILAS - filasTabla;
-
-		if (filasParaCompletar > 0) {
-			for (int i = 0; i < filasParaCompletar; i++) {
-				modelo.addRow(new String[] { "", "", "", "", "", "" });
-			}
-		}
+		completarFilasVacias();
 		
 		// personaliza el encabezado
 		this.headerTabla = this.tabla.getTableHeader();
@@ -59,6 +50,24 @@ public class Tabla extends JPanel implements MouseListener {
 
 		// se asigna la tabla al scrollPane
 		this.scrollPaneTabla.setViewportView(this.tabla);
+	}
+	
+	public void actualizarTabla(String[] titulos, Object[][] datos) {
+		this.modelo.actualizarModeloTabla(titulos, datos);
+		completarFilasVacias();
+	}
+	
+	public void completarFilasVacias() {
+		this.filasTabla = tabla.getRowCount();
+		
+		int filasParaCompletar = this.MIN_FILAS - filasTabla;
+
+		if (filasParaCompletar > 0) {
+			for (int i = 0; i < filasParaCompletar; i++) {
+				modelo.addRow(new String[] { "", "", "", "", "", "" });
+			}
+		}
+
 	}
 
 	public JTable getTabla() {

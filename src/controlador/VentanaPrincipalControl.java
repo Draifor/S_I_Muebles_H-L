@@ -1,12 +1,12 @@
 package controlador;
 
 import vista.*;
-import vista.cliente.VistaCliente;
-import vista.diseño.VistaDiseño;
-import vista.material.VistaMaterial;
-import vista.ordencompra.VistaOrdenCompra;
-import vista.producto.VistaProducto;
-import vista.venta.VistaVenta;
+import vista.cliente.*;
+import vista.diseño.*;
+import vista.material.*;
+import vista.ordencompra.*;
+import vista.producto.*;
+import vista.venta.*;
 
 public class VentanaPrincipalControl {
 
@@ -40,31 +40,44 @@ public class VentanaPrincipalControl {
     
     public static void mostrarVistaCliente() {
     	VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionCliente, "CLIENTES");
-    	System.out.println("Mostrar Cliente");
+    	System.out.println("Mostrar Clientes");
+    }
+    
+    public static void actualizarVistaCliente() {
+    	VentanaPrincipalControl.seccionCliente.actualizarTabla();
+    	System.out.println("Actualizar Clientes");
     }
 
     public static void mostrarVistaDiseño() {
     	VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionDiseño, "DISEÑOS");
-    	System.out.println("Mostrar Diseño");
+    	System.out.println("Mostrar Diseños");
     }
 
     public static void mostrarVistaMaterial() {
     	VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionMaterial, "MATERIALES");
-    	System.out.println("Mostrar Material");
+    	System.out.println("Mostrar Materiales");
     }
 
     public static void mostrarVistaOrdenCompra() {
     	VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionOrdenCompra, "ORDEN DE COMPRA");
-    	System.out.println("Mostrar OrdenCompra");
+    	System.out.println("Mostrar OrdenCompras");
     }
 
     public static void mostrarVistaProducto() {
     	VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionProducto, "PRODUCTOS");
-    	System.out.println("Mostrar Producto");
+    	System.out.println("Mostrar Productos");
     }
 
     public static void mostrarVistaVenta() {
     	VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionVenta, "VENTAS");
-    	System.out.println("Mostrar Venta");
+    	System.out.println("Mostrar Ventas");
+    }
+    
+    public static VentanaAgregarCliente getAgregarClienteDialog() {
+    	return new VentanaAgregarCliente(VentanaPrincipalControl.ventana, true);
+    }
+    
+    public static DialogCliente getClienteDialog() {
+    	return new DialogCliente(VentanaPrincipalControl.ventana);
     }
 }

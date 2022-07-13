@@ -3,7 +3,7 @@ package vista.cliente;
 import java.awt.BorderLayout;
 import javax.swing.*;
 
-import controlador.VistaClienteControl;
+import controlador.*;
 import vista.componentes.*;
 
 public class VistaCliente extends JPanel {
@@ -30,6 +30,14 @@ public class VistaCliente extends JPanel {
 
 		this.tabla = new Tabla(titulos, datos);
 
+		VistaClienteControl.construirTabla(this.tabla.getTabla());
+	}
+	
+	public void actualizarTabla() {
+		String[] titulos = VistaClienteControl.obtenerTitulosColumnas();
+		String[][] datos = VistaClienteControl.obtenerClientes();
+
+		this.tabla.actualizarTabla(titulos, datos);
 		VistaClienteControl.construirTabla(this.tabla.getTabla());
 	}
 }

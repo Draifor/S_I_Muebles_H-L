@@ -25,4 +25,8 @@ public class CampoInput extends JPanel {
 	public String getTextInput() {
 		return this.campoInput.getText();
 	}
+	
+	public void setTextInput(String campoInput) {
+		this.campoInput.setText(campoInput);
+	}
 }

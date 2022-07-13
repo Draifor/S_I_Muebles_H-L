@@ -1,19 +1,16 @@
 package vista.cliente;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
-import utilidades.Color;
-import utilidades.Operacion;
 import vista.componentes.*;
 import vista.componentes.Label;
-import controlador.*;
+import utilidades.Color;
+import utilidades.Operacion;
 
-public class VentanaAgregarCliente extends JDialog {
+public class DialogCliente extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private static final String TITULO = "Agregar Cliente";
-	private static final Operacion ON_CLICK = () -> DialogClienteControl.agregarCliente();
 
 	private JPanel contenedor;
 	private JPanel contenedorPrincipal;
@@ -29,23 +26,24 @@ public class VentanaAgregarCliente extends JDialog {
 	private Label direccion;
 	private CampoInput direccionInput;
 	private Boton btnAgregar;
+	private UIManager UI;
 
-	public VentanaAgregarCliente(JFrame ventanaPadre, boolean modal) {
+	public DialogCliente(JFrame ventanaPadre) {
 
-		super(ventanaPadre, modal);
+		super(ventanaPadre, true);
+		
 		iniciarComponentes();
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setSize(600, 500);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		setTitle(VentanaAgregarCliente.TITULO);
 
 	}
 
 	private void iniciarComponentes() {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
-		this.titulo = new Texto(VentanaAgregarCliente.TITULO, 1, 24);
+		this.titulo = new Texto("", 1, 24);
 		this.titulo.setBounds(2, 11, 396, 35);
 
 		this.nombre = new Label("Nombre:");
@@ -53,10 +51,10 @@ public class VentanaAgregarCliente extends JDialog {
 
 		this.nombreInput = new CampoInput("texto");
 		this.nombreInput.setBounds(183, 78, 183, 29);
-		
+
 		this.apellido = new Label("Apellido:");
 		this.apellido.setBounds(36, 133, 115, 29);
-		
+
 		this.apellidoInput = new CampoInput("texto");
 		this.apellidoInput.setBounds(183, 133, 183, 29);
 
@@ -78,7 +76,7 @@ public class VentanaAgregarCliente extends JDialog {
 		this.direccionInput = new CampoInput("texto");
 		this.direccionInput.setBounds(183, 298, 183, 29);
 
-		this.btnAgregar = new Boton("Ingresar", VentanaAgregarCliente.ON_CLICK);
+		this.btnAgregar = new Boton("Ingresar", () -> setTitle(""));
 		this.btnAgregar.setBounds(156, 351, 105, 27);
 
 		this.contenedorPrincipal = new JPanel();
@@ -107,25 +105,60 @@ public class VentanaAgregarCliente extends JDialog {
 		getContentPane().add(this.contenedor);
 
 	}
+	
+	public void mensajeDialogo(String mensaje, String titulo) {
+		UI = null;
+		UIManager.put("OptionPane.background", Color.AZUL_30.getColor());
+		UIManager.put("Panel.background", Color.VERDE_100.getColor());
+		JOptionPane.showMessageDialog(this, new Texto(mensaje, 0, 18), titulo, JOptionPane.PLAIN_MESSAGE);
+	}
 
 	public String getNombreInput() {
 		return this.nombreInput.getTextInput();
 	}
-	
+
+	public void setNombreInput(String nombreInput) {
+		this.nombreInput.setTextInput(nombreInput);
+	}
+
 	public String getApellidoInput() {
 		return this.apellidoInput.getTextInput();
+	}
+	
+	public void setApellidoInput(String apellidoInput) {
+		this.apellidoInput.setTextInput(apellidoInput);;
 	}
 
 	public String getIdentificacionInput() {
 		return this.identificacionInput.getTextInput();
 	}
+	
+	public void setIdentificacionInput(String identificacionInput) {
+		this.identificacionInput.setTextInput(identificacionInput);;
+	}
 
 	public String getCelularInput() {
 		return this.celularInput.getTextInput();
+	}
+	
+	public void setCelularInput(String celularInput) {
+		this.celularInput.setTextInput(celularInput);;
 	}
 
 	public String getDireccionInput() {
 		return this.direccionInput.getTextInput();
 	}
+	
+	public void setDireccionInput(String direccionInput) {
+		this.direccionInput.setTextInput(direccionInput);;
+	}
 
+	public void setTitulo(String nombreVentana) {
+		setTitle(nombreVentana);
+		this.titulo.setText(nombreVentana);
+	}
+	
+	public void setOnClick(Operacion onClick) {
+		this.btnAgregar.setOnClick(onClick);
+	}
 }

@@ -59,4 +59,8 @@ public class VistaClienteControl implements VistaControl {
 		tabla.getColumnModel().getColumn(ClientesColumnas.CELULAR).setPreferredWidth(150);
 		tabla.getColumnModel().getColumn(ClientesColumnas.DIRECCION).setPreferredWidth(280);
 	}
+	
+	public static void actualizarTabla() {
+		
+	}
 }

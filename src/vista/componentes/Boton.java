@@ -32,6 +32,10 @@ public class Boton extends JPanel implements MouseListener {
 		add(botonTxt);
 	}
 
+	public void setOnClick(Operacion onClick) {
+		this.onClick = onClick;
+	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		this.onClick.onMouseClicked();
