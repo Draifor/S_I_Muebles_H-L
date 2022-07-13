@@ -9,12 +9,6 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 
 	private static final long serialVersionUID = 1L;
 	private String tipo;
-	private static DecimalFormatSymbols simbolos;
-	private static DecimalFormat formato;
-
-//	public GestionCeldas() {
-//		this.tipo = "texto";
-//	}
 
 	public GestionCeldas(String tipo) {
 		this.tipo = tipo;
@@ -25,11 +19,8 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 			int row, int column) {
 
 		if (this.tipo == "numero" && !((String) value).equals("")) {
-			simbolos = new DecimalFormatSymbols();
-			simbolos.setDecimalSeparator(',');
-			simbolos.setGroupingSeparator('.');
-			formato = new DecimalFormat("0000", simbolos);
-			value = formato.format(Double.parseDouble((String) value));
+			
+			value = MetodosAuxiliares.formatearNumero(value);
 			super.getTableCellRendererComponent(table, value, isSelected, isFocused, row, column);
 		}
 		

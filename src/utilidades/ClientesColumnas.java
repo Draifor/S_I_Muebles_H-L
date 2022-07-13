@@ -9,8 +9,8 @@ public class ClientesColumnas {
 	public static final int CELULAR = 4;
 	public static final int DIRECCION = 5;
 
-	public static final int[] TIPO_NUMERO = { 0, 3, 4 };
-	public static final int[] TIPO_TEXTO = { 1, 2, 5 };
+	public static final int[] TIPO_NUMERO = { 0, 4 };
+	public static final int[] TIPO_TEXTO = { 1, 2, 3, 5 };
 
 	public static final String[] TITULOS_COLUMNAS = { "CODIGO", "NOMBRE", "APELLIDO", "IDENTIFICACION", "CELULAR",
 			"DIRECCION" };

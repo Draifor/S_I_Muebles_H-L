@@ -1,51 +1,67 @@
 package controlador;
 
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-
 import modelo.vo.ClienteVo;
+import utilidades.MetodosAuxiliares;
+import utilidades.Operacion;
 import vista.cliente.DialogCliente;
-import vista.componentes.Texto;
 
 public class DialogClienteControl {
 
-    private static DialogCliente ventana = VentanaPrincipalControl.getClienteDialog();
-    
+	private static DialogCliente ventana = VentanaPrincipalControl.getClienteDialog();
 
-    public static void mostrarAgregarCliente() {
-    	
-    	DialogClienteControl.ventana.setTitulo("Agregar Cliente");
-    	DialogClienteControl.ventana.setOnClick(() -> DialogClienteControl.agregarCliente());
-        DialogClienteControl.ventana.setVisible(true);
-    }
-    
-    public static void mostrarModificarCliente() {
-    	
-    	DialogClienteControl.ventana.setTitulo("Modificar Cliente");
-    	DialogClienteControl.ventana.setOnClick(() -> DialogClienteControl.modificarCliente());
-    	JOptionPane.showMessageDialog(ventana, new Texto("Hola baby", 0,18), "Alerta", JOptionPane.PLAIN_MESSAGE);
-//    	DialogClienteControl.ventana.setVisible(true);
-    }
+	public static void mostrar(String titulo, Operacion onClick) {
+		DialogClienteControl.ventana.setTitulo(titulo);
+		DialogClienteControl.ventana.setOnClick(onClick);
+		DialogClienteControl.ventana.setVisible(true);
+	}
 
-    public static void ocultar() {
-        DialogClienteControl.ventana.setVisible(false);
-    }
+	public static void ocultar() {
+		DialogClienteControl.ventana.setVisible(false);
+	}
 
-	public static void agregarCliente() {
+	public static ClienteVo getDatosCliente() {
 		String nombre = DialogClienteControl.ventana.getNombreInput();
 		String apellido = DialogClienteControl.ventana.getApellidoInput();
-		double identificacion = Double.parseDouble(DialogClienteControl.ventana.getIdentificacionInput());
+		String identificacion = DialogClienteControl.ventana.getIdentificacionInput();
 		String celular = DialogClienteControl.ventana.getCelularInput();
 		String direccion = DialogClienteControl.ventana.getDireccionInput();
-		
-		ClienteVo nuevoCliente = new ClienteVo(nombre, apellido, identificacion, celular, direccion);
-		
-		VistaClienteControl.getClienteDao().agregarCliente(nuevoCliente);
-		VentanaPrincipalControl.actualizarVistaCliente();
-		DialogClienteControl.ocultar();
+
+		ClienteVo cliente;
+
+		if (MetodosAuxiliares.esNumero(DialogClienteControl.ventana.getCodigoInput())) {
+			int IdCliente = Integer.parseInt(DialogClienteControl.ventana.getCodigoInput());
+			cliente = new ClienteVo(IdCliente, nombre, apellido, identificacion, celular, direccion);
+		} else {
+			cliente = new ClienteVo(nombre, apellido, identificacion, celular, direccion);
+		}
+
+		return cliente;
+	}
+
+	public static void setDatosCliente(ClienteVo cliente) {
+		DialogClienteControl.ventana
+				.setCodigoInput(MetodosAuxiliares.formatearNumero((Object) (cliente.getIdCliente() + "")).toString());
+		DialogClienteControl.ventana.setNombreInput(cliente.getNombre());
+		DialogClienteControl.ventana.setApellidoInput(cliente.getApellido());
+		DialogClienteControl.ventana.setIdentificacionInput(cliente.getIdentificacion() + "");
+		DialogClienteControl.ventana.setCelularInput(cliente.getCelular());
+		DialogClienteControl.ventana.setDireccionInput(cliente.getDireccion());
+	}
+
+	public static void limpiarDatos() {
+		DialogClienteControl.ventana.setCodigoInput("");
+		DialogClienteControl.ventana.setNombreInput("");
+		DialogClienteControl.ventana.setApellidoInput("");
+		DialogClienteControl.ventana.setIdentificacionInput("");
+		DialogClienteControl.ventana.setCelularInput("");
+		DialogClienteControl.ventana.setDireccionInput("");
 	}
 
 	public static void modificarCliente() {
 		System.out.println("Se modificó el cliente");
+	}
+
+	public static void mostrarCodigoPorDefecto() {
+		DialogClienteControl.ventana.codigoPorDefecto();
 	}
 }

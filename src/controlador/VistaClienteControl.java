@@ -1,18 +1,30 @@
 package controlador;
 
 import java.util.List;
+
 import javax.swing.JTable;
 
 import modelo.dao.ClienteDao;
 import modelo.vo.ClienteVo;
 import utilidades.*;
+import vista.cliente.VistaCliente;
 
-public class VistaClienteControl implements VistaControl {
+public class VistaClienteControl {
 
 	private static ClienteDao clienteDao = new ClienteDao();
+	private static VistaCliente vistaCliente = new VistaCliente();;
 
-	public static ClienteDao getClienteDao() {
-		return VistaClienteControl.clienteDao;
+	public static void agregarCliente() {
+		ClienteVo nuevoCliente = DialogClienteControl.getDatosCliente();
+		VistaClienteControl.clienteDao.agregarCliente(nuevoCliente);
+		
+		VistaClienteControl.actualizarVistaCliente();
+		DialogClienteControl.ocultar();
+	}
+	
+	public static void modificarCliente() {
+		ClienteVo clienteActualizado = DialogClienteControl.getDatosCliente();
+		VistaClienteControl.clienteDao.modificarCliente(clienteActualizado);
 	}
 
 	public static String[][] obtenerClientes() {
@@ -60,7 +72,50 @@ public class VistaClienteControl implements VistaControl {
 		tabla.getColumnModel().getColumn(ClientesColumnas.DIRECCION).setPreferredWidth(280);
 	}
 	
-	public static void actualizarTabla() {
+    
+    public static void actualizarVistaCliente() {
+    	VistaClienteControl.vistaCliente.actualizarTabla();
+    	System.out.println("Actualizar Clientes");
+    }
+    
+	public static String obtenerClienteSeleccionado(JTable tabla) {
+		int filaSeleccionada = tabla.getSelectedRow(); 
+		String resultadoOperacion = "";
 		
+		if (filaSeleccionada != -1) {
+			int IdCliente = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ClientesColumnas.CODIGO).toString());
+			String nombre = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.NOMBRE);
+			String apellido = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.APELLIDO);
+			String identificacion = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.IDENTIFICACION);
+			String celular = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.CELULAR);
+			String direccion = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.DIRECCION);
+			
+			ClienteVo cliente = new ClienteVo(IdCliente, nombre, apellido, identificacion, celular, direccion);
+			DialogClienteControl.setDatosCliente(cliente);
+		} else {
+			resultadoOperacion = "error";
+		}
+		
+		return resultadoOperacion;
 	}
+	
+    public static void mostrarAgregarCliente() {
+    	DialogClienteControl.limpiarDatos();
+    	DialogClienteControl.mostrarCodigoPorDefecto();
+        DialogClienteControl.mostrar("Agregar Cliente", () -> VistaClienteControl.agregarCliente());
+
+    }
+    
+    public static void mostrarModificarCliente() {
+    	String resultadoOperacion = VistaClienteControl.vistaCliente.obtenerClienteSeleccionado();
+    	
+    	if (resultadoOperacion.equals("mostrar")) {
+    		DialogClienteControl.mostrar("Modificar Cliente", () -> VistaClienteControl.modificarCliente());
+//    		DialogClienteControl.setDatosDialogCliente(null);
+    	}
+    }
+
+    public static VistaCliente getVistaCliente() {
+    	return VistaClienteControl.vistaCliente;
+    }
 }

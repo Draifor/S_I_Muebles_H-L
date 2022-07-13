@@ -40,4 +40,19 @@ public class VistaCliente extends JPanel {
 		this.tabla.actualizarTabla(titulos, datos);
 		VistaClienteControl.construirTabla(this.tabla.getTabla());
 	}
+	
+	public String obtenerClienteSeleccionado() {
+		String resultadoOperacion = VistaClienteControl.obtenerClienteSeleccionado(this.tabla.getTabla());
+		
+		if (resultadoOperacion.equals("error")) {
+			this.mostrarAlerta("Selecciona el cliente a modificar", "Modificar Cliente");
+			return "error";
+		} else {
+			return "mostrar";
+		}
+	}
+	
+	public void mostrarAlerta(String mensaje, String titulo) {
+		JOptionPane.showMessageDialog(this, new Texto("Selecciona el cliente a modificar", 0,18), "Modificar Cliente", JOptionPane.PLAIN_MESSAGE);
+	}
 }

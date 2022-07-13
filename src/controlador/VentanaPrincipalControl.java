@@ -13,7 +13,7 @@ public class VentanaPrincipalControl {
     private static VentanaPrincipal ventana = new VentanaPrincipal();
 
     private static VistaMenu menuPrincipal = new VistaMenu();
-	private static VistaCliente seccionCliente = new VistaCliente();;
+    private static VistaCliente seccionCliente = VistaClienteControl.getVistaCliente();
 	private static VistaDiseño seccionDiseño = new VistaDiseño();;
 	private static VistaMaterial seccionMaterial = new VistaMaterial();;
 	private static VistaOrdenCompra seccionOrdenCompra = new VistaOrdenCompra();;
@@ -38,16 +38,17 @@ public class VentanaPrincipalControl {
     	System.out.println("Mostrar Menu");
     }
     
+    // Operaciones vista cliente
+    
     public static void mostrarVistaCliente() {
     	VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionCliente, "CLIENTES");
     	System.out.println("Mostrar Clientes");
     }
     
-    public static void actualizarVistaCliente() {
-    	VentanaPrincipalControl.seccionCliente.actualizarTabla();
-    	System.out.println("Actualizar Clientes");
+    public static DialogCliente getClienteDialog() {
+    	return new DialogCliente(VentanaPrincipalControl.ventana);
     }
-
+    
     public static void mostrarVistaDiseño() {
     	VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionDiseño, "DISEÑOS");
     	System.out.println("Mostrar Diseños");
@@ -71,13 +72,5 @@ public class VentanaPrincipalControl {
     public static void mostrarVistaVenta() {
     	VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionVenta, "VENTAS");
     	System.out.println("Mostrar Ventas");
-    }
-    
-    public static VentanaAgregarCliente getAgregarClienteDialog() {
-    	return new VentanaAgregarCliente(VentanaPrincipalControl.ventana, true);
-    }
-    
-    public static DialogCliente getClienteDialog() {
-    	return new DialogCliente(VentanaPrincipalControl.ventana);
     }
 }
