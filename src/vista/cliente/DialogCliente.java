@@ -2,7 +2,6 @@ package vista.cliente;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.text.StyleConstants.FontConstants;
 
 import vista.componentes.*;
 import vista.componentes.Label;
@@ -28,7 +27,7 @@ public class DialogCliente extends JDialog {
 	private CampoInput celularInput;
 	private Label direccion;
 	private CampoInput direccionInput;
-	private Boton btnAgregar;
+	private Boton boton;
 
 	public DialogCliente(JFrame ventanaPadre) {
 
@@ -85,8 +84,8 @@ public class DialogCliente extends JDialog {
 		this.direccionInput = new CampoInput("texto");
 		this.direccionInput.setBounds(183, 353, 183, 29);
 
-		this.btnAgregar = new Boton("Ingresar", () -> setTitle(""));
-		this.btnAgregar.setBounds(156, 405, 105, 27);
+		this.boton = new Boton("Ingresar", () -> setTitle(""));
+		this.boton.setBounds(156, 405, 105, 27);
 
 		this.contenedorPrincipal = new JPanel();
 		this.contenedorPrincipal.setBackground(Color.AZUL_30.getColor());
@@ -106,7 +105,7 @@ public class DialogCliente extends JDialog {
 		this.contenedorPrincipal.add(this.celularInput);
 		this.contenedorPrincipal.add(this.direccion);
 		this.contenedorPrincipal.add(this.direccionInput);
-		this.contenedorPrincipal.add(this.btnAgregar);
+		this.contenedorPrincipal.add(this.boton);
 
 		this.contenedor = new JPanel();
 		this.contenedor.setBackground(Color.AZUL_50.getColor());
@@ -174,8 +173,11 @@ public class DialogCliente extends JDialog {
 		this.titulo.setText(nombreVentana);
 	}
 	
+        public void setTextoBoton(String textoBoton) {
+            this.boton.setTextoBoton(textoBoton);
+        }
 	public void setOnClick(Operacion onClick) {
-		this.btnAgregar.setOnClick(onClick);
+		this.boton.setOnClick(onClick);
 	}
 	
 	public void codigoPorDefecto() {

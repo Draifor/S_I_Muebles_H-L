@@ -9,85 +9,100 @@ import utilidades.ClientesColumnas;
 
 public class ClienteDao {
 
-	public void agregarCliente(ClienteVo nuevoCliente) {
-		Connection connection = null;
-		Conexion conexion = new Conexion();
-		connection = conexion.getConexion();
+    public void agregarCliente(ClienteVo nuevoCliente) {
+        Connection connection = null;
+        Conexion conexion = new Conexion();
+        connection = conexion.getConexion();
 
-		try {
-			PreparedStatement statement = connection.prepareStatement(
-					"INSERT INTO clientes (Nombre, Apellido, Identificacion, Celular, Direccion) values (?, ?, ?, ?, ?)");
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO clientes (Nombre, Apellido, Identificacion, Celular, Direccion) values (?, ?, ?, ?, ?)");
 
-			statement.setString(1, nuevoCliente.getNombre());
-			statement.setString(2, nuevoCliente.getApellido());
-			statement.setInt(3, Integer.parseInt(nuevoCliente.getIdentificacion()));
-			statement.setString(4, nuevoCliente.getCelular());
-			statement.setString(5, nuevoCliente.getDireccion());
-			statement.executeUpdate();
-			
-			statement.close();
-			conexion.desconectar();
-		} catch (SQLException e) {
-			System.out.println("Ocurrió un SQLException: " + e.getMessage() + "\n\n" + e);
-		}
+            statement.setString(1, nuevoCliente.getNombre());
+            statement.setString(2, nuevoCliente.getApellido());
+            statement.setInt(3, Integer.parseInt(nuevoCliente.getIdentificacion()));
+            statement.setString(4, nuevoCliente.getCelular());
+            statement.setString(5, nuevoCliente.getDireccion());
+            statement.executeUpdate();
 
-	}
-	
-	public void modificarCliente(ClienteVo clienteActualizado) {
-		Connection connection = null;
-		Conexion conexion = new Conexion();
-		connection = conexion.getConexion();
-		
-		try {
-			PreparedStatement statement = connection.prepareStatement(
-					"UPDATE clientes (Nombre, Apellido, Identificacion, Celular, Direccion) values (?, ?, ?, ?, ?)");
+            statement.close();
+            conexion.desconectar();
+        } catch (SQLException e) {
+            System.out.println("Ocurrió un SQLException: " + e.getMessage() + "\n\n" + e);
+        }
 
-			statement.setString(1, clienteActualizado.getNombre());
-			statement.setString(2, clienteActualizado.getApellido());
-			statement.setInt(3, Integer.parseInt(clienteActualizado.getIdentificacion()));
-			statement.setString(4, clienteActualizado.getCelular());
-			statement.setString(5, clienteActualizado.getDireccion());
-			statement.executeUpdate();
-			
-			statement.close();
-			conexion.desconectar();
-		} catch (SQLException e) {
-			System.out.println("Ocurrió un SQLException: " + e.getMessage() + "\n\n" + e);
-		}
-		
-	}
+    }
 
-	public List<ClienteVo> obtenerClientes() {
+    public void modificarCliente(ClienteVo clienteActualizado) {
+        Connection connection = null;
+        Conexion conexion = new Conexion();
+        connection = conexion.getConexion();
 
-		List<ClienteVo> clientes = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE clientes SET Nombre=?, Apellido=?, Identificacion=?, Celular=?, Direccion=? WHERE Cod_Cliente=?");
 
-		Connection connection = null;
-		Conexion conexion = new Conexion();
-		connection = conexion.getConexion();
+            statement.setString(1, clienteActualizado.getNombre());
+            statement.setString(2, clienteActualizado.getApellido());
+            statement.setInt(3, Integer.parseInt(clienteActualizado.getIdentificacion()));
+            statement.setString(4, clienteActualizado.getCelular());
+            statement.setString(5, clienteActualizado.getDireccion());
+            statement.setInt(6, clienteActualizado.getIdCliente());
+            statement.executeUpdate();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultado = statement.executeQuery("SELECT * FROM clientes");
+            statement.close();
+            conexion.desconectar();
+        } catch (SQLException e) {
+            System.out.println("Ocurrió un SQLException: " + e.getMessage() + "\n\n" + e);
+        }
 
-			while (resultado.next()) {
-				ClienteVo cliente = new ClienteVo(
-						resultado.getInt("Cod_Cliente"),
-						resultado.getString("Nombre"),
-						resultado.getString("Apellido"),
-						resultado.getInt("Identificacion") + "",
-						resultado.getString("Celular"),
-						resultado.getString("Direccion"));
+    }
+    
+    public void eliminarCliente(int idClientePorEliminar) {
+        Connection connection = null;
+        Conexion conexion = new Conexion();
+        connection = conexion.getConexion();
 
-				clientes.add(cliente);
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM clientes WHERE Cod_Cliente=" + idClientePorEliminar);
 
-			}
+            statement.close();
+            conexion.desconectar();
+        } catch (SQLException e) {
+            System.out.println("Ocurrió un SQLException: " + e.getMessage() + "\n\n" + e);
+        }
 
-			statement.close();
-			conexion.desconectar();
-		} catch (SQLException e) {
-			System.out.println("Ocurrió una SQLException al intentar obtenerClientes:\n" + e.getMessage());
-		}
+    }
+    
 
-		return clientes;
-	}
+    public List<ClienteVo> obtenerClientes() {
+
+        List<ClienteVo> clientes = new ArrayList<>();
+
+        Connection connection = null;
+        Conexion conexion = new Conexion();
+        connection = conexion.getConexion();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultado = statement.executeQuery("SELECT * FROM clientes");
+
+            while (resultado.next()) {
+                ClienteVo cliente = new ClienteVo(resultado.getInt("Cod_Cliente"), resultado.getString("Nombre"),
+                        resultado.getString("Apellido"), resultado.getInt("Identificacion") + "",
+                        resultado.getString("Celular"), resultado.getString("Direccion"));
+
+                clientes.add(cliente);
+
+            }
+
+            statement.close();
+            conexion.desconectar();
+        } catch (SQLException e) {
+            System.out.println("Ocurrió una SQLException al intentar obtenerClientes:\n" + e.getMessage());
+        }
+
+        return clientes;
+    }
 }

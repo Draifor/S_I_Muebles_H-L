@@ -8,51 +8,59 @@ import vista.componentes.*;
 
 public class VistaCliente extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	private ContenedorVista contenedorVista;
-	private Tabla tabla;
-	public VistaCliente() {
+    private static final long serialVersionUID = 1L;
+    private ContenedorVista contenedorVista;
+    private Tabla tabla;
 
-		setLayout(new BorderLayout(0, 0));
-		setOpaque(false);
+    public VistaCliente() {
 
-		this.construirTabla();
+        setLayout(new BorderLayout(0, 0));
+        setOpaque(false);
 
-		this.contenedorVista = new ContenedorVista("CLIENTES", this.tabla);
+        this.construirTabla();
 
-		this.add(this.contenedorVista, BorderLayout.CENTER);
-	}
+        this.contenedorVista = new ContenedorVista("CLIENTES", this.tabla);
 
-	public void construirTabla() {
+        this.add(this.contenedorVista, BorderLayout.CENTER);
+    }
 
-		String[] titulos = VistaClienteControl.obtenerTitulosColumnas();
-		String[][] datos = VistaClienteControl.obtenerClientes();
+    public void construirTabla() {
 
-		this.tabla = new Tabla(titulos, datos);
+        String[] titulos = VistaClienteControl.obtenerTitulosColumnas();
+        String[][] datos = VistaClienteControl.obtenerClientes();
 
-		VistaClienteControl.construirTabla(this.tabla.getTabla());
-	}
-	
-	public void actualizarTabla() {
-		String[] titulos = VistaClienteControl.obtenerTitulosColumnas();
-		String[][] datos = VistaClienteControl.obtenerClientes();
+        this.tabla = new Tabla(titulos, datos);
 
-		this.tabla.actualizarTabla(titulos, datos);
-		VistaClienteControl.construirTabla(this.tabla.getTabla());
-	}
-	
-	public String obtenerClienteSeleccionado() {
-		String resultadoOperacion = VistaClienteControl.obtenerClienteSeleccionado(this.tabla.getTabla());
-		
-		if (resultadoOperacion.equals("error")) {
-			this.mostrarAlerta("Selecciona el cliente a modificar", "Modificar Cliente");
-			return "error";
-		} else {
-			return "mostrar";
-		}
-	}
-	
-	public void mostrarAlerta(String mensaje, String titulo) {
-		JOptionPane.showMessageDialog(this, new Texto("Selecciona el cliente a modificar", 0,18), "Modificar Cliente", JOptionPane.PLAIN_MESSAGE);
-	}
+        VistaClienteControl.construirTabla(this.tabla.getTabla());
+    }
+
+    public void actualizarTabla() {
+        String[] titulos = VistaClienteControl.obtenerTitulosColumnas();
+        String[][] datos = VistaClienteControl.obtenerClientes();
+
+        this.tabla.actualizarTabla(titulos, datos);
+        VistaClienteControl.construirTabla(this.tabla.getTabla());
+    }
+
+    public String obtenerClienteSeleccionado(String mensaje, String titulo) {
+        String resultadoOperacion = VistaClienteControl.obtenerClienteSeleccionado(this.tabla.getTabla());
+
+        if (resultadoOperacion.equals("error")) {
+            this.mostrarAlerta(mensaje, titulo);
+            return "error";
+        } else {
+            return "mostrar";
+        }
+    }
+
+    public void mostrarAlerta(String mensaje, String titulo) {
+        JOptionPane.showMessageDialog(this, new Texto(mensaje, 0, 18), titulo, JOptionPane.PLAIN_MESSAGE);
+    }
+
+    public String mostrarDialogoConfirmacion(String mensaje, String titulo) {
+        int opcionElegida = JOptionPane.showConfirmDialog(this, new Texto(mensaje, 0, 15), titulo, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        
+        if (opcionElegida == 0) return "eliminar";
+        else return "cancelar";
+    }
 }

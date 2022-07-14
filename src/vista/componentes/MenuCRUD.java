@@ -9,29 +9,28 @@ import utilidades.Operacion;
 
 public class MenuCRUD extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	private String[] MENU_LABELS = { " Buscar ", "Agregar", "Modificar", " Eliminar " };
-	private String[] RUTA_IMAGENES = {"/utilidades/img/look.png", "/utilidades/img/add.png", "/utilidades/img/edit.png", "/utilidades/img/del.png"};
-	private Operacion[] FUNCIONES_ON_CLICK = { () -> VentanaPrincipalControl.mostrarVistaCliente(),
-			() -> VistaClienteControl.mostrarAgregarCliente(), () -> VistaClienteControl.mostrarModificarCliente(),
-			() -> VentanaPrincipalControl.mostrarVistaProducto() };
-	private int length = MENU_LABELS.length;
-	
-	private ItemCRUD[] menuCRUD;
+    private static final long serialVersionUID = 1L;
+    private final String[] MENU_LABELS = {" Buscar ", "Agregar", "Modificar", " Eliminar "};
+    private final String[] RUTA_IMAGENES = {"/utilidades/img/look.png", "/utilidades/img/add.png", "/utilidades/img/edit.png", "/utilidades/img/del.png"};
+    private final Operacion[] FUNCIONES_ON_CLICK = {() -> VentanaPrincipalControl.mostrarVistaCliente(),
+        () -> VistaClienteControl.mostrarAgregarCliente(), () -> VistaClienteControl.mostrarModificarCliente(),
+        () -> VistaClienteControl.mostrarEliminarCliente()};
+    private final int LENGTH = MENU_LABELS.length;
 
-	public MenuCRUD() {
-		FlowLayout flowLayout = (FlowLayout) getLayout();
-		flowLayout.setHgap(120);
-		
-//		setOpaque(false);
-		setBackground(Color.AZUL_30.getColor());
+    private ItemCRUD[] menuCRUD;
 
-		this.menuCRUD = new ItemCRUD[length];
-		
-		for (int i = 0; i < length; i++) {
-			menuCRUD[i] = new ItemCRUD(MENU_LABELS[i], RUTA_IMAGENES[i],FUNCIONES_ON_CLICK[i]);
-			add(menuCRUD[i]);
-		}
-	}
+    public MenuCRUD() {
+        FlowLayout flowLayout = (FlowLayout) getLayout();
+        flowLayout.setHgap(120);
+
+        setBackground(Color.AZUL_30.getColor());
+
+        this.menuCRUD = new ItemCRUD[LENGTH];
+
+        for (int i = 0; i < LENGTH; i++) {
+            menuCRUD[i] = new ItemCRUD(MENU_LABELS[i], RUTA_IMAGENES[i], FUNCIONES_ON_CLICK[i]);
+            add(menuCRUD[i]);
+        }
+    }
 
 }

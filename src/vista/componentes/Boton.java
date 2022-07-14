@@ -61,4 +61,8 @@ public class Boton extends JPanel implements MouseListener {
 		this.setBackground(Color.VERDE_50.getColor());
 	}
 
+    public void setTextoBoton(String botonTxt) {
+        this.botonTxt.setText(botonTxt);
+    }
+
 }
