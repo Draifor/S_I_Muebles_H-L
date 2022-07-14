@@ -16,7 +16,6 @@ public class ContenedorVista extends JPanel {
 
 		setLayout(new BorderLayout(0, 0));
 		setOpaque(false);
-		
 
 		this.paginaActual = new PaginaActual(paginaActual);
 		this.navegacion = new NavMenu();
@@ -27,7 +26,7 @@ public class ContenedorVista extends JPanel {
 		this.contenedorHeader.add(this.paginaActual, BorderLayout.SOUTH);
 
 		this.menuCRUD = new MenuCRUD();
-		
+
 		this.contenedorPrincipal = new JPanel();
 		this.contenedorPrincipal.setLayout(new BorderLayout(0, 0));
 		this.contenedorPrincipal.setOpaque(false);

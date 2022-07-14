@@ -18,7 +18,7 @@ public class Boton extends JPanel implements MouseListener {
 		FlowLayout flowLayout = (FlowLayout) getLayout();
 		flowLayout.setHgap(10);
 		flowLayout.setVgap(2);
-		
+
 		setBackground(Color.VERDE_50.getColor());
 		setBorder(BorderFactory.createLineBorder(Color.VERDE_100.getColor(), 2));
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -43,12 +43,10 @@ public class Boton extends JPanel implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -61,8 +59,8 @@ public class Boton extends JPanel implements MouseListener {
 		this.setBackground(Color.VERDE_50.getColor());
 	}
 
-    public void setTextoBoton(String botonTxt) {
-        this.botonTxt.setText(botonTxt);
-    }
+	public void setTextoBoton(String botonTxt) {
+		this.botonTxt.setText(botonTxt);
+	}
 
 }

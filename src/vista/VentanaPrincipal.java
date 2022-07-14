@@ -13,23 +13,6 @@ public class VentanaPrincipal extends JFrame {
 	private JScrollPane contenidoPrincipal;
 	private Header encabezado;
 
-	public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPrincipal frame = new VentanaPrincipal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public VentanaPrincipal() {
 		iniciarComponentes();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +23,6 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	private void iniciarComponentes() {
-
 		this.contenedor = new JPanel();
 		this.contenedor.setLayout(new BorderLayout(0, 0));
 		setContentPane(this.contenedor);

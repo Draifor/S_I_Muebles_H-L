@@ -92,7 +92,7 @@ public class DialogCliente extends JDialog {
 
 		this.boton2 = new Boton("Botón 2", () -> setTitle(""));
 		this.boton2.setBounds(178, 405, 105, 27);
-		
+
 		this.cancelar = new Boton("Cancelar", () -> DialogClienteControl.ocultar());
 		this.cancelar.setBounds(311, 405, 105, 27);
 
@@ -195,11 +195,11 @@ public class DialogCliente extends JDialog {
 	public void setOnClickBoton1(Operacion onClick) {
 		this.boton1.setOnClick(onClick);
 	}
-	
+
 	public void setTextoBoton2(String textoBoton) {
 		this.boton2.setTextoBoton(textoBoton);
 	}
-	
+
 	public void setOnClickBoton2(Operacion onClick) {
 		this.boton2.setOnClick(onClick);
 	}
@@ -209,14 +209,14 @@ public class DialogCliente extends JDialog {
 		this.boton1.setBounds(96, 405, 105, 27);
 		this.cancelar.setBounds(258, 405, 105, 27);
 	}
-	
+
 	public void mostrarBoton2() {
 		this.boton1.setBounds(45, 405, 105, 27);
 		this.boton2.setBounds(178, 405, 105, 27);
 		this.boton2.setVisible(true);
 		this.cancelar.setBounds(311, 405, 105, 27);
 	}
-	
+
 	public void desactivarCampos() {
 		this.nombreInput.desactivarCampo();
 		this.apellidoInput.desactivarCampo();

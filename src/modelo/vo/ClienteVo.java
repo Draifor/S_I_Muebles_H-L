@@ -2,85 +2,87 @@ package modelo.vo;
 
 public class ClienteVo {
 
-    private int IdCliente;
-    private String nombre;
-    private String apellido;
+	private int IdCliente;
+	private String nombre;
+	private String apellido;
 	private String identificacion;
-    private String direccion;
-    private String celular;
+	private String direccion;
+	private String celular;
 
-    public ClienteVo(String nombre, String apellido, String identificacion, String celular, String direccion) {
-    	
-    	this.nombre = nombre;
-    	this.apellido = apellido;
-    	this.identificacion = identificacion;
-    	this.celular = celular;
-    	this.direccion = direccion;
-    }
-    public ClienteVo(int IdCliente, String nombre, String apellido, String identificacion, String celular, String direccion) {
-        this.IdCliente = IdCliente;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.identificacion = identificacion;
-        this.celular = celular;
-        this.direccion = direccion;
-    }
+	public ClienteVo(String nombre, String apellido, String identificacion, String celular, String direccion) {
 
-    public int getIdCliente() {
-        return this.IdCliente;
-    }
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.identificacion = identificacion;
+		this.celular = celular;
+		this.direccion = direccion;
+	}
 
-    public String getNombre() {
-        return this.nombre;
-    }
+	public ClienteVo(int IdCliente, String nombre, String apellido, String identificacion, String celular,
+			String direccion) {
+		this.IdCliente = IdCliente;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.identificacion = identificacion;
+		this.celular = celular;
+		this.direccion = direccion;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public int getIdCliente() {
+		return this.IdCliente;
+	}
 
-    public String getApellido() {
-    	return apellido;
-    }
-    
-    public void setApellido(String apellido) {
-    	this.apellido = apellido;
-    }
-    
-    public String getIdentificacion() {
-        return this.identificacion;
-    }
+	public String getNombre() {
+		return this.nombre;
+	}
 
-    public void setIdentificacion(String identificacion) {
-        this.identificacion = identificacion;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getDireccion() {
-        return this.direccion;
-    }
+	public String getApellido() {
+		return apellido;
+	}
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
 
-    public String getCelular() {
-        return this.celular;
-    }
+	public String getIdentificacion() {
+		return this.identificacion;
+	}
 
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
+	public void setIdentificacion(String identificacion) {
+		this.identificacion = identificacion;
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Cliente {");
-        sb.append("IdCliente: ").append(IdCliente);
-        sb.append(", nombre: ").append(nombre);
-        sb.append(", identificacion: ").append(identificacion);
-        sb.append(", direccion: ").append(direccion);
-        sb.append(", celular: ").append(celular);
-        sb.append('}');
-        return sb.toString();
-    }
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getCelular() {
+		return this.celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Cliente {");
+		sb.append("IdCliente: ").append(IdCliente);
+		sb.append(", nombre: ").append(nombre);
+		sb.append(", identificacion: ").append(identificacion);
+		sb.append(", direccion: ").append(direccion);
+		sb.append(", celular: ").append(celular);
+		sb.append('}');
+		return sb.toString();
+	}
 
 }

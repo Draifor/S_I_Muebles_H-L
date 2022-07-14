@@ -4,19 +4,24 @@ import vista.VentanaLogin;
 
 public class LoginControl {
 
-    private static VentanaLogin ventana = new VentanaLogin();
+	private static VentanaLogin ventana = new VentanaLogin();
 
-    public static void mostrar() {
-        LoginControl.ventana.setVisible(true);
-    }
+	public static void mostrar() {
+		LoginControl.ventana.setVisible(true);
+	}
 
-    public static void ocultar() {
-        LoginControl.ventana.setVisible(false);
-    }
+	public static void ocultar() {
+		LoginControl.ventana.setVisible(false);
+	}
 
-    public static void iniciarSesion() {
-        LoginControl.ocultar();
-        VentanaPrincipalControl.mostrar();
-        VentanaPrincipalControl.mostrarVistaMenu();
-    }
+	public static void iniciarSesion() {
+		LoginControl.validarCredenciales();
+		LoginControl.ocultar();
+		VentanaPrincipalControl.mostrar();
+		VentanaPrincipalControl.mostrarVistaMenu();
+	}
+
+	public static void validarCredenciales() {
+
+	}
 }

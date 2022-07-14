@@ -4,46 +4,45 @@ import java.awt.BorderLayout;
 import javax.swing.*;
 
 import controlador.*;
-import utilidades.MetodosAuxiliares;
 import vista.componentes.*;
 
 public class VistaCliente extends JPanel {
 
-    private static final long serialVersionUID = 1L;
-    private ContenedorVista contenedorVista;
-    private Tabla tabla;
+	private static final long serialVersionUID = 1L;
+	private ContenedorVista contenedorVista;
+	private Tabla tabla;
 
-    public VistaCliente() {
+	public VistaCliente() {
 
-        setLayout(new BorderLayout(0, 0));
-        setOpaque(false);
+		setLayout(new BorderLayout(0, 0));
+		setOpaque(false);
 
-        this.construirTabla();
+		this.construirTabla();
 
-        this.contenedorVista = new ContenedorVista("CLIENTES", this.tabla);
+		this.contenedorVista = new ContenedorVista("CLIENTES", this.tabla);
 
-        this.add(this.contenedorVista, BorderLayout.CENTER);
-    }
+		this.add(this.contenedorVista, BorderLayout.CENTER);
+	}
 
-    public void construirTabla() {
+	public void construirTabla() {
 
-        String[] titulos = VistaClienteControl.obtenerTitulosColumnas();
-        String[][] datos = VistaClienteControl.obtenerClientes();
+		String[] titulos = VistaClienteControl.obtenerTitulosColumnas();
+		String[][] datos = VistaClienteControl.obtenerClientes();
 
-        this.tabla = new Tabla(titulos, datos);
+		this.tabla = new Tabla(titulos, datos);
 
-        VistaClienteControl.construirTabla(this.tabla.getTabla());
-    }
+		VistaClienteControl.construirTabla(this.tabla.getTabla());
+	}
 
-    public void actualizarTabla() {
-        String[] titulos = VistaClienteControl.obtenerTitulosColumnas();
-        String[][] datos = VistaClienteControl.obtenerClientes();
+	public void actualizarTabla() {
+		String[] titulos = VistaClienteControl.obtenerTitulosColumnas();
+		String[][] datos = VistaClienteControl.obtenerClientes();
 
-        this.tabla.actualizarTabla(titulos, datos);
-        VistaClienteControl.construirTabla(this.tabla.getTabla());
-    }
+		this.tabla.actualizarTabla(titulos, datos);
+		VistaClienteControl.construirTabla(this.tabla.getTabla());
+	}
 
-    public JTable getTabla() {
-    	return this.tabla.getTabla();
-    }
+	public JTable getTabla() {
+		return this.tabla.getTabla();
+	}
 }

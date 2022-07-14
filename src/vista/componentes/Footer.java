@@ -2,10 +2,10 @@ package vista.componentes;
 
 import utilidades.Color;
 import javax.swing.*;
-import java.awt.*;
 
 public class Footer extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private String COPYRIGTH_TXT = "Todos los derechos reservados ASD - ASEORÍA, SERVICIO Y DISEÑO ©";
 	private Texto copyright;
 

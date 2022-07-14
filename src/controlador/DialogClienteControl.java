@@ -1,9 +1,8 @@
 package controlador;
 
-import modelo.vo.ClienteVo;
-import utilidades.MetodosAuxiliares;
-import utilidades.Operacion;
 import vista.cliente.DialogCliente;
+import modelo.vo.ClienteVo;
+import utilidades.*;
 
 public class DialogClienteControl {
 
@@ -55,10 +54,6 @@ public class DialogClienteControl {
         DialogClienteControl.ventana.setIdentificacionInput("");
         DialogClienteControl.ventana.setCelularInput("");
         DialogClienteControl.ventana.setDireccionInput("");
-    }
-
-    public static void modificarCliente() {
-        System.out.println("Se modificó el cliente");
     }
 
     public static void mostrarCodigoPorDefecto() {

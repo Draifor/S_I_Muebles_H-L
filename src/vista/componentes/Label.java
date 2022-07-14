@@ -2,11 +2,11 @@ package vista.componentes;
 
 import utilidades.Color;
 import javax.swing.*;
-import java.awt.Dimension;
-import java.awt.BorderLayout;
+import java.awt.*;
 
 public class Label extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private Texto label;
 
 	public Label(String label) {

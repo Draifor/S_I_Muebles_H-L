@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class SeccionPanel extends JPanel implements MouseListener{
+public class SeccionPanel extends JPanel implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	private Texto lblSeccion;
@@ -35,8 +35,6 @@ public class SeccionPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -53,5 +51,5 @@ public class SeccionPanel extends JPanel implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		this.setBackground(Color.AZUL_30.getColor());
 	}
-	
+
 }

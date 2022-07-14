@@ -1,7 +1,6 @@
 package utilidades;
 
 import java.awt.*;
-import java.text.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -19,12 +18,11 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 			int row, int column) {
 
 		if (this.tipo == "numero" && !((String) value).equals("")) {
-			
+
 			value = MetodosAuxiliares.formatearNumero(value);
 			super.getTableCellRendererComponent(table, value, isSelected, isFocused, row, column);
 		}
-		
-		
+
 		/*
 		 * Este metodo controla toda la tabla, podemos obtener el valor que contiene
 		 * definir que celda está seleccionada, la fila y columna al tener el foco en
@@ -45,16 +43,15 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 		if (isSelected) {
 			this.setBackground(colorFondoPorDefecto);
 		} else {
-			// Para las que no est�n seleccionadas se pinta el fondo de las celdas de blanco
 			this.setBackground(Color.WHITE.getColor());
 		}
 
 		/*
-		 * Se definen los tipos de datos que contendr�n las celdas basado en la
+		 * Se definen los tipos de datos que contendrán las celdas basado en la
 		 * instancia que se hace en la ventana de la tabla al momento de construirla
 		 */
-		// si es tipo texto define el color de fondo del texto y de la celda as� como la
-		// alineaci�n
+		// si es tipo texto define el color de fondo del texto y de la celda así como la
+		// alineación
 		if (isFocused) {
 			colorFondo = colorFondoSeleccion;
 		} else {
@@ -62,12 +59,9 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 		}
 		this.setHorizontalAlignment(column == 0 ? JLabel.CENTER : JLabel.LEFT);
 		this.setText((String) value);
-		// this.setForeground( (selected)? new Color(255,255,255) :new Color(0,0,0) );
-		// this.setForeground( (selected)? new Color(255,255,255) :new Color(32,117,32)
-		// );
+		this.setForeground(isSelected ? Color.WHITE.getColor() : Color.BLACK.getColor());
 		this.setBackground((isSelected) ? colorFondo : Color.WHITE.getColor());
 		this.setFont(new Font("Times New Roman", 0, 16));
-		// this.setFont(bold);
 
 		return this;
 

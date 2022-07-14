@@ -1,14 +1,12 @@
 package controlador;
 
-import java.awt.Dialog;
 import java.util.List;
-
 import javax.swing.JTable;
 
+import vista.cliente.VistaCliente;
 import modelo.dao.ClienteDao;
 import modelo.vo.ClienteVo;
 import utilidades.*;
-import vista.cliente.VistaCliente;
 
 public class VistaClienteControl {
 
@@ -86,20 +84,21 @@ public class VistaClienteControl {
 	}
 
 	public static void construirTabla(JTable tabla) {
-		// se recorre y asignan las celdas que almacenan datos de tipo texto
+		// Se crean las columnas tipo texto
 		for (int i = 0; i < ClientesColumnas.TIPO_TEXTO.length; i++) {
 			tabla.getColumnModel().getColumn(ClientesColumnas.TIPO_TEXTO[i])
 					.setCellRenderer(new GestionCeldas("texto"));
 		}
 
-		// Se recorre para asignar datos de tipo numero
+		// Se crean las columnas numericas
 		for (int i = 0; i < ClientesColumnas.TIPO_NUMERO.length; i++) {
 			tabla.getColumnModel().getColumn(ClientesColumnas.TIPO_NUMERO[i])
 					.setCellRenderer(new GestionCeldas("numero"));
 		}
 
+		// Se define el tamaño de las filas y columnas
 		tabla.getTableHeader().setReorderingAllowed(false);
-		tabla.setRowHeight(25);// tama�o de las celdas
+		tabla.setRowHeight(25);
 		tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
 		tabla.getColumnModel().getColumn(ClientesColumnas.CODIGO).setPreferredWidth(115);
@@ -112,7 +111,6 @@ public class VistaClienteControl {
 
 	public static void actualizarVistaCliente() {
 		VistaClienteControl.vistaCliente.actualizarTabla();
-		System.out.println("Actualizar Clientes");
 	}
 
 	public static ClienteVo obtenerClienteSeleccionado(JTable tabla) {

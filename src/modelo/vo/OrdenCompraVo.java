@@ -36,10 +36,6 @@ public class OrdenCompraVo {
         return this.idCliente;
     }
 
-    public void setIdCliente(int IdCliente) {
-        this.idCliente = idCliente;
-    }
-
     public int getIdOrden() {
         return this.idOrden;
     }

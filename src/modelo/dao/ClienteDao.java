@@ -5,7 +5,6 @@ import java.util.*;
 
 import modelo.conexion.Conexion;
 import modelo.vo.ClienteVo;
-import utilidades.ClientesColumnas;
 
 public class ClienteDao {
 

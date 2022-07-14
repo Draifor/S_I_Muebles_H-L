@@ -1,14 +1,13 @@
 package vista.componentes;
 
 import java.awt.BorderLayout;
-import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 
 import utilidades.*;
 
-public class Tabla extends JPanel implements MouseListener {
+public class Tabla extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private final int MIN_FILAS = 18;
@@ -19,13 +18,12 @@ public class Tabla extends JPanel implements MouseListener {
 	private int filasTabla;
 	List<? extends Object> lista;
 
-	public Tabla(String[] titulos, String [][] datos) {
+	public Tabla(String[] titulos, String[][] datos) {
 
 		setLayout(new BorderLayout(0, 0));
 
 		this.tabla = new JTable();
 		this.tabla.setBackground(Color.WHITE.getColor());
-		this.tabla.addMouseListener(this);
 
 		this.scrollPaneTabla = new JScrollPane();
 		this.scrollPaneTabla.setViewportView(this.tabla);
@@ -35,31 +33,28 @@ public class Tabla extends JPanel implements MouseListener {
 		this.construirTabla(titulos, datos);
 	}
 
+	private void construirTabla(String[] titulos, String[][] datos) {
 
-	private void construirTabla(String[] titulos, String [][] datos) {
-				
 		this.modelo = new ModeloTabla(titulos, datos);
 		this.tabla.setModel(this.modelo);
 
 		completarFilasVacias();
-		
-		// personaliza el encabezado
+
 		this.headerTabla = this.tabla.getTableHeader();
 		this.headerTabla.setDefaultRenderer(new GestionEncabezadoTabla());
 		this.tabla.setTableHeader(this.headerTabla);
 
-		// se asigna la tabla al scrollPane
 		this.scrollPaneTabla.setViewportView(this.tabla);
 	}
-	
+
 	public void actualizarTabla(String[] titulos, Object[][] datos) {
 		this.modelo.actualizarModeloTabla(titulos, datos);
 		completarFilasVacias();
 	}
-	
+
 	public void completarFilasVacias() {
 		this.filasTabla = tabla.getRowCount();
-		
+
 		int filasParaCompletar = this.MIN_FILAS - filasTabla;
 
 		if (filasParaCompletar > 0) {
@@ -74,28 +69,4 @@ public class Tabla extends JPanel implements MouseListener {
 		return this.tabla;
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
 }

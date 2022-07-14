@@ -5,8 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import controlador.*;
-import utilidades.Color;
-import utilidades.Operacion;
+import utilidades.*;
 
 public class Aside extends JPanel {
 

@@ -2,11 +2,11 @@ package vista;
 
 import java.awt.BorderLayout;
 import javax.swing.*;
-import utilidades.Color;
 import vista.componentes.*;
 
 public class VistaMenu extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private PaginaActual paginaActual;
 	private Aside aside;
 	private MainMenu menuPricipal;

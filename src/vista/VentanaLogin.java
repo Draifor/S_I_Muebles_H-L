@@ -13,25 +13,6 @@ public class VentanaLogin extends JFrame {
 	private Header encabezado;
 	private Footer piePagina;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaLogin frame = new VentanaLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public VentanaLogin() {
 		iniciarComponentes();
 		setMinimumSize(new Dimension(650, 530));
@@ -39,7 +20,6 @@ public class VentanaLogin extends JFrame {
 		setSize(860, 570);
 		setLocationRelativeTo(null);
 		setTitle(this.TITULO);
-
 	}
 
 	private void iniciarComponentes() {
@@ -51,7 +31,7 @@ public class VentanaLogin extends JFrame {
 		this.contenedor = new JPanel();
 		this.contenedor.setLayout(new BorderLayout(0, 0));
 		setContentPane(this.contenedor);
-		
+
 		this.contenedor.add(this.encabezado, BorderLayout.NORTH);
 		this.contenedor.add(this.contenidoPrincipal, BorderLayout.CENTER);
 		this.contenedor.add(this.piePagina, BorderLayout.SOUTH);
