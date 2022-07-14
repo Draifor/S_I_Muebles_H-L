@@ -59,4 +59,20 @@ public class VentanaPrincipal extends JFrame {
 		this.contenidoPrincipal.setViewportView(nuevoContenido);
 		PaginaActual.setPaginaActual(nombrePaginaActual);
 	}
+
+	public void dialogoAlerta(String mensaje, String titulo) {
+		JOptionPane.showMessageDialog(this, new Texto(mensaje, 0, 18), titulo, JOptionPane.PLAIN_MESSAGE);
+	}
+
+	public int dialogoConfirmacion(String mensaje, String titulo) {
+		int opcionElegida = JOptionPane.showConfirmDialog(this, new Texto(mensaje, 0, 15), titulo,
+				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+		return opcionElegida;
+	}
+
+	public String dialogoInput(String mensaje, String titulo) {
+		String usuarioInput = JOptionPane.showInputDialog(this, new Texto(mensaje, 0, 15), titulo,
+				JOptionPane.PLAIN_MESSAGE);
+		return usuarioInput;
+	}
 }

@@ -1,5 +1,6 @@
 package controlador;
 
+import java.awt.Dialog;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -23,10 +24,9 @@ public class VistaClienteControl {
 		if (resultadoOperacion > 0) {
 			VistaClienteControl.actualizarVistaCliente();
 			DialogClienteControl.ocultar();
-			VistaClienteControl.vistaCliente.mostrarAlerta("Cliente registrado con éxito", "Operación Exitosa");
+			VentanaPrincipalControl.dialogoAlerta("Cliente registrado con éxito", "Operación Exitosa");
 		} else {
-			VistaClienteControl.vistaCliente.mostrarAlerta("Ocurrió un error, no se registró el usuario",
-					"Operación Fallida");
+			VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se registró el usuario", "Operación Fallida");
 		}
 	}
 
@@ -37,32 +37,31 @@ public class VistaClienteControl {
 		if (resultadoOperacion > 0) {
 			VistaClienteControl.actualizarVistaCliente();
 			DialogClienteControl.ocultar();
-			VistaClienteControl.vistaCliente.mostrarAlerta("El cliente se modificó con éxito", "Operación Exitosa");
+			VentanaPrincipalControl.dialogoAlerta("El cliente se modificó con éxito", "Operación Exitosa");
 		} else {
-			VistaClienteControl.vistaCliente.mostrarAlerta("Ocurrió un error, no se modificó el usuario",
-					"Operación Fallida");
+			VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se modificó el usuario", "Operación Fallida");
 		}
 	}
 
 	public static void eliminarCliente() {
-		String respuestaUsuario = VistaClienteControl.vistaCliente
-				.mostrarDialogoConfirmacion("Esta operación es irreversible ¿Desea continuar?", "ADVERTENCIA");
+		int opcionElegida = VentanaPrincipalControl
+				.dialogoConfirmacion("Esta operación es irreversible ¿Desea continuar?", "ADVERTENCIA");
 
-		if (respuestaUsuario.equals("eliminar")) {
+		if (opcionElegida == 0) {
 			ClienteVo clientePorEliminar = DialogClienteControl.getDatosCliente();
-			
+
 			int resultadoOperacion = VistaClienteControl.clienteDao.eliminarCliente(clientePorEliminar.getIdCliente());
 
 			if (resultadoOperacion > 0) {
 				VistaClienteControl.actualizarVistaCliente();
 				DialogClienteControl.ocultar();
-				VistaClienteControl.vistaCliente.mostrarAlerta("Cliente eliminado con exito", "Operación Exitosa");
+				VentanaPrincipalControl.dialogoAlerta("Cliente eliminado con exito", "Operación Exitosa");
 			} else {
-				VistaClienteControl.vistaCliente.mostrarAlerta("Ocurrió un error, no se eliminó el usuario",
+				VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se eliminó el usuario",
 						"Operación Fallida");
 			}
 		}
-		
+
 	}
 
 	public static String[][] obtenerClientes() {
@@ -116,9 +115,9 @@ public class VistaClienteControl {
 		System.out.println("Actualizar Clientes");
 	}
 
-	public static String obtenerClienteSeleccionado(JTable tabla) {
+	public static ClienteVo obtenerClienteSeleccionado(JTable tabla) {
+		ClienteVo cliente = null;
 		int filaSeleccionada = tabla.getSelectedRow();
-		String resultadoOperacion = "";
 
 		if (filaSeleccionada != -1) {
 			int IdCliente = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ClientesColumnas.CODIGO).toString());
@@ -128,41 +127,88 @@ public class VistaClienteControl {
 			String celular = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.CELULAR);
 			String direccion = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.DIRECCION);
 
-			ClienteVo cliente = new ClienteVo(IdCliente, nombre, apellido, identificacion, celular, direccion);
-			DialogClienteControl.setDatosCliente(cliente);
-		} else {
-			resultadoOperacion = "error";
+			cliente = new ClienteVo(IdCliente, nombre, apellido, identificacion, celular, direccion);
 		}
+		return cliente;
+	}
 
-		return resultadoOperacion;
+	public static void buscarCliente() {
+		String usuarioInput = VentanaPrincipalControl.dialogoInput("Número de identificación a buscar",
+				"Buscar Cliente");
+
+		try {
+
+			if (MetodosAuxiliares.esNumero(usuarioInput)) {
+				ClienteVo cliente = VistaClienteControl.clienteDao.buscarCliente(Integer.parseInt(usuarioInput));
+				if (cliente != null) {
+					DialogClienteControl.setDatosCliente(cliente);
+					DialogClienteControl.desactivarCampos();
+					DialogClienteControl.mostrarSegundoBoton();
+					DialogClienteControl.cambiarTextoPrimerBoton("Modificar");
+					DialogClienteControl.cambiarTextoSegundoBoton("Eliminar");
+					DialogClienteControl.cambiarOnClickSegundoBoton(() -> VistaClienteControl.eliminarCliente());
+					DialogClienteControl.mostrar("Cliente", () -> VistaClienteControl.mostrarClienteModificar(cliente));
+				} else {
+					VentanaPrincipalControl.dialogoAlerta("No se encontró el cliente", "Resultado");
+				}
+
+			} else if (usuarioInput.length() == 0) {
+				VentanaPrincipalControl.dialogoAlerta("Debe ingresar un número", "Atención");
+				VistaClienteControl.buscarCliente();
+			} else {
+				VentanaPrincipalControl.dialogoAlerta("Debe ingresar solo el número sin caracteres adicionales",
+						"Formato de Número Incorrecto");
+				VistaClienteControl.buscarCliente();
+			}
+
+		} catch (Exception e) {
+
+		}
 	}
 
 	public static void mostrarAgregarCliente() {
 		DialogClienteControl.limpiarDatos();
+		DialogClienteControl.activarCampos();
 		DialogClienteControl.mostrarCodigoPorDefecto();
-		DialogClienteControl.cambiarTextoBoton("Agregar Cliente");
+		DialogClienteControl.cambiarTextoPrimerBoton("Agregar");
+		DialogClienteControl.ocultarSegundoBoton();
 		DialogClienteControl.mostrar("Agregar Cliente", () -> VistaClienteControl.agregarCliente());
-
 	}
 
-	public static void mostrarModificarCliente() {
-		String resultadoOperacion = VistaClienteControl.vistaCliente
-				.obtenerClienteSeleccionado("Selecciona el cliente a modificar", "Modificar Cliente");
+	public static void validarClienteModificar() {
+		ClienteVo cliente = VistaClienteControl.obtenerClienteSeleccionado(VistaClienteControl.vistaCliente.getTabla());
 
-		if (resultadoOperacion.equals("mostrar")) {
-			DialogClienteControl.cambiarTextoBoton("Modificar Cliente");
-			DialogClienteControl.mostrar("Modificar Cliente", () -> VistaClienteControl.modificarCliente());
+		if (cliente != null) {
+			VistaClienteControl.mostrarClienteModificar(cliente);
+		} else {
+			VentanaPrincipalControl.dialogoAlerta("Selecciona el cliente a modificar", "Modificar Cliente");
 		}
 	}
 
-	public static void mostrarEliminarCliente() {
-		String resultadoOperacion = VistaClienteControl.vistaCliente
-				.obtenerClienteSeleccionado("Selecciona el cliente a eliminar", "Eliminar Cliente");
+	public static void validarClienteEliminar() {
+		ClienteVo cliente = VistaClienteControl.obtenerClienteSeleccionado(VistaClienteControl.vistaCliente.getTabla());
 
-		if (resultadoOperacion.equals("mostrar")) {
-			DialogClienteControl.cambiarTextoBoton("Eliminar Cliente");
-			DialogClienteControl.mostrar("Eliminar Cliente", () -> VistaClienteControl.eliminarCliente());
+		if (cliente != null) {
+			VistaClienteControl.mostrarClienteEliminar(cliente);
+		} else {
+			VentanaPrincipalControl.dialogoAlerta("Selecciona el cliente a eliminar", "Eliminar Cliente");
 		}
+	}
+
+	public static void mostrarClienteModificar(ClienteVo cliente) {
+		DialogClienteControl.setDatosCliente(cliente);
+		DialogClienteControl.activarCampos();
+		DialogClienteControl.cambiarTextoPrimerBoton("Modificar");
+		DialogClienteControl.ocultarSegundoBoton();
+		DialogClienteControl.mostrar("Modificar Cliente", () -> VistaClienteControl.modificarCliente());
+	}
+
+	public static void mostrarClienteEliminar(ClienteVo cliente) {
+		DialogClienteControl.setDatosCliente(cliente);
+		DialogClienteControl.desactivarCampos();
+		DialogClienteControl.cambiarTextoPrimerBoton("Eliminar");
+		DialogClienteControl.ocultarSegundoBoton();
+		DialogClienteControl.mostrar("Eliminar Cliente", () -> VistaClienteControl.eliminarCliente());
 	}
 
 	public static VistaCliente getVistaCliente() {

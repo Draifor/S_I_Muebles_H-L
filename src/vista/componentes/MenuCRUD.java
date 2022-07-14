@@ -12,9 +12,9 @@ public class MenuCRUD extends JPanel {
     private static final long serialVersionUID = 1L;
     private final String[] MENU_LABELS = {" Buscar ", "Agregar", "Modificar", " Eliminar "};
     private final String[] RUTA_IMAGENES = {"/utilidades/img/look.png", "/utilidades/img/add.png", "/utilidades/img/edit.png", "/utilidades/img/del.png"};
-    private final Operacion[] FUNCIONES_ON_CLICK = {() -> VentanaPrincipalControl.mostrarVistaCliente(),
-        () -> VistaClienteControl.mostrarAgregarCliente(), () -> VistaClienteControl.mostrarModificarCliente(),
-        () -> VistaClienteControl.mostrarEliminarCliente()};
+    private final Operacion[] FUNCIONES_ON_CLICK = {() -> VistaClienteControl.buscarCliente(),
+        () -> VistaClienteControl.mostrarAgregarCliente(), () -> VistaClienteControl.validarClienteModificar(),
+        () -> VistaClienteControl.validarClienteEliminar()};
     private final int LENGTH = MENU_LABELS.length;
 
     private ItemCRUD[] menuCRUD;

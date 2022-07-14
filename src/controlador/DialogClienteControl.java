@@ -11,7 +11,7 @@ public class DialogClienteControl {
 
     public static void mostrar(String titulo, Operacion onClick) {
         DialogClienteControl.ventana.setTitulo(titulo);
-        DialogClienteControl.ventana.setOnClick(onClick);
+        DialogClienteControl.ventana.setOnClickBoton1(onClick);
         DialogClienteControl.ventana.setVisible(true);
     }
 
@@ -65,7 +65,31 @@ public class DialogClienteControl {
         DialogClienteControl.ventana.codigoPorDefecto();
     }
 
-    public static void cambiarTextoBoton(String textoBoton) {
-        DialogClienteControl.ventana.setTextoBoton(textoBoton);
+    public static void cambiarTextoPrimerBoton(String textoBoton) {
+        DialogClienteControl.ventana.setTextoBoton1(textoBoton);
+    }
+    
+    public static void cambiarTextoSegundoBoton(String textoBoton) {
+    	DialogClienteControl.ventana.setTextoBoton2(textoBoton);
+    }
+    
+    public static void cambiarOnClickSegundoBoton(Operacion onClick) {
+    	DialogClienteControl.ventana.setOnClickBoton2(onClick);
+    }
+    
+    public static void activarCampos() {
+    	DialogClienteControl.ventana.activarCampos();
+    }
+    
+    public static void desactivarCampos() {
+    	DialogClienteControl.ventana.desactivarCampos();
+    }
+    
+    public static void ocultarSegundoBoton() {
+    	DialogClienteControl.ventana.ocultarBoton2();
+    }
+    
+    public static void mostrarSegundoBoton() {
+    	DialogClienteControl.ventana.mostrarBoton2();
     }
 }

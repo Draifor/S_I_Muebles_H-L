@@ -1,7 +1,10 @@
 package controlador;
 
+import javax.swing.JOptionPane;
+
 import vista.*;
 import vista.cliente.*;
+import vista.componentes.Texto;
 import vista.diseño.*;
 import vista.material.*;
 import vista.ordencompra.*;
@@ -72,5 +75,19 @@ public class VentanaPrincipalControl {
     public static void mostrarVistaVenta() {
     	VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionVenta, "VENTAS");
     	System.out.println("Mostrar Ventas");
+    }
+    
+    public static void dialogoAlerta(String mensaje, String titulo) {
+    	VentanaPrincipalControl.ventana.dialogoAlerta(mensaje, titulo);
+    }
+    
+    public static int dialogoConfirmacion(String mensaje, String titulo) {
+    	int opcionElegida = VentanaPrincipalControl.ventana.dialogoConfirmacion(mensaje, titulo);
+    	return opcionElegida;
+    }
+    
+    public static String dialogoInput(String mensaje, String titulo) {
+    	String usuarioInput = VentanaPrincipalControl.ventana.dialogoInput(mensaje, titulo);
+    	return usuarioInput;
     }
 }
