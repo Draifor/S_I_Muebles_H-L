@@ -9,10 +9,11 @@ import utilidades.ClientesColumnas;
 
 public class ClienteDao {
 
-    public void agregarCliente(ClienteVo nuevoCliente) {
+    public int agregarCliente(ClienteVo nuevoCliente) {
         Connection connection = null;
         Conexion conexion = new Conexion();
         connection = conexion.getConexion();
+        int resultadoOperacion = 0;
 
         try {
             PreparedStatement statement = connection.prepareStatement(
@@ -23,21 +24,25 @@ public class ClienteDao {
             statement.setInt(3, Integer.parseInt(nuevoCliente.getIdentificacion()));
             statement.setString(4, nuevoCliente.getCelular());
             statement.setString(5, nuevoCliente.getDireccion());
-            statement.executeUpdate();
+            
+            resultadoOperacion = statement.executeUpdate();
 
             statement.close();
             conexion.desconectar();
+            
         } catch (SQLException e) {
             System.out.println("Ocurrió un SQLException: " + e.getMessage() + "\n\n" + e);
         }
 
+        return resultadoOperacion;
     }
 
-    public void modificarCliente(ClienteVo clienteActualizado) {
+    public int modificarCliente(ClienteVo clienteActualizado) {
         Connection connection = null;
         Conexion conexion = new Conexion();
         connection = conexion.getConexion();
-
+        int resultadoOperacion = 0;
+        
         try {
             PreparedStatement statement = connection.prepareStatement(
                     "UPDATE clientes SET Nombre=?, Apellido=?, Identificacion=?, Celular=?, Direccion=? WHERE Cod_Cliente=?");
@@ -48,7 +53,8 @@ public class ClienteDao {
             statement.setString(4, clienteActualizado.getCelular());
             statement.setString(5, clienteActualizado.getDireccion());
             statement.setInt(6, clienteActualizado.getIdCliente());
-            statement.executeUpdate();
+            
+            resultadoOperacion = statement.executeUpdate();
 
             statement.close();
             conexion.desconectar();
@@ -56,16 +62,18 @@ public class ClienteDao {
             System.out.println("Ocurrió un SQLException: " + e.getMessage() + "\n\n" + e);
         }
 
+        return resultadoOperacion;
     }
     
-    public void eliminarCliente(int idClientePorEliminar) {
+    public int eliminarCliente(int idClientePorEliminar) {
         Connection connection = null;
         Conexion conexion = new Conexion();
         connection = conexion.getConexion();
+        int resultadoOperacion = 0;
 
         try {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("DELETE FROM clientes WHERE Cod_Cliente=" + idClientePorEliminar);
+            resultadoOperacion = statement.executeUpdate("DELETE FROM clientes WHERE Cod_Cliente=" + idClientePorEliminar);
 
             statement.close();
             conexion.desconectar();
@@ -73,6 +81,7 @@ public class ClienteDao {
             System.out.println("Ocurrió un SQLException: " + e.getMessage() + "\n\n" + e);
         }
 
+        return resultadoOperacion;
     }
     
 
