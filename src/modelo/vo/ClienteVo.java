@@ -2,7 +2,7 @@ package modelo.vo;
 
 public class ClienteVo {
 
-	private int IdCliente;
+	private int idCliente;
 	private String nombre;
 	private String apellido;
 	private String identificacion;
@@ -20,7 +20,7 @@ public class ClienteVo {
 
 	public ClienteVo(int IdCliente, String nombre, String apellido, String identificacion, String celular,
 			String direccion) {
-		this.IdCliente = IdCliente;
+		this.idCliente = IdCliente;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.identificacion = identificacion;
@@ -29,7 +29,7 @@ public class ClienteVo {
 	}
 
 	public int getIdCliente() {
-		return this.IdCliente;
+		return this.idCliente;
 	}
 
 	public String getNombre() {
@@ -76,7 +76,7 @@ public class ClienteVo {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Cliente {");
-		sb.append("IdCliente: ").append(IdCliente);
+		sb.append("IdCliente: ").append(idCliente);
 		sb.append(", nombre: ").append(nombre);
 		sb.append(", identificacion: ").append(identificacion);
 		sb.append(", direccion: ").append(direccion);

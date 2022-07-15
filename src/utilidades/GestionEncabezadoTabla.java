@@ -25,7 +25,6 @@ public class GestionEncabezadoTabla implements TableCellRenderer {
 		jcomponent.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new java.awt.Color(255, 255, 255)));
 		jcomponent.setOpaque(true);
 		jcomponent.setBackground(new Color(65, 65, 65));
-		jcomponent.setToolTipText("Tabla Seguimiento");
 		jcomponent.setForeground(Color.white);
 
 		return jcomponent;

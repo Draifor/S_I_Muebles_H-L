@@ -11,16 +11,14 @@ import utilidades.*;
 public class VistaClienteControl {
 
 	private static ClienteDao clienteDao = new ClienteDao();
-	private static VistaCliente vistaCliente = new VistaCliente();
-
-	;
+	private static VistaCliente vista = new VistaCliente();
 
 	public static void agregarCliente() {
 		ClienteVo nuevoCliente = DialogClienteControl.getDatosCliente();
-		int resultadoOperacion = VistaClienteControl.clienteDao.agregarCliente(nuevoCliente);
+		int resultadoOperacion = VistaClienteControl.clienteDao.agregar(nuevoCliente);
 
 		if (resultadoOperacion > 0) {
-			VistaClienteControl.actualizarVistaCliente();
+			VistaClienteControl.actualizarVista();
 			DialogClienteControl.ocultar();
 			VentanaPrincipalControl.dialogoAlerta("Cliente registrado con éxito", "Operación Exitosa");
 		} else {
@@ -30,10 +28,10 @@ public class VistaClienteControl {
 
 	public static void modificarCliente() {
 		ClienteVo clienteActualizado = DialogClienteControl.getDatosCliente();
-		int resultadoOperacion = VistaClienteControl.clienteDao.modificarCliente(clienteActualizado);
+		int resultadoOperacion = VistaClienteControl.clienteDao.modificar(clienteActualizado);
 
 		if (resultadoOperacion > 0) {
-			VistaClienteControl.actualizarVistaCliente();
+			VistaClienteControl.actualizarVista();
 			DialogClienteControl.ocultar();
 			VentanaPrincipalControl.dialogoAlerta("El cliente se modificó con éxito", "Operación Exitosa");
 		} else {
@@ -48,10 +46,10 @@ public class VistaClienteControl {
 		if (opcionElegida == 0) {
 			ClienteVo clientePorEliminar = DialogClienteControl.getDatosCliente();
 
-			int resultadoOperacion = VistaClienteControl.clienteDao.eliminarCliente(clientePorEliminar.getIdCliente());
+			int resultadoOperacion = VistaClienteControl.clienteDao.eliminar(clientePorEliminar.getIdCliente());
 
 			if (resultadoOperacion > 0) {
-				VistaClienteControl.actualizarVistaCliente();
+				VistaClienteControl.actualizarVista();
 				DialogClienteControl.ocultar();
 				VentanaPrincipalControl.dialogoAlerta("Cliente eliminado con exito", "Operación Exitosa");
 			} else {
@@ -109,11 +107,11 @@ public class VistaClienteControl {
 		tabla.getColumnModel().getColumn(ClientesColumnas.DIRECCION).setPreferredWidth(280);
 	}
 
-	public static void actualizarVistaCliente() {
-		VistaClienteControl.vistaCliente.actualizarTabla();
+	public static void actualizarVista() {
+		VistaClienteControl.vista.actualizarTabla();
 	}
 
-	public static ClienteVo obtenerClienteSeleccionado(JTable tabla) {
+	public static ClienteVo obtenerRegistroSeleccionado(JTable tabla) {
 		ClienteVo cliente = null;
 		int filaSeleccionada = tabla.getSelectedRow();
 
@@ -137,7 +135,7 @@ public class VistaClienteControl {
 		try {
 
 			if (MetodosAuxiliares.esNumero(usuarioInput)) {
-				ClienteVo cliente = VistaClienteControl.clienteDao.buscarCliente(Integer.parseInt(usuarioInput));
+				ClienteVo cliente = VistaClienteControl.clienteDao.buscar(Integer.parseInt(usuarioInput));
 				if (cliente != null) {
 					DialogClienteControl.setDatosCliente(cliente);
 					DialogClienteControl.desactivarCampos();
@@ -174,7 +172,7 @@ public class VistaClienteControl {
 	}
 
 	public static void validarClienteModificar() {
-		ClienteVo cliente = VistaClienteControl.obtenerClienteSeleccionado(VistaClienteControl.vistaCliente.getTabla());
+		ClienteVo cliente = VistaClienteControl.obtenerRegistroSeleccionado(VistaClienteControl.vista.getTabla());
 
 		if (cliente != null) {
 			VistaClienteControl.mostrarClienteModificar(cliente);
@@ -184,7 +182,7 @@ public class VistaClienteControl {
 	}
 
 	public static void validarClienteEliminar() {
-		ClienteVo cliente = VistaClienteControl.obtenerClienteSeleccionado(VistaClienteControl.vistaCliente.getTabla());
+		ClienteVo cliente = VistaClienteControl.obtenerRegistroSeleccionado(VistaClienteControl.vista.getTabla());
 
 		if (cliente != null) {
 			VistaClienteControl.mostrarClienteEliminar(cliente);
@@ -210,6 +208,6 @@ public class VistaClienteControl {
 	}
 
 	public static VistaCliente getVistaCliente() {
-		return VistaClienteControl.vistaCliente;
+		return VistaClienteControl.vista;
 	}
 }

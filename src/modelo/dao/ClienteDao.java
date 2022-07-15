@@ -8,7 +8,7 @@ import modelo.vo.ClienteVo;
 
 public class ClienteDao {
 
-	public int agregarCliente(ClienteVo nuevoCliente) {
+	public int agregar(ClienteVo nuevoCliente) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
@@ -36,7 +36,7 @@ public class ClienteDao {
 		return resultadoOperacion;
 	}
 
-	public int modificarCliente(ClienteVo clienteActualizado) {
+	public int modificar(ClienteVo clienteActualizado) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
@@ -64,7 +64,7 @@ public class ClienteDao {
 		return resultadoOperacion;
 	}
 
-	public int eliminarCliente(int idEliminar) {
+	public int eliminar(int idEliminar) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
@@ -83,7 +83,7 @@ public class ClienteDao {
 		return resultadoOperacion;
 	}
 
-	public ClienteVo buscarCliente(int idBuscar) {
+	public ClienteVo buscar(int idBuscar) {
 
 		ClienteVo cliente = null;
 
@@ -109,7 +109,7 @@ public class ClienteDao {
 			statement.close();
 			conexion.desconectar();
 		} catch (SQLException e) {
-			System.out.println("Ocurrió una SQLException al intentar obtenerClientes:\n" + e.getMessage());
+			System.out.println("Ocurrió una SQLException al intentar buscar cliente:\n" + e.getMessage());
 		}
 
 		return cliente;

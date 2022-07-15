@@ -4,11 +4,19 @@ import java.awt.BorderLayout;
 import javax.swing.*;
 
 import controlador.*;
+import utilidades.Operacion;
 import vista.componentes.*;
 
 public class VistaCliente extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+
+	private final Operacion[] FUNCIONES_ON_CLICK = {
+			() -> VistaClienteControl.buscarCliente(),
+			() -> VistaClienteControl.mostrarAgregarCliente(),
+			() -> VistaClienteControl.validarClienteModificar(),
+			() -> VistaClienteControl.validarClienteEliminar()
+	};
 	private ContenedorVista contenedorVista;
 	private Tabla tabla;
 
@@ -19,7 +27,7 @@ public class VistaCliente extends JPanel {
 
 		this.construirTabla();
 
-		this.contenedorVista = new ContenedorVista("CLIENTES", this.tabla);
+		this.contenedorVista = new ContenedorVista("CLIENTES", this.tabla, FUNCIONES_ON_CLICK);
 
 		this.add(this.contenedorVista, BorderLayout.CENTER);
 	}

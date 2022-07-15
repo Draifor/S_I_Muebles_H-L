@@ -16,17 +16,11 @@ public class MenuCRUD extends JPanel {
 			"/utilidades/img/edit.png",
 			"/utilidades/img/del.png"
 	};
-	private final Operacion[] FUNCIONES_ON_CLICK = {
-			() -> VistaClienteControl.buscarCliente(),
-			() -> VistaClienteControl.mostrarAgregarCliente(),
-			() -> VistaClienteControl.validarClienteModificar(),
-			() -> VistaClienteControl.validarClienteEliminar()
-	};
 	private final int LENGTH = MENU_LABELS.length;
 
 	private ItemCRUD[] menuCRUD;
 
-	public MenuCRUD() {
+	public MenuCRUD(Operacion[] funcionesOnClick) {
 		FlowLayout flowLayout = (FlowLayout) getLayout();
 		flowLayout.setHgap(120);
 
@@ -35,7 +29,7 @@ public class MenuCRUD extends JPanel {
 		this.menuCRUD = new ItemCRUD[LENGTH];
 
 		for (int i = 0; i < LENGTH; i++) {
-			menuCRUD[i] = new ItemCRUD(MENU_LABELS[i], RUTA_IMAGENES[i], FUNCIONES_ON_CLICK[i]);
+			menuCRUD[i] = new ItemCRUD(MENU_LABELS[i], RUTA_IMAGENES[i], funcionesOnClick[i]);
 			add(menuCRUD[i]);
 		}
 	}

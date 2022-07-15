@@ -14,7 +14,7 @@ public class VentanaPrincipalControl {
 
 	private static VistaMenu menuPrincipal = new VistaMenu();
 	private static VistaCliente seccionCliente = VistaClienteControl.getVistaCliente();
-	private static VistaDiseño seccionDiseño = new VistaDiseño();;
+	private static VistaDiseño seccionDiseño = VistaDiseñoControl.getVistaDiseño();;
 	private static VistaMaterial seccionMaterial = new VistaMaterial();;
 	private static VistaOrdenCompra seccionOrdenCompra = new VistaOrdenCompra();;
 	private static VistaProducto seccionProducto = new VistaProducto();;
@@ -54,6 +54,10 @@ public class VentanaPrincipalControl {
 	public static void mostrarVistaDiseño() {
 		VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionDiseño, "DISEÑOS");
 		System.out.println("Mostrar Diseños");
+	}
+	
+	public static DialogDiseño getDiseñoDialog() {
+		return new DialogDiseño(VentanaPrincipalControl.ventana);
 	}
 
 	// Operaciones Vista Material

@@ -3,6 +3,8 @@ package vista.componentes;
 import java.awt.*;
 import javax.swing.*;
 
+import utilidades.Operacion;
+
 public class ContenedorVista extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -12,7 +14,7 @@ public class ContenedorVista extends JPanel {
 	private NavMenu navegacion;
 	private MenuCRUD menuCRUD;
 
-	public ContenedorVista(String paginaActual, JPanel contenidoVista) {
+	public ContenedorVista(String paginaActual, JPanel contenidoVista, Operacion[] funcionesOnClick) {
 
 		setLayout(new BorderLayout(0, 0));
 		setOpaque(false);
@@ -25,7 +27,7 @@ public class ContenedorVista extends JPanel {
 		this.contenedorHeader.add(this.navegacion, BorderLayout.NORTH);
 		this.contenedorHeader.add(this.paginaActual, BorderLayout.SOUTH);
 
-		this.menuCRUD = new MenuCRUD();
+		this.menuCRUD = new MenuCRUD(funcionesOnClick);
 
 		this.contenedorPrincipal = new JPanel();
 		this.contenedorPrincipal.setLayout(new BorderLayout(0, 0));
