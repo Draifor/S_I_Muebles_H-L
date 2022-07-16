@@ -3,7 +3,6 @@ package vista.producto;
 import java.awt.*;
 import javax.swing.*;
 
-import controlador.DialogMaterialControl;
 import controlador.DialogProductoControl;
 import utilidades.Color;
 import utilidades.Operacion;
@@ -100,7 +99,7 @@ public class DialogProducto extends JDialog {
 		this.boton2 = new Boton("Botón 2", () -> setTitle(""));
 		this.boton2.setBounds(178, 465, 105, 27);
 
-		this.cancelar = new Boton("Cancelar", () -> DialogMaterialControl.ocultar());
+		this.cancelar = new Boton("Cancelar", () -> DialogProductoControl.ocultar());
 		this.cancelar.setBounds(311, 465, 105, 27);
 
 		this.contenedorPrincipal = new JPanel();
@@ -191,8 +190,8 @@ public class DialogProducto extends JDialog {
 		return Integer.parseInt(this.idDiseñoInput.getTextInput());
 	}
 	
-	public void setIdDiseñoInput(int idDiseñoInput) {
-		this.cantidadInput.setValue(idDiseñoInput);
+	public void setIdDiseñoInput(String idDiseñoInput) {
+		this.idDiseñoInput.setTextInput(idDiseñoInput);
 	}
 
 	public void setTitulo(String nombreVentana) {
