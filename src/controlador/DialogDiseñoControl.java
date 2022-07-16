@@ -18,30 +18,47 @@ public class DialogDiseñoControl {
 	}
 
 	public static DiseñoVo getDatosDiseño() {
-		String referencia = DialogDiseñoControl.ventana.getReferenciaInput();
-		String nombre = DialogDiseñoControl.ventana.getNombreInput();
-		String tipo = DialogDiseñoControl.ventana.getTipoInput();
-		String urlImagen = DialogDiseñoControl.ventana.getImagenInput();
+		String referencia = DialogDiseñoControl.ventana.getReferenciaInput().trim();
+		String nombre = DialogDiseñoControl.ventana.getNombreInput().trim();
+		String tipo = DialogDiseñoControl.ventana.getTipoInput().trim();
+		String urlImagen = DialogDiseñoControl.ventana.getImagenInput().trim();
 
 		DiseñoVo diseño;
 
-		if (MetodosAuxiliares.esNumero(DialogDiseñoControl.ventana.getCodigoInput())) {
+		if (MetodosAuxiliares.esNumeroInt(DialogDiseñoControl.ventana.getCodigoInput())) {
 			int idDiseño = Integer.parseInt(DialogDiseñoControl.ventana.getCodigoInput());
 			diseño = new DiseñoVo(idDiseño, referencia, nombre, tipo, urlImagen);
 		} else {
 			diseño = new DiseñoVo(referencia, nombre, tipo, urlImagen);
 		}
 
+		if (!DialogDiseñoControl.validarCampos(diseño)) {
+			VentanaPrincipalControl.dialogoAlerta("¡Debe diligenciar todos los campos!", "Campos vacíos");
+			diseño = null;
+		}
 		return diseño;
 	}
 
 	public static void setDatosDiseño(DiseñoVo diseño) {
 		DialogDiseñoControl.ventana
-				.setCodigoInput(MetodosAuxiliares.formatearNumero((Object) (diseño.getIdDiseño() + "")).toString());
+				.setCodigoInput(MetodosAuxiliares.formatearNumero((Object) (diseño.getId() + "")).toString());
 		DialogDiseñoControl.ventana.setReferenciaInput(diseño.getReferencia());
 		DialogDiseñoControl.ventana.setNombreInput(diseño.getNombre());
 		DialogDiseñoControl.ventana.setTipoInput(diseño.getTipo());
 		DialogDiseñoControl.ventana.setImagenInput(diseño.getUrlImagen());
+	}
+
+	public static boolean validarCampos(DiseñoVo diseño) {
+		String referencia = diseño.getReferencia();
+		String nombre = diseño.getNombre();
+		String tipo = diseño.getTipo();
+		String urlImagen = diseño.getUrlImagen();
+
+		if (!referencia.equals("") && !nombre.equals("") && !tipo.equals("") && !urlImagen.equals("")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public static void limpiarDatos() {

@@ -3,11 +3,11 @@ package utilidades;
 import java.text.*;
 
 public class MetodosAuxiliares {
+	
+	private static DecimalFormatSymbols simbolos;
+	private static DecimalFormat formato;
 
 	public static Object formatearNumero(Object value) {
-
-		DecimalFormatSymbols simbolos;
-		DecimalFormat formato;
 
 		simbolos = new DecimalFormatSymbols();
 		simbolos.setDecimalSeparator(',');
@@ -18,8 +18,32 @@ public class MetodosAuxiliares {
 
 		return value;
 	};
+	
+	public static Object formatearNumeroSimple(Object value) {
+		
+		simbolos = new DecimalFormatSymbols();
+		simbolos.setDecimalSeparator(',');
+		simbolos.setGroupingSeparator('.');
+		formato = new DecimalFormat("0", simbolos);
+		
+		value = formato.format(Double.parseDouble((String) value));
+		
+		return value;
+	};
+	
+	public static Object formatearPrecio(Object value) {
+		
+		simbolos = new DecimalFormatSymbols();
+		simbolos.setDecimalSeparator(',');
+		simbolos.setGroupingSeparator('.');
+		formato = new DecimalFormat("$###,##0", simbolos);
+		
+		value = formato.format(Double.parseDouble((String) value));
+		
+		return value;
+	};
 
-	public static boolean esNumero(String cadena) {
+	public static boolean esNumeroInt(String cadena) {
 
 		boolean resultado;
 
@@ -30,6 +54,20 @@ public class MetodosAuxiliares {
 			resultado = false;
 		}
 
+		return resultado;
+	}
+	
+	public static boolean esNumeroDouble(String cadena) {
+		
+		boolean resultado;
+		
+		try {
+			Double.parseDouble(cadena);
+			resultado = true;
+		} catch (NumberFormatException excepcion) {
+			resultado = false;
+		}
+		
 		return resultado;
 	}
 }

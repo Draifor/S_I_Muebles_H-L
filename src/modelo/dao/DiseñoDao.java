@@ -28,7 +28,7 @@ public class DiseñoDao {
 			conexion.desconectar();
 
 		} catch (SQLException e) {
-			System.out.println("Ocurrió un SQLException: " + e.getMessage() + "\n\n" + e);
+			System.out.println("Ocurrió un SQLException en DiseñoDao.agregar(): " + e.getMessage() + "\n\n" + e);
 		}
 
 		return resultadoOperacion;
@@ -48,14 +48,14 @@ public class DiseñoDao {
 			statement.setString(2, diseñoActualizado.getNombre());
 			statement.setString(3, diseñoActualizado.getTipo());
 			statement.setString(4, diseñoActualizado.getUrlImagen());
-			statement.setInt(5, diseñoActualizado.getIdDiseño());
+			statement.setInt(5, diseñoActualizado.getId());
 
 			resultadoOperacion = statement.executeUpdate();
 
 			statement.close();
 			conexion.desconectar();
 		} catch (SQLException e) {
-			System.out.println("Ocurrió un SQLException: " + e.getMessage() + "\n\n" + e);
+			System.out.println("Ocurrió un SQLException en DiseñoDao.modificar(): " + e.getMessage() + "\n\n" + e);
 		}
 
 		return resultadoOperacion;
@@ -74,7 +74,7 @@ public class DiseñoDao {
 			statement.close();
 			conexion.desconectar();
 		} catch (SQLException e) {
-			System.out.println("Ocurrió un SQLException: " + e.getMessage() + "\n\n" + e);
+			System.out.println("Ocurrió un SQLException en DiseñoDao.eliminar(): " + e.getMessage() + "\n\n" + e);
 		}
 
 		return resultadoOperacion;
@@ -90,28 +90,29 @@ public class DiseñoDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet resultado = statement.executeQuery("SELECT * FROM Diseños WHERE Referencia='" + referenciaBuscar + "';");
+			ResultSet resultado = statement
+					.executeQuery("SELECT * FROM Diseños WHERE Referencia='" + referenciaBuscar + "';");
 
 			while (resultado.next()) {
-				int idDiseño = resultado.getInt("Cod_Diseño");
+				int id = resultado.getInt("Cod_Diseño");
 				String referencia = resultado.getString("Referencia");
 				String nombre = resultado.getString("Nombre");
 				String tipo = resultado.getString("Tipo");
 				String urlImagen = resultado.getString("Imagen");
 
-				diseño = new DiseñoVo(idDiseño, referencia, nombre, tipo, urlImagen);
+				diseño = new DiseñoVo(id, referencia, nombre, tipo, urlImagen);
 			}
 
 			statement.close();
 			conexion.desconectar();
 		} catch (SQLException e) {
-			System.out.println("Ocurrió una SQLException al intentar buscar diseño:\n" + e.getMessage());
+			System.out.println("Ocurrió una SQLException en DiseñoDao.buscar():\n" + e.getMessage());
 		}
 
 		return diseño;
 	}
 
-	public List<DiseñoVo> obtenerDiseños() {
+	public List<DiseñoVo> obtenerRegistros() {
 
 		List<DiseñoVo> diseños = new ArrayList<>();
 
@@ -123,9 +124,21 @@ public class DiseñoDao {
 			Statement statement = connection.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM Diseños");
 
+			int id;
+			String referencia;
+			String nombre;
+			String tipo;
+			String urlImagen;
+			DiseñoVo diseño;
+
 			while (resultado.next()) {
-				DiseñoVo diseño = new DiseñoVo(resultado.getInt("Cod_Diseño"), resultado.getString("Referencia"),
-						resultado.getString("Nombre"), resultado.getString("Tipo"), resultado.getString("Imagen"));
+				id = resultado.getInt("Cod_Diseño");
+				referencia = resultado.getString("Referencia");
+				nombre = resultado.getString("Nombre");
+				tipo = resultado.getString("Tipo");
+				urlImagen = resultado.getString("Imagen");
+
+				diseño = new DiseñoVo(id, referencia, nombre, tipo, urlImagen);
 
 				diseños.add(diseño);
 			}
@@ -133,7 +146,7 @@ public class DiseñoDao {
 			statement.close();
 			conexion.desconectar();
 		} catch (SQLException e) {
-			System.out.println("Ocurrió una SQLException al intentar obtenerDiseños:\n" + e.getMessage());
+			System.out.println("Ocurrió una SQLException en DiseñoDao.obtenerDiseños():\n" + e.getMessage());
 		}
 
 		return diseños;

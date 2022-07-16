@@ -20,8 +20,16 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 		if (this.tipo == "numero" && !((String) value).equals("")) {
 
 			value = MetodosAuxiliares.formatearNumero(value);
-			super.getTableCellRendererComponent(table, value, isSelected, isFocused, row, column);
+		} 
+		else if (this.tipo == "numero_simple" && !((String) value).equals("")) {
+			
+			value = MetodosAuxiliares.formatearNumeroSimple(value);
 		}
+		else if (this.tipo == "precio" && !((String) value).equals("")) {
+
+			value = MetodosAuxiliares.formatearPrecio(value);
+		}
+		super.getTableCellRendererComponent(table, value, isSelected, isFocused, row, column);
 
 		/*
 		 * Este metodo controla toda la tabla, podemos obtener el valor que contiene
@@ -57,7 +65,8 @@ public class GestionCeldas extends DefaultTableCellRenderer {
 		} else {
 			colorFondo = colorFondoPorDefecto;
 		}
-		this.setHorizontalAlignment(column == 0 ? JLabel.CENTER : JLabel.LEFT);
+//		this.setHorizontalAlignment(column == 0 ? JLabel.CENTER : this.tipo.equals("numero_simple") ? JLabel.CENTER : JLabel.LEFT);
+		this.setHorizontalAlignment(JLabel.CENTER);
 		this.setText((String) value);
 		this.setForeground(isSelected ? Color.WHITE.getColor() : Color.BLACK.getColor());
 		this.setBackground((isSelected) ? colorFondo : Color.WHITE.getColor());

@@ -15,27 +15,45 @@ public class VistaClienteControl {
 
 	public static void agregarCliente() {
 		ClienteVo nuevoCliente = DialogClienteControl.getDatosCliente();
-		int resultadoOperacion = VistaClienteControl.clienteDao.agregar(nuevoCliente);
 
-		if (resultadoOperacion > 0) {
-			VistaClienteControl.actualizarVista();
-			DialogClienteControl.ocultar();
-			VentanaPrincipalControl.dialogoAlerta("Cliente registrado con éxito", "Operación Exitosa");
-		} else {
-			VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se registró el usuario", "Operación Fallida");
+		if (nuevoCliente != null) {
+			if (VistaClienteControl.validarCampos(nuevoCliente)) {
+				int resultadoOperacion = VistaClienteControl.clienteDao.agregar(nuevoCliente);
+
+				if (resultadoOperacion > 0) {
+					VistaClienteControl.actualizarVista();
+					DialogClienteControl.ocultar();
+					VentanaPrincipalControl.dialogoAlerta("Cliente registrado con éxito", "Operación Exitosa");
+				} else {
+					VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se registró el usuario",
+							"Operación Fallida");
+				}
+			} else {
+				VentanaPrincipalControl.dialogoAlerta("¡Debe diligenciar todos los campos!", "Campos vacíos");
+			}
 		}
 	}
 
 	public static void modificarCliente() {
 		ClienteVo clienteActualizado = DialogClienteControl.getDatosCliente();
-		int resultadoOperacion = VistaClienteControl.clienteDao.modificar(clienteActualizado);
+		if (VistaClienteControl.validarCampos(clienteActualizado)) {
+			if (MetodosAuxiliares.esNumeroInt(clienteActualizado.getCelular())) {
+				int resultadoOperacion = VistaClienteControl.clienteDao.modificar(clienteActualizado);
 
-		if (resultadoOperacion > 0) {
-			VistaClienteControl.actualizarVista();
-			DialogClienteControl.ocultar();
-			VentanaPrincipalControl.dialogoAlerta("El cliente se modificó con éxito", "Operación Exitosa");
+				if (resultadoOperacion > 0) {
+					VistaClienteControl.actualizarVista();
+					DialogClienteControl.ocultar();
+					VentanaPrincipalControl.dialogoAlerta("El cliente se modificó con éxito", "Operación Exitosa");
+				} else {
+					VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se modificó el usuario",
+							"Operación Fallida");
+				}
+			} else {
+				VentanaPrincipalControl.dialogoAlerta(
+						"¡Debe escribir el número de celular sin caracteres especiales ni espacios!", "Advertencia");
+			}
 		} else {
-			VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se modificó el usuario", "Operación Fallida");
+			VentanaPrincipalControl.dialogoAlerta("¡Debe diligenciar todos los campos!", "Campos vacíos");
 		}
 	}
 
@@ -46,7 +64,7 @@ public class VistaClienteControl {
 		if (opcionElegida == 0) {
 			ClienteVo clientePorEliminar = DialogClienteControl.getDatosCliente();
 
-			int resultadoOperacion = VistaClienteControl.clienteDao.eliminar(clientePorEliminar.getIdCliente());
+			int resultadoOperacion = VistaClienteControl.clienteDao.eliminar(clientePorEliminar.getId());
 
 			if (resultadoOperacion > 0) {
 				VistaClienteControl.actualizarVista();
@@ -62,11 +80,11 @@ public class VistaClienteControl {
 
 	public static String[][] obtenerClientes() {
 
-		List<ClienteVo> clientes = VistaClienteControl.clienteDao.obtenerClientes();
+		List<ClienteVo> clientes = VistaClienteControl.clienteDao.obtenerRegistros();
 		String[][] matrizClientes = new String[clientes.size()][ClientesColumnas.TITULOS_COLUMNAS.length];
 
 		for (int i = 0; i < matrizClientes.length; i++) {
-			matrizClientes[i][ClientesColumnas.CODIGO] = ((ClienteVo) clientes.get(i)).getIdCliente() + "";
+			matrizClientes[i][ClientesColumnas.CODIGO] = ((ClienteVo) clientes.get(i)).getId() + "";
 			matrizClientes[i][ClientesColumnas.NOMBRE] = ((ClienteVo) clientes.get(i)).getNombre() + "";
 			matrizClientes[i][ClientesColumnas.APELLIDO] = ((ClienteVo) clientes.get(i)).getApellido() + "";
 			matrizClientes[i][ClientesColumnas.IDENTIFICACION] = ((ClienteVo) clientes.get(i)).getIdentificacion() + "";
@@ -129,12 +147,12 @@ public class VistaClienteControl {
 	}
 
 	public static void buscarCliente() {
-		String usuarioInput = VentanaPrincipalControl.dialogoInput("Número de identificación a buscar",
-				"Buscar Cliente");
+		String usuarioInput = VentanaPrincipalControl
+				.dialogoInput("Número de identificación a buscar", "Buscar Cliente").trim();
 
 		try {
 
-			if (MetodosAuxiliares.esNumero(usuarioInput)) {
+			if (MetodosAuxiliares.esNumeroInt(usuarioInput)) {
 				ClienteVo cliente = VistaClienteControl.clienteDao.buscar(Integer.parseInt(usuarioInput));
 				if (cliente != null) {
 					DialogClienteControl.setDatosCliente(cliente);
@@ -207,7 +225,22 @@ public class VistaClienteControl {
 		DialogClienteControl.mostrar("Eliminar Cliente", () -> VistaClienteControl.eliminarCliente());
 	}
 
-	public static VistaCliente getVistaCliente() {
+	public static boolean validarCampos(ClienteVo cliente) {
+		String nombre = cliente.getNombre();
+		String apellido = cliente.getApellido();
+		String identificacion = cliente.getIdentificacion();
+		String celular = cliente.getCelular();
+		String direccion = cliente.getDireccion();
+
+		if (!nombre.equals("") && !apellido.equals("") && !identificacion.equals("") && !celular.equals("")
+				&& !direccion.equals("")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static VistaCliente getVista() {
 		return VistaClienteControl.vista;
 	}
 }

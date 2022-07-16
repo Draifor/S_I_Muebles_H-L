@@ -2,7 +2,7 @@ package modelo.vo;
 
 public class DiseñoVo {
 
-	private int idDiseño;
+	private int id;
 	private String referencia;
 	private String nombre;
 	private String tipo;
@@ -15,16 +15,16 @@ public class DiseñoVo {
 		this.urlImagen = urlImagen;
 	}
 
-	public DiseñoVo(int idDiseño, String referencia, String nombre, String tipo, String urlImagen) {
-		this.idDiseño = idDiseño;
+	public DiseñoVo(int id, String referencia, String nombre, String tipo, String urlImagen) {
+		this.id = id;
 		this.referencia = referencia;
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.urlImagen = urlImagen;
 	}
 
-	public int getIdDiseño() {
-		return this.idDiseño;
+	public int getId() {
+		return this.id;
 	}
 	
 	public String getReferencia() {
@@ -62,8 +62,8 @@ public class DiseñoVo {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("DiseÃ±o{");
-		sb.append("IdDiseño: ").append(idDiseño);
+		sb.append("Diseño{");
+		sb.append("Id: ").append(id);
 		sb.append(", nombre: ").append(nombre);
 		sb.append(", tipo: ").append(tipo);
 		sb.append(", referencia: ").append(referencia);

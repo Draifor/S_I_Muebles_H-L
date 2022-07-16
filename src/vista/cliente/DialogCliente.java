@@ -41,7 +41,6 @@ public class DialogCliente extends JDialog {
 		setSize(650, 560);
 		setResizable(false);
 		setLocationRelativeTo(null);
-
 	}
 
 	private void iniciarComponentes() {
@@ -124,7 +123,6 @@ public class DialogCliente extends JDialog {
 		this.contenedor.add(this.contenedorPrincipal);
 
 		getContentPane().add(this.contenedor);
-
 	}
 
 	public void mensajeDialogo(String mensaje, String titulo) {

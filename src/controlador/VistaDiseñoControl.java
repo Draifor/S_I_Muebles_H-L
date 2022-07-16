@@ -10,31 +10,39 @@ import utilidades.*;
 
 public class VistaDiseñoControl {
 	private static DiseñoDao diseñoDao = new DiseñoDao();
-	private static VistaDiseño vistaDiseño = new VistaDiseño();
+	private static VistaDiseño vista = new VistaDiseño();
 
 	public static void agregarDiseño() {
 		DiseñoVo nuevoDiseño = DialogDiseñoControl.getDatosDiseño();
-		int resultadoOperacion = VistaDiseñoControl.diseñoDao.agregar(nuevoDiseño);
 
-		if (resultadoOperacion > 0) {
-			VistaDiseñoControl.actualizarVista();
-			DialogDiseñoControl.ocultar();
-			VentanaPrincipalControl.dialogoAlerta("Diseño guardado con éxito", "Operación Exitosa");
-		} else {
-			VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se registró el diseño", "Operación Fallida");
-		}
+		if (nuevoDiseño != null) {
+			int resultadoOperacion = VistaDiseñoControl.diseñoDao.agregar(nuevoDiseño);
+
+			if (resultadoOperacion > 0) {
+				VistaDiseñoControl.actualizarVista();
+				DialogDiseñoControl.ocultar();
+				VentanaPrincipalControl.dialogoAlerta("Diseño guardado con éxito", "Operación Exitosa");
+			} else {
+				VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se registró el diseño",
+						"Operación Fallida");
+			}
+		} 
 	}
 
 	public static void modificarDiseño() {
 		DiseñoVo diseñoActualizado = DialogDiseñoControl.getDatosDiseño();
-		int resultadoOperacion = VistaDiseñoControl.diseñoDao.modificar(diseñoActualizado);
+		
+		if (diseñoActualizado != null) {
+			int resultadoOperacion = VistaDiseñoControl.diseñoDao.modificar(diseñoActualizado);
 
-		if (resultadoOperacion > 0) {
-			VistaDiseñoControl.actualizarVista();
-			DialogDiseñoControl.ocultar();
-			VentanaPrincipalControl.dialogoAlerta("El cliente se modificó con éxito", "Operación Exitosa");
-		} else {
-			VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se modificó el usuario", "Operación Fallida");
+			if (resultadoOperacion > 0) {
+				VistaDiseñoControl.actualizarVista();
+				DialogDiseñoControl.ocultar();
+				VentanaPrincipalControl.dialogoAlerta("El diseño se modificó con éxito", "Operación Exitosa");
+			} else {
+				VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se modificó el diseño",
+						"Operación Fallida");
+			}
 		}
 	}
 
@@ -45,7 +53,7 @@ public class VistaDiseñoControl {
 		if (opcionElegida == 0) {
 			DiseñoVo diseñoPorEliminar = DialogDiseñoControl.getDatosDiseño();
 
-			int resultadoOperacion = VistaDiseñoControl.diseñoDao.eliminar(diseñoPorEliminar.getIdDiseño());
+			int resultadoOperacion = VistaDiseñoControl.diseñoDao.eliminar(diseñoPorEliminar.getId());
 
 			if (resultadoOperacion > 0) {
 				VistaDiseñoControl.actualizarVista();
@@ -61,11 +69,11 @@ public class VistaDiseñoControl {
 
 	public static String[][] obtenerDiseños() {
 
-		List<DiseñoVo> diseños = VistaDiseñoControl.diseñoDao.obtenerDiseños();
+		List<DiseñoVo> diseños = VistaDiseñoControl.diseñoDao.obtenerRegistros();
 		String[][] matrizDiseños = new String[diseños.size()][DiseñosColumnas.TITULOS_COLUMNAS.length];
 
 		for (int i = 0; i < matrizDiseños.length; i++) {
-			matrizDiseños[i][DiseñosColumnas.CODIGO] = ((DiseñoVo) diseños.get(i)).getIdDiseño() + "";
+			matrizDiseños[i][DiseñosColumnas.CODIGO] = ((DiseñoVo) diseños.get(i)).getId() + "";
 			matrizDiseños[i][DiseñosColumnas.REFERENCIA] = ((DiseñoVo) diseños.get(i)).getReferencia();
 			matrizDiseños[i][DiseñosColumnas.NOMBRE] = ((DiseñoVo) diseños.get(i)).getNombre();
 			matrizDiseños[i][DiseñosColumnas.TIPO] = ((DiseñoVo) diseños.get(i)).getTipo();
@@ -82,8 +90,7 @@ public class VistaDiseñoControl {
 	public static void construirTabla(JTable tabla) {
 		// Se crean las columnas tipo texto
 		for (int i = 0; i < DiseñosColumnas.TIPO_TEXTO.length; i++) {
-			tabla.getColumnModel().getColumn(DiseñosColumnas.TIPO_TEXTO[i])
-					.setCellRenderer(new GestionCeldas("texto"));
+			tabla.getColumnModel().getColumn(DiseñosColumnas.TIPO_TEXTO[i]).setCellRenderer(new GestionCeldas("texto"));
 		}
 
 		// Se crean las columnas numericas
@@ -105,7 +112,7 @@ public class VistaDiseñoControl {
 	}
 
 	public static void actualizarVista() {
-		VistaDiseñoControl.vistaDiseño.actualizarTabla();
+		VistaDiseñoControl.vista.actualizarTabla();
 	}
 
 	public static DiseñoVo obtenerRegistroSeleccionado(JTable tabla) {
@@ -125,27 +132,26 @@ public class VistaDiseñoControl {
 	}
 
 	public static void buscarDiseño() {
-		String usuarioInput = VentanaPrincipalControl.dialogoInput("Referencia a buscar",
-				"Buscar Diseño");
-		
-			if (usuarioInput.length() > 0) {
-				DiseñoVo diseño = VistaDiseñoControl.diseñoDao.buscar(usuarioInput);
-				if (diseño != null) {
-					DialogDiseñoControl.setDatosDiseño(diseño);
-					DialogDiseñoControl.desactivarCampos();
-					DialogDiseñoControl.mostrarSegundoBoton();
-					DialogDiseñoControl.cambiarTextoPrimerBoton("Modificar");
-					DialogDiseñoControl.cambiarTextoSegundoBoton("Eliminar");
-					DialogDiseñoControl.cambiarOnClickSegundoBoton(() -> VistaDiseñoControl.eliminarDiseño());
-					DialogDiseñoControl.mostrar("Diseño", () -> VistaDiseñoControl.mostrarDiseñoModificar(diseño));
-				} else {
-					VentanaPrincipalControl.dialogoAlerta("No se encontró el diseño", "Resultado");
-				}
+		String usuarioInput = VentanaPrincipalControl.dialogoInput("Referencia a buscar", "Buscar Diseño").trim();
 
+		if (usuarioInput.length() > 0) {
+			DiseñoVo diseño = VistaDiseñoControl.diseñoDao.buscar(usuarioInput);
+			if (diseño != null) {
+				DialogDiseñoControl.setDatosDiseño(diseño);
+				DialogDiseñoControl.desactivarCampos();
+				DialogDiseñoControl.mostrarSegundoBoton();
+				DialogDiseñoControl.cambiarTextoPrimerBoton("Modificar");
+				DialogDiseñoControl.cambiarTextoSegundoBoton("Eliminar");
+				DialogDiseñoControl.cambiarOnClickSegundoBoton(() -> VistaDiseñoControl.eliminarDiseño());
+				DialogDiseñoControl.mostrar("Diseño", () -> VistaDiseñoControl.mostrarModificarDiseño(diseño));
 			} else {
-				VentanaPrincipalControl.dialogoAlerta("Debe ingresar una referencia", "Atención");
-				VistaDiseñoControl.buscarDiseño();
+				VentanaPrincipalControl.dialogoAlerta("No se encontró el diseño", "Resultado");
 			}
+
+		} else {
+			VentanaPrincipalControl.dialogoAlerta("Debe ingresar una referencia", "Atención");
+			VistaDiseñoControl.buscarDiseño();
+		}
 	}
 
 	public static void mostrarAgregarDiseño() {
@@ -157,27 +163,27 @@ public class VistaDiseñoControl {
 		DialogDiseñoControl.mostrar("Agregar Diseño", () -> VistaDiseñoControl.agregarDiseño());
 	}
 
-	public static void validarDiseñoModificar() {
-		DiseñoVo diseño = VistaDiseñoControl.obtenerRegistroSeleccionado(VistaDiseñoControl.vistaDiseño.getTabla());
+	public static void validarModificarDiseño() {
+		DiseñoVo diseño = VistaDiseñoControl.obtenerRegistroSeleccionado(VistaDiseñoControl.vista.getTabla());
 
 		if (diseño != null) {
-			VistaDiseñoControl.mostrarDiseñoModificar(diseño);
+			VistaDiseñoControl.mostrarModificarDiseño(diseño);
 		} else {
 			VentanaPrincipalControl.dialogoAlerta("Selecciona el diseño a modificar", "Modificar Diseño");
 		}
 	}
 
-	public static void validarDiseñoEliminar() {
-		DiseñoVo diseño = VistaDiseñoControl.obtenerRegistroSeleccionado(VistaDiseñoControl.vistaDiseño.getTabla());
+	public static void validarEliminarDiseño() {
+		DiseñoVo diseño = VistaDiseñoControl.obtenerRegistroSeleccionado(VistaDiseñoControl.vista.getTabla());
 
 		if (diseño != null) {
-			VistaDiseñoControl.mostrarDiseñoEliminar(diseño);
+			VistaDiseñoControl.mostrarEliminarDiseño(diseño);
 		} else {
 			VentanaPrincipalControl.dialogoAlerta("Selecciona el diseño a eliminar", "Eliminar Diseño");
 		}
 	}
 
-	public static void mostrarDiseñoModificar(DiseñoVo diseño) {
+	public static void mostrarModificarDiseño(DiseñoVo diseño) {
 		DialogDiseñoControl.setDatosDiseño(diseño);
 		DialogDiseñoControl.activarCampos();
 		DialogDiseñoControl.cambiarTextoPrimerBoton("Modificar");
@@ -185,7 +191,7 @@ public class VistaDiseñoControl {
 		DialogDiseñoControl.mostrar("Modificar Diseño", () -> VistaDiseñoControl.modificarDiseño());
 	}
 
-	public static void mostrarDiseñoEliminar(DiseñoVo diseño) {
+	public static void mostrarEliminarDiseño(DiseñoVo diseño) {
 		DialogDiseñoControl.setDatosDiseño(diseño);
 		DialogDiseñoControl.desactivarCampos();
 		DialogDiseñoControl.cambiarTextoPrimerBoton("Eliminar");
@@ -193,7 +199,7 @@ public class VistaDiseñoControl {
 		DialogDiseñoControl.mostrar("Eliminar Diseño", () -> VistaDiseñoControl.eliminarDiseño());
 	}
 
-	public static VistaDiseño getVistaDiseño() {
-		return VistaDiseñoControl.vistaDiseño;
+	public static VistaDiseño getVista() {
+		return VistaDiseñoControl.vista;
 	}
 }

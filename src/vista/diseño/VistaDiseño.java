@@ -13,8 +13,8 @@ public class VistaDiseño extends JPanel {
 	private final Operacion[] FUNCIONES_ON_CLICK = {
 			() -> VistaDiseñoControl.buscarDiseño(),
 			() -> VistaDiseñoControl.mostrarAgregarDiseño(),
-			() -> VistaDiseñoControl.validarDiseñoModificar(),
-			() -> VistaDiseñoControl.validarDiseñoEliminar()
+			() -> VistaDiseñoControl.validarModificarDiseño(),
+			() -> VistaDiseñoControl.validarEliminarDiseño()
 	};
 	private ContenedorVista contenedorVista;
 	private Tabla tabla;

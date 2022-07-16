@@ -1,31 +1,29 @@
 package modelo.vo;
 
 public class MaterialVo {
-    private int IdMaterial;
-    private String nombre;
+    private int id;
     private String referencia;
+    private String nombre;
     private double costo;
     private int cantidad;
-    private static int contadorMateriales;
 
-    public MaterialVo(String nombre, String referencia, double costo, int cantidad) {
-        this.IdMaterial = ++MaterialVo.contadorMateriales;
+    public MaterialVo(String referencia, String nombre, double costo, int cantidad) {
         this.nombre = nombre;
         this.referencia = referencia;
         this.costo = costo;
         this.cantidad = cantidad;
     }
-
-    public int getIdMaterial() {
-        return this.IdMaterial;
+    
+    public MaterialVo(int id, String referencia, String nombre, double costo, int cantidad) {
+    	this.id = id;
+    	this.nombre = nombre;
+    	this.referencia = referencia;
+    	this.costo = costo;
+    	this.cantidad = cantidad;
     }
 
-    public String getNombre() {
-        return this.nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public int getId() {
+        return this.id;
     }
 
     public String getReferencia() {
@@ -34,6 +32,14 @@ public class MaterialVo {
 
     public void setReferencia(String referencia) {
         this.referencia = referencia;
+    }
+    
+    public String getNombre() {
+    	return this.nombre;
+    }
+    
+    public void setNombre(String nombre) {
+    	this.nombre = nombre;
     }
 
     public double getCosto() {
@@ -56,7 +62,7 @@ public class MaterialVo {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Material{");
-        sb.append("IdMaterial: ").append(IdMaterial);
+        sb.append("Id: ").append(id);
         sb.append(", nombre: ").append(nombre);
         sb.append(", referencia: ").append(referencia);
         sb.append(", costo: ").append(costo);

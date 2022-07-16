@@ -1,18 +1,18 @@
-package vista.diseño;
+package vista.material;
 
 import java.awt.*;
 import javax.swing.*;
 
-import controlador.DialogDiseñoControl;
+import controlador.DialogMaterialControl;
 import utilidades.Color;
 import utilidades.Operacion;
 import vista.componentes.*;
 import vista.componentes.Label;
 
-public class DialogDiseño extends JDialog {
+public class DialogMaterial extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private JPanel contenedor;
 	private JPanel contenedorPrincipal;
 	private Texto titulo;
@@ -22,15 +22,15 @@ public class DialogDiseño extends JDialog {
 	private CampoInput referenciaInput;
 	private Label nombre;
 	private CampoInput nombreInput;
-	private Label tipo;
-	private CampoInput tipoInput;
-	private Label imagen;
-	private CampoInput imagenInput;
+	private Label costo;
+	private CampoInput costoInput;
+	private Label cantidad;
+	private Spinner cantidadInput;
 	private Boton boton1;
 	private Boton boton2;
 	private Boton cancelar;
-
-	public DialogDiseño(JFrame ventanaPadre) {
+	
+	public DialogMaterial(JFrame ventanaPadre) {
 
 		super(ventanaPadre, true);
 
@@ -40,7 +40,7 @@ public class DialogDiseño extends JDialog {
 		setResizable(false);
 		setLocationRelativeTo(null);
 	}
-
+	
 	private void iniciarComponentes() {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -66,17 +66,17 @@ public class DialogDiseño extends JDialog {
 		this.nombreInput = new CampoInput("texto");
 		this.nombreInput.setBounds(183, 188, 233, 29);
 
-		this.tipo = new Label("Tipo:");
-		this.tipo.setBounds(36, 243, 115, 29);
+		this.costo = new Label("Costo: $");
+		this.costo.setBounds(36, 243, 115, 29);
 
-		this.tipoInput = new CampoInput("texto");
-		this.tipoInput.setBounds(183, 243, 233, 29);
+		this.costoInput = new CampoInput("texto");
+		this.costoInput.setBounds(183, 243, 233, 29);
 
-		this.imagen = new Label("Imagen:");
-		this.imagen.setBounds(36, 298, 115, 29);
+		this.cantidad = new Label("Cantidad:");
+		this.cantidad.setBounds(36, 298, 115, 29);
 
-		this.imagenInput = new CampoInput("texto");
-		this.imagenInput.setBounds(183, 298, 233, 29);
+		this.cantidadInput = new Spinner();
+		this.cantidadInput.setBounds(183, 298, 83, 29);
 
 		this.boton1 = new Boton("Botón 1", () -> setTitle(""));
 		this.boton1.setBounds(45, 355, 105, 27);
@@ -84,7 +84,7 @@ public class DialogDiseño extends JDialog {
 		this.boton2 = new Boton("Botón 2", () -> setTitle(""));
 		this.boton2.setBounds(178, 355, 105, 27);
 
-		this.cancelar = new Boton("Cancelar", () -> DialogDiseñoControl.ocultar());
+		this.cancelar = new Boton("Cancelar", () -> DialogMaterialControl.ocultar());
 		this.cancelar.setBounds(311, 355, 105, 27);
 
 		this.contenedorPrincipal = new JPanel();
@@ -99,10 +99,10 @@ public class DialogDiseño extends JDialog {
 		this.contenedorPrincipal.add(this.referenciaInput);
 		this.contenedorPrincipal.add(this.nombre);
 		this.contenedorPrincipal.add(this.nombreInput);
-		this.contenedorPrincipal.add(this.tipo);
-		this.contenedorPrincipal.add(this.tipoInput);
-		this.contenedorPrincipal.add(this.imagen);
-		this.contenedorPrincipal.add(this.imagenInput);
+		this.contenedorPrincipal.add(this.costo);
+		this.contenedorPrincipal.add(this.costoInput);
+		this.contenedorPrincipal.add(this.cantidad);
+		this.contenedorPrincipal.add(this.cantidadInput);
 		this.contenedorPrincipal.add(this.boton1);
 		this.contenedorPrincipal.add(this.boton2);
 		this.contenedorPrincipal.add(this.cancelar);
@@ -114,7 +114,7 @@ public class DialogDiseño extends JDialog {
 
 		getContentPane().add(this.contenedor);
 	}
-
+	
 	public void mensajeDialogo(String mensaje, String titulo) {
 		JOptionPane.showMessageDialog(this, new Texto(mensaje, 0, 18), titulo, JOptionPane.PLAIN_MESSAGE);
 	}
@@ -144,21 +144,21 @@ public class DialogDiseño extends JDialog {
 		;
 	}
 
-	public String getTipoInput() {
-		return this.tipoInput.getTextInput();
+	public String getCostoInput() {
+		return this.costoInput.getTextInput();
 	}
 
-	public void setTipoInput(String tipoInput) {
-		this.tipoInput.setTextInput(tipoInput);
+	public void setCostoInput(String costoInput) {
+		this.costoInput.setTextInput(costoInput);
 		;
 	}
 
-	public String getImagenInput() {
-		return this.imagenInput.getTextInput();
+	public int getCantidadInput() {
+		return this.cantidadInput.getValor();
 	}
 
-	public void setImagenInput(String ImagenInput) {
-		this.imagenInput.setTextInput(ImagenInput);
+	public void setCantidadInput(int cantidadInput) {
+		this.cantidadInput.setValue(cantidadInput);
 		;
 	}
 
@@ -199,15 +199,15 @@ public class DialogDiseño extends JDialog {
 	public void desactivarCampos() {
 		this.referenciaInput.desactivarCampo();
 		this.nombreInput.desactivarCampo();
-		this.tipoInput.desactivarCampo();
-		this.imagenInput.desactivarCampo();
+		this.costoInput.desactivarCampo();
+		this.cantidadInput.setEnabled(false);
 	}
 
 	public void activarCampos() {
 		this.referenciaInput.activarCampo();
 		this.nombreInput.activarCampo();
-		this.tipoInput.activarCampo();
-		this.imagenInput.activarCampo();
+		this.costoInput.activarCampo();
+		this.cantidadInput.setEnabled(true);
 	}
 
 	public void codigoPorDefecto() {
