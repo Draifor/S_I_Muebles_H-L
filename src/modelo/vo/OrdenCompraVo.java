@@ -1,69 +1,71 @@
 package modelo.vo;
 
-import java.util.Date;
+import java.util.*;
 
 public class OrdenCompraVo {
 
-    private int idOrden;
+    private int id;
     private int idCliente;
-    private ProductoVo[] productoVos;
-    private DiseñoVo[] diseñoVos;
-    private Date fecha;  // Cómo y dónde agregar la fecha
-    private static int contadorOrdenes;
-
+    private Date fecha; 
+    private List<ProductoVo> productos = new ArrayList<>(); 
+    
     private OrdenCompraVo(int idCliente) {
-        this.idOrden = ++OrdenCompraVo.contadorOrdenes;
+    	this.idCliente = idCliente;
+    }
+    
+    private OrdenCompraVo(int idCliente, Date fecha) {
+    	this.idCliente = idCliente;
+    	this.fecha = fecha;
+    }
+
+    private OrdenCompraVo(int idCliente, Date fecha, List<ProductoVo> productos) {
         this.idCliente = idCliente;
+        this.fecha = fecha;
+        this.productos = productos;
     }
-
-    public OrdenCompraVo(int idCliente, ProductoVo[] productos) {
-        this(idCliente);
-        this.productoVos = productos;
+    
+    private OrdenCompraVo(int id, int idCliente, Date fecha, List<ProductoVo> productos) {
+    	this.id = id;
+    	this.idCliente = idCliente;
+    	this.fecha = fecha;
+    	this.productos = productos;
     }
-
-    public OrdenCompraVo(int idCliente, DiseñoVo[] diseños) {
-        this(idCliente);
-        this.diseñoVos = diseños;
-    }
-
-    public OrdenCompraVo(int idCliente, DiseñoVo[] diseños, ProductoVo[] productos) {
-        this(idCliente);
-        this.diseñoVos = diseños;
-        this.productoVos = productos;
+    
+    public int getId() {
+    	return this.id;
     }
 
     public int getIdCliente() {
         return this.idCliente;
     }
-
-    public int getIdOrden() {
-        return this.idOrden;
+    
+    public void setIdCliente(int idCliente) {
+    	this.idCliente = idCliente;
     }
 
-    public ProductoVo[] getProductos() {
-        return this.productoVos;
+    public Date getFecha() {
+		return this.fecha;
+	}
+    
+    public void setFecha(Date fecha) {
+    	this.fecha = fecha;
     }
 
-    public void setProductos(ProductoVo[] productos) {
-        this.productoVos = productos;
-    }
+	public List<ProductoVo> getProductos() {
+		return this.productos;
+	}
 
-     public DiseñoVo[] getDiseños() {
-        return this.diseñoVos;
-    }
+	public void setProductos(List<ProductoVo> productos) {
+		this.productos = productos;
+	}
 
-    public void setDiseños(DiseñoVo[] diseños) {
-        this.diseñoVos = diseños;
-    }
-
-    // Getter and Setter fecha??
-    @Override
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("OrdenCompra numero: ").append(this.idOrden);
+        sb.append("OrdenCompra numero: ").append(this.id);
         sb.append(" {");
         sb.append("IdCliente: ").append(this.idCliente);
-        sb.append(", Productos: ").append(this.productoVos);
+        sb.append(", Productos: ").append(this.productos);
         sb.append(", fecha: ").append(this.fecha);
         sb.append('}');
         return sb.toString();

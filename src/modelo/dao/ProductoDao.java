@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.*;
 
 import modelo.conexion.Conexion;
-import modelo.vo.MaterialVo;
 import modelo.vo.ProductoVo;
 
 public class ProductoDao {
@@ -16,7 +15,7 @@ public class ProductoDao {
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(
-					"INSERT INTO Productos (Referencia, Nombre, Tipo, Precio, Cantidad, idDiseño) values (?, ?, ?, ?, ?, ?)");
+					"INSERT INTO Productos (Referencia, Nombre, Tipo, Precio, Cantidad, Cod_Diseño) values (?, ?, ?, ?, ?, ?)");
 
 			statement.setString(1, nuevoProducto.getReferencia());
 			statement.setString(2, nuevoProducto.getNombre());

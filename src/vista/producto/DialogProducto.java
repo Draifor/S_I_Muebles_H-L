@@ -39,7 +39,7 @@ public class DialogProducto extends JDialog {
 
 		iniciarComponentes();
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setSize(650, 555);
+		setSize(650, 610);
 		setResizable(false);
 		setLocationRelativeTo(null);
 	}
@@ -105,7 +105,7 @@ public class DialogProducto extends JDialog {
 		this.contenedorPrincipal = new JPanel();
 		this.contenedorPrincipal.setBackground(Color.AZUL_30.getColor());
 		this.contenedorPrincipal.setBorder(BorderFactory.createLineBorder(Color.AZUL_100.getColor(), 2));
-		this.contenedorPrincipal.setPreferredSize(new Dimension(450, 465));
+		this.contenedorPrincipal.setPreferredSize(new Dimension(450, 520));
 		this.contenedorPrincipal.setLayout(null);
 		this.contenedorPrincipal.add(this.titulo);
 		this.contenedorPrincipal.add(this.codigo);
@@ -186,8 +186,8 @@ public class DialogProducto extends JDialog {
 		this.cantidadInput.setValue(cantidadInput);
 	}
 	
-	public int getIdDiseñoInput() {
-		return Integer.parseInt(this.idDiseñoInput.getTextInput());
+	public String getIdDiseñoInput() {
+		return this.idDiseñoInput.getTextInput();
 	}
 	
 	public void setIdDiseñoInput(String idDiseñoInput) {

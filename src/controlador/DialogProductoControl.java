@@ -20,14 +20,15 @@ public class DialogProductoControl {
 	public static ProductoVo getDatosProducto() {
 		ProductoVo producto = null;
 		String precioInput = DialogProductoControl.ventana.getPrecioInput().trim();
+		String idDiseñoInput = DialogProductoControl.ventana.getIdDiseñoInput().trim();
 
-		if (MetodosAuxiliares.esNumeroDouble(precioInput)) {
+		if (MetodosAuxiliares.esNumeroDouble(precioInput) && MetodosAuxiliares.esNumeroInt(idDiseñoInput)) {
 			String referencia = DialogProductoControl.ventana.getReferenciaInput().trim();
 			String nombre = DialogProductoControl.ventana.getNombreInput().trim();
 			String tipo = DialogProductoControl.ventana.getTipoInput().trim();
 			double precio = Double.parseDouble(precioInput);
 			int cantidad = DialogProductoControl.ventana.getCantidadInput();
-			int idDiseño = DialogProductoControl.ventana.getIdDiseñoInput();
+			int idDiseño = Integer.parseInt(DialogProductoControl.ventana.getIdDiseñoInput());
 
 			if (MetodosAuxiliares.esNumeroInt(DialogProductoControl.ventana.getCodigoInput())) {
 				int id = Integer.parseInt(DialogProductoControl.ventana.getCodigoInput());
@@ -41,7 +42,7 @@ public class DialogProductoControl {
 			}
 			
 		} else {
-			VentanaPrincipalControl.dialogoAlerta("¡Debe ingresar un valor válido para el precio!", "Advertencia");
+			VentanaPrincipalControl.dialogoAlerta("¡Debe ingresar un valor válido para precio e idDiseño!", "Advertencia");
 		}
 
 		return producto;

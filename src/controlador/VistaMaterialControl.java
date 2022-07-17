@@ -3,10 +3,8 @@ package controlador;
 import java.util.List;
 import javax.swing.JTable;
 
-import vista.diseño.VistaDiseño;
 import vista.material.VistaMaterial;
 import modelo.dao.MaterialDao;
-import modelo.vo.DiseñoVo;
 import modelo.vo.MaterialVo;
 import utilidades.*;
 
@@ -125,6 +123,7 @@ public class VistaMaterialControl {
 		MaterialVo material = null;
 		int filaSeleccionada = tabla.getSelectedRow();
 
+		try {
 		if (filaSeleccionada != -1) {
 			int id = Integer.parseInt(tabla.getValueAt(filaSeleccionada, MaterialesColumnas.CODIGO).toString());
 			String referencia = (String) tabla.getValueAt(filaSeleccionada, MaterialesColumnas.REFERENCIA);
@@ -134,10 +133,12 @@ public class VistaMaterialControl {
 
 			material = new MaterialVo(id, referencia, nombre, costo, cantidad);
 		}
+		} catch(Exception e) {}
 		return material;
 	}
 
 	public static void buscarMaterial() {
+		try {
 		String usuarioInput = VentanaPrincipalControl.dialogoInput("Referencia a buscar", "Buscar Material").trim();
 
 		if (usuarioInput.length() > 0) {
@@ -159,6 +160,7 @@ public class VistaMaterialControl {
 			VentanaPrincipalControl.dialogoAlerta("Debe ingresar una referencia", "Atención");
 			VistaMaterialControl.buscarMaterial();
 		}
+		} catch (Exception e) {}
 	}
 
 	public static void mostrarAgregarMaterial() {

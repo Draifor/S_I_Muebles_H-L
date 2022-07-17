@@ -133,6 +133,7 @@ public class VistaClienteControl {
 		ClienteVo cliente = null;
 		int filaSeleccionada = tabla.getSelectedRow();
 
+		try {
 		if (filaSeleccionada != -1) {
 			int IdCliente = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ClientesColumnas.CODIGO).toString());
 			String nombre = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.NOMBRE);
@@ -143,14 +144,14 @@ public class VistaClienteControl {
 
 			cliente = new ClienteVo(IdCliente, nombre, apellido, identificacion, celular, direccion);
 		}
+		} catch(Exception e) {}
 		return cliente;
 	}
 
 	public static void buscarCliente() {
-		String usuarioInput = VentanaPrincipalControl
-				.dialogoInput("Número de identificación a buscar", "Buscar Cliente").trim();
-
 		try {
+			String usuarioInput = VentanaPrincipalControl
+					.dialogoInput("Número de identificación a buscar", "Buscar Cliente").trim();
 
 			if (MetodosAuxiliares.esNumeroInt(usuarioInput)) {
 				ClienteVo cliente = VistaClienteControl.clienteDao.buscar(Integer.parseInt(usuarioInput));
@@ -175,9 +176,7 @@ public class VistaClienteControl {
 				VistaClienteControl.buscarCliente();
 			}
 
-		} catch (Exception e) {
-
-		}
+		} catch (Exception e) {}
 	}
 
 	public static void mostrarAgregarCliente() {

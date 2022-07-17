@@ -26,12 +26,12 @@ public class VistaDiseñoControl {
 				VentanaPrincipalControl.dialogoAlerta("Ocurrió un error, no se registró el diseño",
 						"Operación Fallida");
 			}
-		} 
+		}
 	}
 
 	public static void modificarDiseño() {
 		DiseñoVo diseñoActualizado = DialogDiseñoControl.getDatosDiseño();
-		
+
 		if (diseñoActualizado != null) {
 			int resultadoOperacion = VistaDiseñoControl.diseñoDao.modificar(diseñoActualizado);
 
@@ -119,6 +119,7 @@ public class VistaDiseñoControl {
 		DiseñoVo diseño = null;
 		int filaSeleccionada = tabla.getSelectedRow();
 
+		try {
 		if (filaSeleccionada != -1) {
 			int idDiseño = Integer.parseInt(tabla.getValueAt(filaSeleccionada, DiseñosColumnas.CODIGO).toString());
 			String referencia = (String) tabla.getValueAt(filaSeleccionada, DiseñosColumnas.REFERENCIA);
@@ -128,30 +129,33 @@ public class VistaDiseñoControl {
 
 			diseño = new DiseñoVo(idDiseño, referencia, nombre, tipo, urlImagen);
 		}
+		} catch(Exception e) {}
 		return diseño;
 	}
 
 	public static void buscarDiseño() {
-		String usuarioInput = VentanaPrincipalControl.dialogoInput("Referencia a buscar", "Buscar Diseño").trim();
+		try {
+			String usuarioInput = VentanaPrincipalControl.dialogoInput("Referencia a buscar", "Buscar Diseño").trim();
 
-		if (usuarioInput.length() > 0) {
-			DiseñoVo diseño = VistaDiseñoControl.diseñoDao.buscar(usuarioInput);
-			if (diseño != null) {
-				DialogDiseñoControl.setDatosDiseño(diseño);
-				DialogDiseñoControl.desactivarCampos();
-				DialogDiseñoControl.mostrarSegundoBoton();
-				DialogDiseñoControl.cambiarTextoPrimerBoton("Modificar");
-				DialogDiseñoControl.cambiarTextoSegundoBoton("Eliminar");
-				DialogDiseñoControl.cambiarOnClickSegundoBoton(() -> VistaDiseñoControl.eliminarDiseño());
-				DialogDiseñoControl.mostrar("Diseño", () -> VistaDiseñoControl.mostrarModificarDiseño(diseño));
+			if (usuarioInput.length() > 0) {
+				DiseñoVo diseño = VistaDiseñoControl.diseñoDao.buscar(usuarioInput);
+				if (diseño != null) {
+					DialogDiseñoControl.setDatosDiseño(diseño);
+					DialogDiseñoControl.desactivarCampos();
+					DialogDiseñoControl.mostrarSegundoBoton();
+					DialogDiseñoControl.cambiarTextoPrimerBoton("Modificar");
+					DialogDiseñoControl.cambiarTextoSegundoBoton("Eliminar");
+					DialogDiseñoControl.cambiarOnClickSegundoBoton(() -> VistaDiseñoControl.eliminarDiseño());
+					DialogDiseñoControl.mostrar("Diseño", () -> VistaDiseñoControl.mostrarModificarDiseño(diseño));
+				} else {
+					VentanaPrincipalControl.dialogoAlerta("No se encontró el diseño", "Resultado");
+				}
+
 			} else {
-				VentanaPrincipalControl.dialogoAlerta("No se encontró el diseño", "Resultado");
+				VentanaPrincipalControl.dialogoAlerta("Debe ingresar una referencia", "Atención");
+				VistaDiseñoControl.buscarDiseño();
 			}
-
-		} else {
-			VentanaPrincipalControl.dialogoAlerta("Debe ingresar una referencia", "Atención");
-			VistaDiseñoControl.buscarDiseño();
-		}
+		} catch (Exception e) {}
 	}
 
 	public static void mostrarAgregarDiseño() {
