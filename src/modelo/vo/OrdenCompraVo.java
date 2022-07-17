@@ -6,31 +6,24 @@ public class OrdenCompraVo {
 
     private int id;
     private int idCliente;
+    private List<ProductoVo> productos; 
+    private List<DiseñoVo> diseños; 
     private Date fecha; 
-    private List<ProductoVo> productos = new ArrayList<>(); 
-    
-    private OrdenCompraVo(int idCliente) {
-    	this.idCliente = idCliente;
-    }
-    
-    private OrdenCompraVo(int idCliente, Date fecha) {
-    	this.idCliente = idCliente;
-    	this.fecha = fecha;
-    }
+    private boolean completada;
+    private boolean ventaEfectiva;
 
-    private OrdenCompraVo(int idCliente, Date fecha, List<ProductoVo> productos) {
-        this.idCliente = idCliente;
-        this.fecha = fecha;
-        this.productos = productos;
-    }
-    
-    private OrdenCompraVo(int id, int idCliente, Date fecha, List<ProductoVo> productos) {
-    	this.id = id;
+	public OrdenCompraVo(int idCliente, Date fecha, boolean completada, boolean ventaEfectiva) {
     	this.idCliente = idCliente;
     	this.fecha = fecha;
-    	this.productos = productos;
+    	this.completada = completada;
+    	this.ventaEfectiva = ventaEfectiva;
     }
-    
+	
+	public OrdenCompraVo(int id, int idCliente, Date fecha, boolean completada, boolean ventaEfectiva) {
+		this(idCliente, fecha, completada, ventaEfectiva);
+		this.id = id;
+	}
+
     public int getId() {
     	return this.id;
     }
@@ -57,6 +50,30 @@ public class OrdenCompraVo {
 
 	public void setProductos(List<ProductoVo> productos) {
 		this.productos = productos;
+	}
+	
+	public List<DiseñoVo> getDiseños() {
+		return this.diseños;
+	}
+	
+	public void setDiseños(List<DiseñoVo> diseños) {
+		this.diseños = diseños;
+	}
+
+	public boolean isCompletada() {
+		return this.completada;
+	}
+	
+	public void setCompletada(boolean completada) {
+		this.completada = completada;
+	}
+	
+	public boolean isVentaEfectiva() {
+		return this.ventaEfectiva;
+	}
+	
+	public void setVentaEfectiva(boolean ventaEfectiva) {
+		this.ventaEfectiva = ventaEfectiva;
 	}
 
 	@Override

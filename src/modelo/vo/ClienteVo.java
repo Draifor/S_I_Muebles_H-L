@@ -18,14 +18,10 @@ public class ClienteVo {
 		this.direccion = direccion;
 	}
 
-	public ClienteVo(int id, String nombre, String apellido, String identificacion, String celular,
-			String direccion) {
+	public ClienteVo(int id, String nombre, String apellido, String identificacion, String celular, String direccion) {
+		this(nombre, apellido, identificacion, celular, direccion);
 		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.identificacion = identificacion;
-		this.celular = celular;
-		this.direccion = direccion;
+
 	}
 
 	public int getId() {

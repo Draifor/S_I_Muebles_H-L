@@ -15,11 +15,8 @@ public class MaterialVo {
     }
     
     public MaterialVo(int id, String referencia, String nombre, double costo, int cantidad) {
+    	this(referencia, nombre, costo, cantidad);
     	this.id = id;
-    	this.nombre = nombre;
-    	this.referencia = referencia;
-    	this.costo = costo;
-    	this.cantidad = cantidad;
     }
 
     public int getId() {

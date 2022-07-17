@@ -17,7 +17,7 @@ public class VentanaPrincipalControl {
 	private static VistaDiseño seccionDiseño = VistaDiseñoControl.getVista();
 	private static VistaMaterial seccionMaterial = VistaMaterialControl.getVista();
 	private static VistaProducto seccionProducto = VistaProductoControl.getVista();
-	private static VistaOrdenCompra seccionOrdenCompra = new VistaOrdenCompra();
+	private static VistaOrdenCompra seccionOrdenCompra = VistaOrdenCompraControl.getVista();
 	private static VistaVenta seccionVenta = new VistaVenta();
 
 	public static void mostrar() {

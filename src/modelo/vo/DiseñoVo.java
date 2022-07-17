@@ -16,11 +16,8 @@ public class DiseñoVo {
 	}
 
 	public DiseñoVo(int id, String referencia, String nombre, String tipo, String urlImagen) {
+		this(referencia, nombre, tipo, urlImagen);
 		this.id = id;
-		this.referencia = referencia;
-		this.nombre = nombre;
-		this.tipo = tipo;
-		this.urlImagen = urlImagen;
 	}
 
 	public int getId() {

@@ -9,17 +9,13 @@ import utilidades.*;
 public class NavMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private String[] OPCIONES_MENU = { "Inicio", "Clientes", "Diseños", "Materiales", "Productos", "Ventas",
-			"Orden de Compra" };
-	private Operacion[] FUNCIONES_ON_CLICK = { 
-			() -> VentanaPrincipalControl.mostrarVistaMenu(),
-			() -> VentanaPrincipalControl.mostrarVistaCliente(),
-			() -> VentanaPrincipalControl.mostrarVistaDiseño(),
-			() -> VentanaPrincipalControl.mostrarVistaMaterial(),
-			() -> VentanaPrincipalControl.mostrarVistaProducto(),
+	private String[] OPCIONES_MENU = { "Inicio", "Clientes", "Diseños", "Materiales", "Productos", "Orden de Compra",
+			"Ventas", };
+	private Operacion[] FUNCIONES_ON_CLICK = { () -> VentanaPrincipalControl.mostrarVistaMenu(),
+			() -> VentanaPrincipalControl.mostrarVistaCliente(), () -> VentanaPrincipalControl.mostrarVistaDiseño(),
+			() -> VentanaPrincipalControl.mostrarVistaMaterial(), () -> VentanaPrincipalControl.mostrarVistaProducto(),
 			() -> VentanaPrincipalControl.mostrarVistaOrdenCompra(),
-			() -> VentanaPrincipalControl.mostrarVistaVenta()
-	};
+			() -> VentanaPrincipalControl.mostrarVistaVenta() };
 	private int length = OPCIONES_MENU.length;
 
 	private SesionUsuario sesionUsuario;

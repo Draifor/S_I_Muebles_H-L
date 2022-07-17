@@ -20,13 +20,8 @@ public class ProductoVo {
     }
     
     public ProductoVo(int id, String referencia, String nombre, String tipo, double precio, int cantidad, int idDiseño) {
+    	this(referencia, nombre, tipo, precio, cantidad, idDiseño);
     	this.id = id;
-    	this.referencia = referencia;
-    	this.nombre = nombre;
-    	this.tipo = tipo;
-    	this.precio = precio;
-    	this.cantidad = cantidad;
-    	this.idDiseño = idDiseño;
     }
 
     public int getId() {
