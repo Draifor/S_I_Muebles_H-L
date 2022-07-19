@@ -81,34 +81,34 @@ public class VistaClienteControl {
 	public static String[][] obtenerClientes() {
 
 		List<ClienteVo> clientes = VistaClienteControl.clienteDao.obtenerRegistros();
-		String[][] matrizClientes = new String[clientes.size()][ClientesColumnas.TITULOS_COLUMNAS.length];
+		String[][] matrizClientes = new String[clientes.size()][ColumnasClientes.TITULOS_COLUMNAS.length];
 
 		for (int i = 0; i < matrizClientes.length; i++) {
-			matrizClientes[i][ClientesColumnas.CODIGO] = ((ClienteVo) clientes.get(i)).getId() + "";
-			matrizClientes[i][ClientesColumnas.NOMBRE] = ((ClienteVo) clientes.get(i)).getNombre() + "";
-			matrizClientes[i][ClientesColumnas.APELLIDO] = ((ClienteVo) clientes.get(i)).getApellido() + "";
-			matrizClientes[i][ClientesColumnas.IDENTIFICACION] = ((ClienteVo) clientes.get(i)).getIdentificacion() + "";
-			matrizClientes[i][ClientesColumnas.CELULAR] = ((ClienteVo) clientes.get(i)).getCelular() + "";
-			matrizClientes[i][ClientesColumnas.DIRECCION] = ((ClienteVo) clientes.get(i)).getDireccion() + "";
+			matrizClientes[i][ColumnasClientes.CODIGO] = ((ClienteVo) clientes.get(i)).getId() + "";
+			matrizClientes[i][ColumnasClientes.NOMBRE] = ((ClienteVo) clientes.get(i)).getNombre() + "";
+			matrizClientes[i][ColumnasClientes.APELLIDO] = ((ClienteVo) clientes.get(i)).getApellido() + "";
+			matrizClientes[i][ColumnasClientes.IDENTIFICACION] = ((ClienteVo) clientes.get(i)).getIdentificacion() + "";
+			matrizClientes[i][ColumnasClientes.CELULAR] = ((ClienteVo) clientes.get(i)).getCelular() + "";
+			matrizClientes[i][ColumnasClientes.DIRECCION] = ((ClienteVo) clientes.get(i)).getDireccion() + "";
 		}
 
 		return matrizClientes;
 	}
 
 	public static String[] obtenerTitulosColumnas() {
-		return ClientesColumnas.TITULOS_COLUMNAS;
+		return ColumnasClientes.TITULOS_COLUMNAS;
 	}
 
 	public static void construirTabla(JTable tabla) {
 		// Se crean las columnas tipo texto
-		for (int i = 0; i < ClientesColumnas.TIPO_TEXTO.length; i++) {
-			tabla.getColumnModel().getColumn(ClientesColumnas.TIPO_TEXTO[i])
+		for (int i = 0; i < ColumnasClientes.TIPO_TEXTO.length; i++) {
+			tabla.getColumnModel().getColumn(ColumnasClientes.TIPO_TEXTO[i])
 					.setCellRenderer(new GestionCeldas("texto"));
 		}
 
 		// Se crean las columnas numericas
-		for (int i = 0; i < ClientesColumnas.TIPO_NUMERO.length; i++) {
-			tabla.getColumnModel().getColumn(ClientesColumnas.TIPO_NUMERO[i])
+		for (int i = 0; i < ColumnasClientes.TIPO_NUMERO.length; i++) {
+			tabla.getColumnModel().getColumn(ColumnasClientes.TIPO_NUMERO[i])
 					.setCellRenderer(new GestionCeldas("numero"));
 		}
 
@@ -117,12 +117,12 @@ public class VistaClienteControl {
 		tabla.setRowHeight(25);
 		tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
-		tabla.getColumnModel().getColumn(ClientesColumnas.CODIGO).setPreferredWidth(115);
-		tabla.getColumnModel().getColumn(ClientesColumnas.NOMBRE).setPreferredWidth(230);
-		tabla.getColumnModel().getColumn(ClientesColumnas.APELLIDO).setPreferredWidth(230);
-		tabla.getColumnModel().getColumn(ClientesColumnas.IDENTIFICACION).setPreferredWidth(150);
-		tabla.getColumnModel().getColumn(ClientesColumnas.CELULAR).setPreferredWidth(150);
-		tabla.getColumnModel().getColumn(ClientesColumnas.DIRECCION).setPreferredWidth(280);
+		tabla.getColumnModel().getColumn(ColumnasClientes.CODIGO).setPreferredWidth(115);
+		tabla.getColumnModel().getColumn(ColumnasClientes.NOMBRE).setPreferredWidth(230);
+		tabla.getColumnModel().getColumn(ColumnasClientes.APELLIDO).setPreferredWidth(230);
+		tabla.getColumnModel().getColumn(ColumnasClientes.IDENTIFICACION).setPreferredWidth(150);
+		tabla.getColumnModel().getColumn(ColumnasClientes.CELULAR).setPreferredWidth(150);
+		tabla.getColumnModel().getColumn(ColumnasClientes.DIRECCION).setPreferredWidth(280);
 	}
 
 	public static void actualizarVista() {
@@ -135,12 +135,12 @@ public class VistaClienteControl {
 
 		try {
 		if (filaSeleccionada != -1) {
-			int IdCliente = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ClientesColumnas.CODIGO).toString());
-			String nombre = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.NOMBRE);
-			String apellido = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.APELLIDO);
-			String identificacion = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.IDENTIFICACION);
-			String celular = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.CELULAR);
-			String direccion = (String) tabla.getValueAt(filaSeleccionada, ClientesColumnas.DIRECCION);
+			int IdCliente = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasClientes.CODIGO).toString());
+			String nombre = (String) tabla.getValueAt(filaSeleccionada, ColumnasClientes.NOMBRE);
+			String apellido = (String) tabla.getValueAt(filaSeleccionada, ColumnasClientes.APELLIDO);
+			String identificacion = (String) tabla.getValueAt(filaSeleccionada, ColumnasClientes.IDENTIFICACION);
+			String celular = (String) tabla.getValueAt(filaSeleccionada, ColumnasClientes.CELULAR);
+			String direccion = (String) tabla.getValueAt(filaSeleccionada, ColumnasClientes.DIRECCION);
 
 			cliente = new ClienteVo(IdCliente, nombre, apellido, identificacion, celular, direccion);
 		}

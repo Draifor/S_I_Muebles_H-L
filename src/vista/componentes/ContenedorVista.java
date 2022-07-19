@@ -41,4 +41,11 @@ public class ContenedorVista extends JPanel {
 		add(this.contenedorPrincipal, BorderLayout.CENTER);
 	}
 
+	public void desactivarModificar() {
+		this.menuCRUD.desactivarModificar();
+	}
+	
+	public void desactivarEliminar() {
+		this.menuCRUD.desactivarEliminar();
+	}
 }

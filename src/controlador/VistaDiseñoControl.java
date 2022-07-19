@@ -70,32 +70,32 @@ public class VistaDiseñoControl {
 	public static String[][] obtenerDiseños() {
 
 		List<DiseñoVo> diseños = VistaDiseñoControl.diseñoDao.obtenerRegistros();
-		String[][] matrizDiseños = new String[diseños.size()][DiseñosColumnas.TITULOS_COLUMNAS.length];
+		String[][] matrizDiseños = new String[diseños.size()][ColumnasDiseños.TITULOS_COLUMNAS.length];
 
 		for (int i = 0; i < matrizDiseños.length; i++) {
-			matrizDiseños[i][DiseñosColumnas.CODIGO] = ((DiseñoVo) diseños.get(i)).getId() + "";
-			matrizDiseños[i][DiseñosColumnas.REFERENCIA] = ((DiseñoVo) diseños.get(i)).getReferencia();
-			matrizDiseños[i][DiseñosColumnas.NOMBRE] = ((DiseñoVo) diseños.get(i)).getNombre();
-			matrizDiseños[i][DiseñosColumnas.TIPO] = ((DiseñoVo) diseños.get(i)).getTipo();
-			matrizDiseños[i][DiseñosColumnas.URL_IMAGEN] = ((DiseñoVo) diseños.get(i)).getUrlImagen();
+			matrizDiseños[i][ColumnasDiseños.CODIGO] = ((DiseñoVo) diseños.get(i)).getId() + "";
+			matrizDiseños[i][ColumnasDiseños.REFERENCIA] = ((DiseñoVo) diseños.get(i)).getReferencia();
+			matrizDiseños[i][ColumnasDiseños.NOMBRE] = ((DiseñoVo) diseños.get(i)).getNombre();
+			matrizDiseños[i][ColumnasDiseños.TIPO] = ((DiseñoVo) diseños.get(i)).getTipo();
+			matrizDiseños[i][ColumnasDiseños.URL_IMAGEN] = ((DiseñoVo) diseños.get(i)).getUrlImagen();
 		}
 
 		return matrizDiseños;
 	}
 
 	public static String[] obtenerTitulosColumnas() {
-		return DiseñosColumnas.TITULOS_COLUMNAS;
+		return ColumnasDiseños.TITULOS_COLUMNAS;
 	}
 
 	public static void construirTabla(JTable tabla) {
 		// Se crean las columnas tipo texto
-		for (int i = 0; i < DiseñosColumnas.TIPO_TEXTO.length; i++) {
-			tabla.getColumnModel().getColumn(DiseñosColumnas.TIPO_TEXTO[i]).setCellRenderer(new GestionCeldas("texto"));
+		for (int i = 0; i < ColumnasDiseños.TIPO_TEXTO.length; i++) {
+			tabla.getColumnModel().getColumn(ColumnasDiseños.TIPO_TEXTO[i]).setCellRenderer(new GestionCeldas("texto"));
 		}
 
 		// Se crean las columnas numericas
-		for (int i = 0; i < DiseñosColumnas.TIPO_NUMERO.length; i++) {
-			tabla.getColumnModel().getColumn(DiseñosColumnas.TIPO_NUMERO[i])
+		for (int i = 0; i < ColumnasDiseños.TIPO_NUMERO.length; i++) {
+			tabla.getColumnModel().getColumn(ColumnasDiseños.TIPO_NUMERO[i])
 					.setCellRenderer(new GestionCeldas("numero"));
 		}
 
@@ -104,11 +104,11 @@ public class VistaDiseñoControl {
 		tabla.setRowHeight(25);
 		tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
-		tabla.getColumnModel().getColumn(DiseñosColumnas.CODIGO).setPreferredWidth(84);
-		tabla.getColumnModel().getColumn(DiseñosColumnas.REFERENCIA).setPreferredWidth(130);
-		tabla.getColumnModel().getColumn(DiseñosColumnas.NOMBRE).setPreferredWidth(420);
-		tabla.getColumnModel().getColumn(DiseñosColumnas.TIPO).setPreferredWidth(170);
-		tabla.getColumnModel().getColumn(DiseñosColumnas.URL_IMAGEN).setPreferredWidth(150);
+		tabla.getColumnModel().getColumn(ColumnasDiseños.CODIGO).setPreferredWidth(84);
+		tabla.getColumnModel().getColumn(ColumnasDiseños.REFERENCIA).setPreferredWidth(130);
+		tabla.getColumnModel().getColumn(ColumnasDiseños.NOMBRE).setPreferredWidth(420);
+		tabla.getColumnModel().getColumn(ColumnasDiseños.TIPO).setPreferredWidth(170);
+		tabla.getColumnModel().getColumn(ColumnasDiseños.URL_IMAGEN).setPreferredWidth(150);
 	}
 
 	public static void actualizarVista() {
@@ -121,11 +121,11 @@ public class VistaDiseñoControl {
 
 		try {
 		if (filaSeleccionada != -1) {
-			int idDiseño = Integer.parseInt(tabla.getValueAt(filaSeleccionada, DiseñosColumnas.CODIGO).toString());
-			String referencia = (String) tabla.getValueAt(filaSeleccionada, DiseñosColumnas.REFERENCIA);
-			String nombre = (String) tabla.getValueAt(filaSeleccionada, DiseñosColumnas.NOMBRE);
-			String tipo = (String) tabla.getValueAt(filaSeleccionada, DiseñosColumnas.TIPO);
-			String urlImagen = (String) tabla.getValueAt(filaSeleccionada, DiseñosColumnas.URL_IMAGEN);
+			int idDiseño = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasDiseños.CODIGO).toString());
+			String referencia = (String) tabla.getValueAt(filaSeleccionada, ColumnasDiseños.REFERENCIA);
+			String nombre = (String) tabla.getValueAt(filaSeleccionada, ColumnasDiseños.NOMBRE);
+			String tipo = (String) tabla.getValueAt(filaSeleccionada, ColumnasDiseños.TIPO);
+			String urlImagen = (String) tabla.getValueAt(filaSeleccionada, ColumnasDiseños.URL_IMAGEN);
 
 			diseño = new DiseñoVo(idDiseño, referencia, nombre, tipo, urlImagen);
 		}

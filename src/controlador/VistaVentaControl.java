@@ -1,25 +1,27 @@
 package controlador;
 
 import java.util.List;
+
 import javax.swing.JTable;
 
-import vista.ordencompra.VistaOrdenCompra;
-import modelo.dao.OrdenCompraDao;
-import modelo.vo.OrdenCompraVo;
-import utilidades.*;
+import modelo.dao.VentaDao;
+import modelo.vo.VentaVo;
+import utilidades.ColumnasVentas;
+import utilidades.GestionCeldas;
+import vista.venta.VistaVenta;
 
-public class VistaOrdenCompraControl {
-	private static OrdenCompraDao ordenCompraDao = new OrdenCompraDao();
-	private static VistaOrdenCompra vista = new VistaOrdenCompra();
+public class VistaVentaControl {
+	private static VentaDao ventaDao = new VentaDao();
+	private static VistaVenta vista = new VistaVenta();
 
-	public static void agregarOrdenCompra() {
-//		OrdenCompraVo nuevaOrdenCompra = DialogProductoControl.getDatosOrdenCompra();
+	public static void agregarVenta() {
+//		VentaVo nuevaVenta = DialogProductoControl.getDatosVenta();
 //
 //		if (nuevaOrdenCompra != null) {
-//			int resultadoOperacion = VistaOrdenCompraControl.ordenCompraDao.agregar(nuevaOrdenCompra);
+//			int resultadoOperacion = VistaVentaControl.ordenCompraDao.agregar(nuevaVenta);
 //
 //			if (resultadoOperacion > 0) {
-//				VistaOrdenCompraControl.actualizarVista();
+//				VistaVentaControl.actualizarVista();
 //				DialogProductoControl.ocultar();
 //				VentanaPrincipalControl.dialogoAlerta("Producto guardado con éxito", "Operación Exitosa");
 //			} else {
@@ -29,14 +31,14 @@ public class VistaOrdenCompraControl {
 //		}
 	}
 
-	public static void modificarOrdenCompra() {
-//		OrdenCompraVo productoActualizado = DialogProductoControl.getDatosOrdenCompra();
+	public static void modificarVenta() {
+//		VentaVo productoActualizado = DialogProductoControl.getDatosVenta();
 //
 //		if (productoActualizado != null) {
-//			int resultadoOperacion = VistaOrdenCompraControl.ordenCompraDao.modificar(productoActualizado);
+//			int resultadoOperacion = VistaVentaControl.ordenCompraDao.modificar(productoActualizado);
 //
 //			if (resultadoOperacion > 0) {
-//				VistaOrdenCompraControl.actualizarVista();
+//				VistaVentaControl.actualizarVista();
 //				DialogProductoControl.ocultar();
 //				VentanaPrincipalControl.dialogoAlerta("El producto se modificó con éxito", "Operación Exitosa");
 //			} else {
@@ -46,17 +48,17 @@ public class VistaOrdenCompraControl {
 //		}
 	}
 
-	public static void eliminarOrdenCompra() {
+	public static void eliminarVenta() {
 //		int opcionElegida = VentanaPrincipalControl
 //				.dialogoConfirmacion("Esta operación es irreversible ¿Desea continuar?", "ADVERTENCIA");
 //
 //		if (opcionElegida == 0) {
 //			ProductoVo productoPorEliminar = DialogProductoControl.getDatosOrdenCompra();
 //
-//			int resultadoOperacion = VistaOrdenCompraControl.ordenCompraDao.eliminar(productoPorEliminar.getId());
+//			int resultadoOperacion = VistaVentaControl.ordenCompraDao.eliminar(productoPorEliminar.getId());
 //
 //			if (resultadoOperacion > 0) {
-//				VistaOrdenCompraControl.actualizarVista();
+//				VistaVentaControl.actualizarVista();
 //				DialogProductoControl.ocultar();
 //				VentanaPrincipalControl.dialogoAlerta("OrdenCompra eliminada con exito", "Operación Exitosa");
 //			} else {
@@ -66,58 +68,61 @@ public class VistaOrdenCompraControl {
 //		}
 	}
 
-	public static String[][] obtenerOrdenesCompra() {
-		List<OrdenCompraVo> ordenesCompra = VistaOrdenCompraControl.ordenCompraDao.obtenerRegistros();
-		String[][] matrizProductos = new String[ordenesCompra.size()][ColumnasOrdenesCompra.TITULOS_COLUMNAS.length];
+	public static String[][] obtenerVentas() {
+		List<VentaVo> ordenesCompra = VistaVentaControl.ventaDao.obtenerRegistros();
+		String[][] matrizVentas = new String[ordenesCompra.size()][ColumnasVentas.TITULOS_COLUMNAS.length];
 
-		for (int i = 0; i < matrizProductos.length; i++) {
-//			matrizProductos[i][OrdenesCompraColumnas.CODIGO] = ((OrdenCompraVo) ordenesCompra.get(i)).getId() + "";
-//			matrizProductos[i][OrdenesCompraColumnas.REFERENCIA] = ((OrdenCompraVo) ordenesCompra.get(i)).getReferencia();
-//			matrizProductos[i][OrdenesCompraColumnas.NOMBRE] = ((OrdenCompraVo) ordenesCompra.get(i)).getNombre();
-//			matrizProductos[i][OrdenesCompraColumnas.TIPO] = ((OrdenCompraVo) ordenesCompra.get(i)).getTipo();
-//			matrizProductos[i][OrdenesCompraColumnas.PRECIO] = ((OrdenCompraVo) ordenesCompra.get(i)).getPrecio() + "";
-//			matrizProductos[i][OrdenesCompraColumnas.CANTIDAD] = ((OrdenCompraVo) ordenesCompra.get(i)).getCantidad() + "";
-//			matrizProductos[i][OrdenesCompraColumnas.ID_DISEÑO] = ((OrdenCompraVo) ordenesCompra.get(i)).getIdDiseño() + "";
+		for (int i = 0; i < matrizVentas.length; i++) {
+//			matrizProductos[i][ColumnasVentas.CODIGO] = ((VentaVo) ordenesCompra.get(i)).getId() + "";
+//			matrizProductos[i][ColumnasVentas.REFERENCIA] = ((VentaVo) ordenesCompra.get(i)).getReferencia();
+//			matrizProductos[i][ColumnasVentas.NOMBRE] = ((VentaVo) ordenesCompra.get(i)).getNombre();
+//			matrizProductos[i][ColumnasVentas.TIPO] = ((VentaVo) ordenesCompra.get(i)).getTipo();
+//			matrizProductos[i][ColumnasVentas.PRECIO] = ((VentaVo) ordenesCompra.get(i)).getPrecio() + "";
+//			matrizProductos[i][ColumnasVentas.CANTIDAD] = ((VentaVo) ordenesCompra.get(i)).getCantidad() + "";
+//			matrizProductos[i][ColumnasVentas.ID_DISEÑO] = ((VentaVo) ordenesCompra.get(i)).getIdDiseño() + "";
 		}
 
-		return matrizProductos;
+		return matrizVentas;
 	}
 
 	public static String[] obtenerTitulosColumnas() {
-		return ColumnasOrdenesCompra.TITULOS_COLUMNAS;
+		return ColumnasVentas.TITULOS_COLUMNAS;
 	}
 
 	public static void construirTabla(JTable tabla) {
 		// Se crean las columnas tipo texto
-		for (int i = 0; i < ColumnasOrdenesCompra.TIPO_TEXTO.length; i++) {
-			tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.TIPO_TEXTO[i])
+		for (int i = 0; i < ColumnasVentas.TIPO_TEXTO.length; i++) {
+			tabla.getColumnModel().getColumn(ColumnasVentas.TIPO_TEXTO[i])
 					.setCellRenderer(new GestionCeldas("texto"));
 		}
 
 		// Se crean las columnas tipo numero
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.CODIGO).setCellRenderer(new GestionCeldas("numero"));
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.COD_CLIENTE)
-				.setCellRenderer(new GestionCeldas("numero"));
+		for (int i = 0; i < ColumnasVentas.TIPO_NUMERO.length; i++) {
+			tabla.getColumnModel().getColumn(ColumnasVentas.TIPO_NUMERO[i])
+					.setCellRenderer(new GestionCeldas("numero"));
+		}
+//		tabla.getColumnModel().getColumn(ColumnasVentas.COD_CLIENTE)
+//				.setCellRenderer(new GestionCeldas("numero"));
+//		tabla.getColumnModel().getColumn(ColumnasVentas.ORDEN_COMPRA_ID).setCellRenderer(new GestionCeldas("numero"));
 
 		// Se crea la columna tipo precio
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.PRECIO).setCellRenderer(new GestionCeldas("precio"));
+		tabla.getColumnModel().getColumn(ColumnasVentas.PRECIO).setCellRenderer(new GestionCeldas("precio"));
 
 		// Se define el tamaño de las filas y columnas
 		tabla.getTableHeader().setReorderingAllowed(false);
 		tabla.setRowHeight(25);
 		tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.CODIGO).setPreferredWidth(84);
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.COD_CLIENTE).setPreferredWidth(84);
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.LISTA_PRODUCTOS).setPreferredWidth(410);
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.PRECIO).setPreferredWidth(110);
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.FECHA).setPreferredWidth(110);
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.ESTADO_PRODUCTOS).setPreferredWidth(130);
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.ESTADO_FACTURA).setPreferredWidth(120);
+		tabla.getColumnModel().getColumn(ColumnasVentas.FACTURA_ID).setPreferredWidth(84);
+		tabla.getColumnModel().getColumn(ColumnasVentas.COD_CLIENTE).setPreferredWidth(84);
+		tabla.getColumnModel().getColumn(ColumnasVentas.LISTA_PRODUCTOS).setPreferredWidth(420);
+		tabla.getColumnModel().getColumn(ColumnasVentas.PRECIO).setPreferredWidth(120);
+		tabla.getColumnModel().getColumn(ColumnasVentas.FECHA).setPreferredWidth(120);
+		tabla.getColumnModel().getColumn(ColumnasVentas.ORDEN_COMPRA_ID).setPreferredWidth(130);
 	}
 
-	public static OrdenCompraVo obtenerRegistroSeleccionado(JTable tabla) {
-		OrdenCompraVo producto = null;
+	public static VentaVo obtenerRegistroSeleccionado(JTable tabla) {
+		VentaVo venta = null;
 		int filaSeleccionada = tabla.getSelectedRow();
 
 		try {
@@ -134,20 +139,20 @@ public class VistaOrdenCompraControl {
 			}
 		} catch (Exception e) {
 		}
-		return producto;
+		return venta;
 	}
 
 	public static void actualizarVista() {
-		VistaOrdenCompraControl.vista.actualizarTabla();
+		VistaVentaControl.vista.actualizarTabla();
 	}
 
-	public static void buscarOrdenCompra() {
+	public static void buscarVenta() {
 		try {
-			String usuarioInput = VentanaPrincipalControl.dialogoInput("Referencia a buscar", "Buscar Orden de Compra").trim();
+			String usuarioInput = VentanaPrincipalControl.dialogoInput("Referencia a buscar", "Buscar Venta").trim();
 
 			if (usuarioInput.length() > 0) {
-				OrdenCompraVo producto = VistaOrdenCompraControl.ordenCompraDao.buscar(usuarioInput);
-				if (producto != null) {
+				VentaVo venta = VistaVentaControl.ventaDao.buscar(usuarioInput);
+				if (venta != null) {
 //					DialogProductoControl.setDatosProducto(producto);
 //					DialogProductoControl.desactivarCampos();
 //					DialogProductoControl.mostrarSegundoBoton();
@@ -157,47 +162,47 @@ public class VistaOrdenCompraControl {
 //					DialogProductoControl.mostrar("Producto",
 //							() -> VistaProductoControl.mostrarModificarProducto(producto));
 				} else {
-					VentanaPrincipalControl.dialogoAlerta("No se encontró la orden de compra", "Resultado");
+					VentanaPrincipalControl.dialogoAlerta("No se encontró la venta", "Resultado");
 				}
 
 			} else {
 				VentanaPrincipalControl.dialogoAlerta("Debe ingresar una referencia", "Atención");
-				VistaOrdenCompraControl.buscarOrdenCompra();
+				VistaVentaControl.buscarVenta();
 			}
 		} catch (Exception e) {
 		}
 	}
 
-	public static void mostrarAgregarOrdenCompra() {
+	public static void mostrarAgregarVenta() {
 		DialogProductoControl.limpiarDatos();
 		DialogProductoControl.activarCampos();
 		DialogProductoControl.mostrarCodigoPorDefecto();
 		DialogProductoControl.cambiarTextoPrimerBoton("Agregar");
 		DialogProductoControl.ocultarSegundoBoton();
-		DialogProductoControl.mostrar("Agregar Orden de Compra", () -> VistaOrdenCompraControl.agregarOrdenCompra());
+		DialogProductoControl.mostrar("Agregar Orden de Compra", () -> VistaVentaControl.agregarVenta());
 	}
 
-	public static void validarModificarOrdenCompra() {
-		OrdenCompraVo ordenCompra = VistaOrdenCompraControl.obtenerRegistroSeleccionado(VistaOrdenCompraControl.vista.getTabla());
+	public static void validarModificarVenta() {
+		VentaVo ordenCompra = VistaVentaControl.obtenerRegistroSeleccionado(VistaVentaControl.vista.getTabla());
 
 		if (ordenCompra != null) {
-			VistaOrdenCompraControl.mostrarModificarOrdenCompra(ordenCompra);
+			VistaVentaControl.mostrarModificarVenta(ordenCompra);
 		} else {
 			VentanaPrincipalControl.dialogoAlerta("Selecciona la orden de compra a modificar", "Modificar Orden de Compra");
 		}
 	}
 
-	public static void validarEliminarOrdenCompra() {
-		 OrdenCompraVo ordenCompra = VistaOrdenCompraControl.obtenerRegistroSeleccionado(VistaOrdenCompraControl.vista.getTabla());
+	public static void validarEliminarVenta() {
+		 VentaVo ordenCompra = VistaVentaControl.obtenerRegistroSeleccionado(VistaVentaControl.vista.getTabla());
 
 			if (ordenCompra != null) {
-				VistaOrdenCompraControl.mostrarEliminarOrdenCompra(ordenCompra);
+				VistaVentaControl.mostrarEliminarVenta(ordenCompra);
 			} else {
 				VentanaPrincipalControl.dialogoAlerta("Selecciona la orden de compra a eliminar", "Eliminar Orden de Compra");
 			}
 	}
 	
-	public static void mostrarModificarOrdenCompra(OrdenCompraVo ordenCompra) {
+	public static void mostrarModificarVenta(VentaVo ordenCompra) {
 //		DialogProductoControl.setDatosProducto(ordenCompra);
 //		DialogProductoControl.activarCampos();
 //		DialogProductoControl.cambiarTextoPrimerBoton("Modificar");
@@ -205,7 +210,7 @@ public class VistaOrdenCompraControl {
 //		DialogProductoControl.mostrar("Modificar Orden de Compra", () -> VistaOrdenCompraControl.modificarOrdenCompra());
 	}
 
-	public static void mostrarEliminarOrdenCompra(OrdenCompraVo ordenCompra) {
+	public static void mostrarEliminarVenta(VentaVo ordenCompra) {
 //		DialogProductoControl.setDatosProducto(ordenCompra);
 //		DialogProductoControl.desactivarCampos();
 //		DialogProductoControl.cambiarTextoPrimerBoton("Eliminar");
@@ -213,8 +218,7 @@ public class VistaOrdenCompraControl {
 //		DialogProductoControl.mostrar("Eliminar Orden de Compra", () -> VistaOrdenCompraControl.eliminarOrdenCompra());
 	}
 
-	public static VistaOrdenCompra getVista() {
-		return VistaOrdenCompraControl.vista;
+	public static VistaVenta getVista() {
+		return VistaVentaControl.vista;
 	}
-
 }

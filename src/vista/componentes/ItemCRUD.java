@@ -14,6 +14,7 @@ public class ItemCRUD extends JPanel implements MouseListener {
 	private Imagen icono;
 	private Texto label;
 	private Operacion onClick;
+	private boolean habilitado;
 
 	public ItemCRUD(String label, String source, Operacion onClick) {
 
@@ -33,11 +34,21 @@ public class ItemCRUD extends JPanel implements MouseListener {
 		add(this.label, BorderLayout.SOUTH);
 
 		this.onClick = onClick;
+		this.habilitado = true;
+	}
+	
+	public void deshabilitarItem() {
+		this.habilitado = false;
+		this.icono.setEnabled(false);
+		this.icono.setBorder(new LineBorder(Color.GRIS_50.getColor(), 1));
+		this.label.setForeground(Color.GRIS_50.getColor());
+		setCursor(Cursor.getDefaultCursor());
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		this.onClick.onMouseClicked();
+		if (this.habilitado)
+			this.onClick.onMouseClicked();
 	}
 
 	@Override

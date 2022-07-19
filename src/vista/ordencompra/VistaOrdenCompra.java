@@ -25,7 +25,7 @@ public class VistaOrdenCompra extends JPanel {
 
 		this.construirTabla();
 
-		this.contenedorVista = new ContenedorVista("PRODUCTOS", this.tabla, FUNCIONES_ON_CLICK);
+		this.contenedorVista = new ContenedorVista("ORDENES DE COMPRA", this.tabla, FUNCIONES_ON_CLICK);
 
 		this.add(this.contenedorVista, BorderLayout.CENTER);
 	}
@@ -33,7 +33,7 @@ public class VistaOrdenCompra extends JPanel {
 	public void construirTabla() {
 
 		String[] titulos = VistaOrdenCompraControl.obtenerTitulosColumnas();
-		String[][] datos = VistaOrdenCompraControl.obtenerOrdenCompras();
+		String[][] datos = VistaOrdenCompraControl.obtenerOrdenesCompra();
 
 		this.tabla = new Tabla(titulos, datos);
 
@@ -42,7 +42,7 @@ public class VistaOrdenCompra extends JPanel {
 	
 	public void actualizarTabla() {
 		String[] titulos = VistaOrdenCompraControl.obtenerTitulosColumnas();
-		String[][] datos = VistaOrdenCompraControl.obtenerOrdenCompras();
+		String[][] datos = VistaOrdenCompraControl.obtenerOrdenesCompra();
 
 		this.tabla.actualizarTabla(titulos, datos);
 		VistaOrdenCompraControl.construirTabla(this.tabla.getTabla());

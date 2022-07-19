@@ -69,41 +69,41 @@ public class VistaProductoControl {
 	public static String[][] obtenerProductos() {
 
 		List<ProductoVo> productos = VistaProductoControl.productoDao.obtenerRegistros();
-		String[][] matrizProductos = new String[productos.size()][ProductosColumnas.TITULOS_COLUMNAS.length];
+		String[][] matrizProductos = new String[productos.size()][ColumnasProductos.TITULOS_COLUMNAS.length];
 
 		for (int i = 0; i < matrizProductos.length; i++) {
-			matrizProductos[i][ProductosColumnas.CODIGO] = ((ProductoVo) productos.get(i)).getId() + "";
-			matrizProductos[i][ProductosColumnas.REFERENCIA] = ((ProductoVo) productos.get(i)).getReferencia();
-			matrizProductos[i][ProductosColumnas.NOMBRE] = ((ProductoVo) productos.get(i)).getNombre();
-			matrizProductos[i][ProductosColumnas.TIPO] = ((ProductoVo) productos.get(i)).getTipo();
-			matrizProductos[i][ProductosColumnas.PRECIO] = ((ProductoVo) productos.get(i)).getPrecio() + "";
-			matrizProductos[i][ProductosColumnas.CANTIDAD] = ((ProductoVo) productos.get(i)).getCantidad() + "";
-			matrizProductos[i][ProductosColumnas.ID_DISEÑO] = ((ProductoVo) productos.get(i)).getIdDiseño() + "";
+			matrizProductos[i][ColumnasProductos.CODIGO] = ((ProductoVo) productos.get(i)).getId() + "";
+			matrizProductos[i][ColumnasProductos.REFERENCIA] = ((ProductoVo) productos.get(i)).getReferencia();
+			matrizProductos[i][ColumnasProductos.NOMBRE] = ((ProductoVo) productos.get(i)).getNombre();
+			matrizProductos[i][ColumnasProductos.TIPO] = ((ProductoVo) productos.get(i)).getTipo();
+			matrizProductos[i][ColumnasProductos.PRECIO] = ((ProductoVo) productos.get(i)).getPrecio() + "";
+			matrizProductos[i][ColumnasProductos.CANTIDAD] = ((ProductoVo) productos.get(i)).getCantidad() + "";
+			matrizProductos[i][ColumnasProductos.ID_DISEÑO] = ((ProductoVo) productos.get(i)).getIdDiseño() + "";
 		}
 
 		return matrizProductos;
 	}
 
 	public static String[] obtenerTitulosColumnas() {
-		return ProductosColumnas.TITULOS_COLUMNAS;
+		return ColumnasProductos.TITULOS_COLUMNAS;
 	}
 
 	public static void construirTabla(JTable tabla) {
 
 		// Se crean las columnas tipo texto
-		for (int i = 0; i < ProductosColumnas.TIPO_TEXTO.length; i++) {
-			tabla.getColumnModel().getColumn(ProductosColumnas.TIPO_TEXTO[i])
+		for (int i = 0; i < ColumnasProductos.TIPO_TEXTO.length; i++) {
+			tabla.getColumnModel().getColumn(ColumnasProductos.TIPO_TEXTO[i])
 					.setCellRenderer(new GestionCeldas("texto"));
 		}
 
 		// Se crean las columnas tipo numero
-		tabla.getColumnModel().getColumn(ProductosColumnas.CODIGO).setCellRenderer(new GestionCeldas("numero"));
+		tabla.getColumnModel().getColumn(ColumnasProductos.CODIGO).setCellRenderer(new GestionCeldas("numero"));
 
 		// Se crea la columna tipo precio
-		tabla.getColumnModel().getColumn(ProductosColumnas.PRECIO).setCellRenderer(new GestionCeldas("precio"));
+		tabla.getColumnModel().getColumn(ColumnasProductos.PRECIO).setCellRenderer(new GestionCeldas("precio"));
 
 		// Se crea la columna tipo numero simple
-		tabla.getColumnModel().getColumn(ProductosColumnas.CANTIDAD)
+		tabla.getColumnModel().getColumn(ColumnasProductos.CANTIDAD)
 				.setCellRenderer(new GestionCeldas("numero_simple"));
 
 		// Se define el tamaño de las filas y columnas
@@ -111,13 +111,13 @@ public class VistaProductoControl {
 		tabla.setRowHeight(25);
 		tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
-		tabla.getColumnModel().getColumn(ProductosColumnas.CODIGO).setPreferredWidth(84);
-		tabla.getColumnModel().getColumn(ProductosColumnas.REFERENCIA).setPreferredWidth(130);
-		tabla.getColumnModel().getColumn(ProductosColumnas.NOMBRE).setPreferredWidth(420);
-		tabla.getColumnModel().getColumn(ProductosColumnas.TIPO).setPreferredWidth(200);
-		tabla.getColumnModel().getColumn(ProductosColumnas.PRECIO).setPreferredWidth(160);
-		tabla.getColumnModel().getColumn(ProductosColumnas.CANTIDAD).setPreferredWidth(80);
-		tabla.getColumnModel().getColumn(ProductosColumnas.ID_DISEÑO).setPreferredWidth(90);
+		tabla.getColumnModel().getColumn(ColumnasProductos.CODIGO).setPreferredWidth(84);
+		tabla.getColumnModel().getColumn(ColumnasProductos.REFERENCIA).setPreferredWidth(130);
+		tabla.getColumnModel().getColumn(ColumnasProductos.NOMBRE).setPreferredWidth(420);
+		tabla.getColumnModel().getColumn(ColumnasProductos.TIPO).setPreferredWidth(200);
+		tabla.getColumnModel().getColumn(ColumnasProductos.PRECIO).setPreferredWidth(160);
+		tabla.getColumnModel().getColumn(ColumnasProductos.CANTIDAD).setPreferredWidth(80);
+		tabla.getColumnModel().getColumn(ColumnasProductos.ID_DISEÑO).setPreferredWidth(90);
 	}
 
 	public static void actualizarVista() {
@@ -130,13 +130,13 @@ public class VistaProductoControl {
 		
 		try {
 		if (filaSeleccionada != -1) {
-			int id = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ProductosColumnas.CODIGO).toString());
-			String referencia = (String) tabla.getValueAt(filaSeleccionada, ProductosColumnas.REFERENCIA);
-			String nombre = (String) tabla.getValueAt(filaSeleccionada, ProductosColumnas.NOMBRE);
-			String tipo = (String) tabla.getValueAt(filaSeleccionada, ProductosColumnas.TIPO);
-			double precio = Double.parseDouble(tabla.getValueAt(filaSeleccionada, ProductosColumnas.PRECIO).toString());
-			int cantidad = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ProductosColumnas.CANTIDAD).toString());
-			int idDiseño = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ProductosColumnas.ID_DISEÑO).toString());
+			int id = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasProductos.CODIGO).toString());
+			String referencia = (String) tabla.getValueAt(filaSeleccionada, ColumnasProductos.REFERENCIA);
+			String nombre = (String) tabla.getValueAt(filaSeleccionada, ColumnasProductos.NOMBRE);
+			String tipo = (String) tabla.getValueAt(filaSeleccionada, ColumnasProductos.TIPO);
+			double precio = Double.parseDouble(tabla.getValueAt(filaSeleccionada, ColumnasProductos.PRECIO).toString());
+			int cantidad = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasProductos.CANTIDAD).toString());
+			int idDiseño = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasProductos.ID_DISEÑO).toString());
 
 			producto = new ProductoVo(id, referencia, nombre, tipo, precio, cantidad, idDiseño);
 		}

@@ -1,6 +1,6 @@
 package utilidades;
 
-public class OrdenesCompraColumnas {
+public class ColumnasOrdenesCompra {
 
 	public static final int CODIGO = 0;
 	public static final int COD_CLIENTE = 1;

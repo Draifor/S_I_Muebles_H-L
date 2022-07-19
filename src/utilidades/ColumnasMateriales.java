@@ -1,6 +1,6 @@
 package utilidades;
 
-public class MaterialesColumnas {
+public class ColumnasMateriales {
 
 	public static final int CODIGO = 0;
 	public static final int REFERENCIA = 1;

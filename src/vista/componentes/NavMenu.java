@@ -9,7 +9,7 @@ import utilidades.*;
 public class NavMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private String[] OPCIONES_MENU = { "Inicio", "Clientes", "Diseños", "Materiales", "Productos", "Orden de Compra",
+	private String[] OPCIONES_MENU = { "Inicio", "Clientes", "Diseños", "Materiales", "Productos", "Ordenes de Compra",
 			"Ventas", };
 	private Operacion[] FUNCIONES_ON_CLICK = { () -> VentanaPrincipalControl.mostrarVistaMenu(),
 			() -> VentanaPrincipalControl.mostrarVistaCliente(), () -> VentanaPrincipalControl.mostrarVistaDiseño(),

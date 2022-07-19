@@ -18,7 +18,7 @@ public class VentanaPrincipalControl {
 	private static VistaMaterial seccionMaterial = VistaMaterialControl.getVista();
 	private static VistaProducto seccionProducto = VistaProductoControl.getVista();
 	private static VistaOrdenCompra seccionOrdenCompra = VistaOrdenCompraControl.getVista();
-	private static VistaVenta seccionVenta = new VistaVenta();
+	private static VistaVenta seccionVenta = VistaVentaControl.getVista();
 
 	public static void mostrar() {
 		VentanaPrincipalControl.ventana.setVisible(true);
@@ -71,14 +71,6 @@ public class VentanaPrincipalControl {
 		return new DialogMaterial(VentanaPrincipalControl.ventana);
 	}
 
-	// Operaciones Vista Orden de Compra
-
-	public static void mostrarVistaOrdenCompra() {
-		VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionOrdenCompra,
-				"ORDEN DE COMPRA");
-		System.out.println("Mostrar OrdenCompras");
-	}
-
 	// Operaciones Vista Producto
 
 	public static void mostrarVistaProducto() {
@@ -88,6 +80,14 @@ public class VentanaPrincipalControl {
 	
 	public static DialogProducto getProductoDialog() {
 		return new DialogProducto(VentanaPrincipalControl.ventana);
+	}
+	
+	// Operaciones Vista Orden de Compra
+	
+	public static void mostrarVistaOrdenCompra() {
+		VentanaPrincipalControl.ventana.setContenidoPrincipal(VentanaPrincipalControl.seccionOrdenCompra,
+				"ORDENES DE COMPRA");
+		System.out.println("Mostrar OrdenCompras");
 	}
 
 	// Operaciones Vista Venta

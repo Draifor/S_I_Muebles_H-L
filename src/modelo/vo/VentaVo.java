@@ -1,68 +1,78 @@
 package modelo.vo;
 
+import java.util.*;
+
 public class VentaVo {
 
-    private int IdVenta;
-    private int IdCliente;
-    private int IdOrden;
-    private ProductoVo[] productoVos;
-    private double precio;
-    private static int contadorVentas;
+	private int id;
+	private int idCliente;
+	private List<ProductoVo> productos;
+	private double precio;
+	private Date fecha;
+	private int idOrden;
 
-    public VentaVo(int IdCliente, int IdOrden, ProductoVo[] productos, double precio) {
-        this.IdVenta = ++VentaVo.contadorVentas;
-        this.IdCliente = IdCliente;
-        this.IdOrden = IdOrden;
-        this.productoVos = productos;
-        this.precio = precio;
-    }
+	public VentaVo(int idCliente, List<ProductoVo> productos, double precio, Date fecha, int idOrden) {
+		this.idCliente = idCliente;
+		this.productos = productos;
+		this.precio = precio;
+		this.fecha = fecha;
+		this.idOrden = idOrden;
+	}
 
-    public int getIdVenta() {
-        return this.IdVenta;
-    }
+	public int getId() {
+		return this.id;
+	}
 
-    public int getIdCliente() {
-        return this.IdCliente;
-    }
+	public int getIdCliente() {
+		return this.idCliente;
+	}
 
-    public void setIdCliente(int IdCliente) {
-        this.IdCliente = IdCliente;
-    }
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
 
-    public int getIdOrden() {
-        return this.IdOrden;
-    }
+	public List<ProductoVo> getProductos() {
+		return this.productos;
+	}
 
-    public void setIdOrden(int IdFactura) {
-        this.IdOrden = IdFactura;
-    }
+	public void setProductos(List<ProductoVo> productos) {
+		this.productos = productos;
+	}
 
-    public ProductoVo[] getProductos() {
-        return this.productoVos;
-    }
+	public double getPrecio() {
+		return this.precio;
+	}
 
-    public void setProductos(ProductoVo[] productos) {
-        this.productoVos = productos;
-    }
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
 
-    public double getPrecio() {
-        return this.precio;
-    }
+	public Date getFecha() {
+		return this.fecha;
+	}
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Venta{");
-        sb.append("IdVenta: ").append(this.IdVenta);
-        sb.append(", IdCliente: ").append(this.IdCliente);
-        sb.append(", IdFactura: ").append(this.IdOrden);
-        sb.append(", refProducto: ").append(this.productoVos);
-        sb.append(", precio: ").append(this.precio);
-        sb.append('}');
-        return sb.toString();
-    }
+	public int getIdOrden() {
+		return this.idOrden;
+	}
+
+	public void setIdOrden(int idOrden) {
+		this.idOrden = idOrden;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Venta{");
+		sb.append("IdVenta: ").append(this.id);
+		sb.append(", IdCliente: ").append(this.idCliente);
+		sb.append(", refProducto: ").append(this.productos);
+		sb.append(", precio: ").append(this.precio);
+		sb.append(", IdFactura: ").append(this.idOrden);
+		sb.append('}');
+		return sb.toString();
+	}
 }

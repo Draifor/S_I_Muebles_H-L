@@ -1,6 +1,6 @@
 package utilidades;
 
-public class ClientesColumnas {
+public class ColumnasClientes {
 
 	public static final int CODIGO = 0;
 	public static final int NOMBRE = 1;

@@ -69,38 +69,38 @@ public class VistaMaterialControl {
 	public static String[][] obtenerMateriales() {
 
 		List<MaterialVo> materiales = VistaMaterialControl.materialDao.obtenerRegistros();
-		String[][] matrizMateriales = new String[materiales.size()][MaterialesColumnas.TITULOS_COLUMNAS.length];
+		String[][] matrizMateriales = new String[materiales.size()][ColumnasMateriales.TITULOS_COLUMNAS.length];
 
 		for (int i = 0; i < matrizMateriales.length; i++) {
-			matrizMateriales[i][MaterialesColumnas.CODIGO] = ((MaterialVo) materiales.get(i)).getId() + "";
-			matrizMateriales[i][MaterialesColumnas.REFERENCIA] = ((MaterialVo) materiales.get(i)).getReferencia();
-			matrizMateriales[i][MaterialesColumnas.NOMBRE] = ((MaterialVo) materiales.get(i)).getNombre();
-			matrizMateriales[i][MaterialesColumnas.COSTO] = ((MaterialVo) materiales.get(i)).getCosto() + "";
-			matrizMateriales[i][MaterialesColumnas.CANTIDAD] = ((MaterialVo) materiales.get(i)).getCantidad() + "";
+			matrizMateriales[i][ColumnasMateriales.CODIGO] = ((MaterialVo) materiales.get(i)).getId() + "";
+			matrizMateriales[i][ColumnasMateriales.REFERENCIA] = ((MaterialVo) materiales.get(i)).getReferencia();
+			matrizMateriales[i][ColumnasMateriales.NOMBRE] = ((MaterialVo) materiales.get(i)).getNombre();
+			matrizMateriales[i][ColumnasMateriales.COSTO] = ((MaterialVo) materiales.get(i)).getCosto() + "";
+			matrizMateriales[i][ColumnasMateriales.CANTIDAD] = ((MaterialVo) materiales.get(i)).getCantidad() + "";
 		}
 
 		return matrizMateriales;
 	}
 
 	public static String[] obtenerTitulosColumnas() {
-		return MaterialesColumnas.TITULOS_COLUMNAS;
+		return ColumnasMateriales.TITULOS_COLUMNAS;
 	}
 
 	public static void construirTabla(JTable tabla) {
 		// Se crea la columna tipo numero
-		tabla.getColumnModel().getColumn(MaterialesColumnas.CODIGO).setCellRenderer(new GestionCeldas("numero"));
+		tabla.getColumnModel().getColumn(ColumnasMateriales.CODIGO).setCellRenderer(new GestionCeldas("numero"));
 
 		// Se crean las columnas tipo texto
-		for (int i = 0; i < MaterialesColumnas.TIPO_TEXTO.length; i++) {
-			tabla.getColumnModel().getColumn(MaterialesColumnas.TIPO_TEXTO[i])
+		for (int i = 0; i < ColumnasMateriales.TIPO_TEXTO.length; i++) {
+			tabla.getColumnModel().getColumn(ColumnasMateriales.TIPO_TEXTO[i])
 					.setCellRenderer(new GestionCeldas("texto"));
 		}
 
 		// Se crea la columna tipo precio
-		tabla.getColumnModel().getColumn(MaterialesColumnas.COSTO).setCellRenderer(new GestionCeldas("precio"));
+		tabla.getColumnModel().getColumn(ColumnasMateriales.COSTO).setCellRenderer(new GestionCeldas("precio"));
 
 		// Se crea la columna tipo numero simple
-		tabla.getColumnModel().getColumn(MaterialesColumnas.CANTIDAD)
+		tabla.getColumnModel().getColumn(ColumnasMateriales.CANTIDAD)
 				.setCellRenderer(new GestionCeldas("numero_simple"));
 
 		// Se define el tamaño de las filas y columnas
@@ -108,11 +108,11 @@ public class VistaMaterialControl {
 		tabla.setRowHeight(25);
 		tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
-		tabla.getColumnModel().getColumn(MaterialesColumnas.CODIGO).setPreferredWidth(84);
-		tabla.getColumnModel().getColumn(MaterialesColumnas.REFERENCIA).setPreferredWidth(130);
-		tabla.getColumnModel().getColumn(MaterialesColumnas.NOMBRE).setPreferredWidth(420);
-		tabla.getColumnModel().getColumn(MaterialesColumnas.COSTO).setPreferredWidth(170);
-		tabla.getColumnModel().getColumn(MaterialesColumnas.CANTIDAD).setPreferredWidth(150);
+		tabla.getColumnModel().getColumn(ColumnasMateriales.CODIGO).setPreferredWidth(84);
+		tabla.getColumnModel().getColumn(ColumnasMateriales.REFERENCIA).setPreferredWidth(130);
+		tabla.getColumnModel().getColumn(ColumnasMateriales.NOMBRE).setPreferredWidth(420);
+		tabla.getColumnModel().getColumn(ColumnasMateriales.COSTO).setPreferredWidth(170);
+		tabla.getColumnModel().getColumn(ColumnasMateriales.CANTIDAD).setPreferredWidth(150);
 	}
 
 	public static void actualizarVista() {
@@ -125,11 +125,11 @@ public class VistaMaterialControl {
 
 		try {
 		if (filaSeleccionada != -1) {
-			int id = Integer.parseInt(tabla.getValueAt(filaSeleccionada, MaterialesColumnas.CODIGO).toString());
-			String referencia = (String) tabla.getValueAt(filaSeleccionada, MaterialesColumnas.REFERENCIA);
-			String nombre = (String) tabla.getValueAt(filaSeleccionada, MaterialesColumnas.NOMBRE);
-			double costo = Double.parseDouble(tabla.getValueAt(filaSeleccionada, MaterialesColumnas.COSTO).toString());
-			int cantidad = Integer.parseInt(tabla.getValueAt(filaSeleccionada, MaterialesColumnas.CANTIDAD).toString());
+			int id = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasMateriales.CODIGO).toString());
+			String referencia = (String) tabla.getValueAt(filaSeleccionada, ColumnasMateriales.REFERENCIA);
+			String nombre = (String) tabla.getValueAt(filaSeleccionada, ColumnasMateriales.NOMBRE);
+			double costo = Double.parseDouble(tabla.getValueAt(filaSeleccionada, ColumnasMateriales.COSTO).toString());
+			int cantidad = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasMateriales.CANTIDAD).toString());
 
 			material = new MaterialVo(id, referencia, nombre, costo, cantidad);
 		}
