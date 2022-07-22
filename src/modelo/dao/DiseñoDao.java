@@ -95,7 +95,7 @@ public class DiseñoDao {
 
 			while (resultado.next()) {
 				int id = resultado.getInt("Cod_Diseño");
-				String referencia = resultado.getString("Referencia");
+				String referencia = resultado.getString("Referencia") == null ? resultado.getString("Referencia") : "DIS-" + referenciaBuscar;
 				String nombre = resultado.getString("Nombre");
 				String tipo = resultado.getString("Tipo");
 				String urlImagen = resultado.getString("Imagen");

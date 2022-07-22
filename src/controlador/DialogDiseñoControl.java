@@ -29,7 +29,7 @@ public class DialogDiseñoControl {
 			int idDiseño = Integer.parseInt(DialogDiseñoControl.ventana.getCodigoInput());
 			diseño = new DiseñoVo(idDiseño, referencia, nombre, tipo, urlImagen);
 		} else {
-			diseño = new DiseñoVo(referencia, nombre, tipo, urlImagen);
+			diseño = new DiseñoVo( nombre, tipo, urlImagen);
 		}
 
 		if (!DialogDiseñoControl.validarCampos(diseño)) {
@@ -49,12 +49,12 @@ public class DialogDiseñoControl {
 	}
 
 	public static boolean validarCampos(DiseñoVo diseño) {
-		String referencia = diseño.getReferencia();
+//		String referencia = diseño.getReferencia();
 		String nombre = diseño.getNombre();
 		String tipo = diseño.getTipo();
 		String urlImagen = diseño.getUrlImagen();
 
-		if (!referencia.equals("") && !nombre.equals("") && !tipo.equals("") && !urlImagen.equals("")) {
+		if (!nombre.equals("") && !tipo.equals("") && !urlImagen.equals("")) {
 			return true;
 		} else {
 			return false;

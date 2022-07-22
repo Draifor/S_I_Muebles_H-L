@@ -93,7 +93,7 @@ public class ClienteDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet resultado = statement.executeQuery("SELECT * FROM clientes WHERE Cod_Cliente=" + idBuscar);
+			ResultSet resultado = statement.executeQuery("SELECT * FROM clientes WHERE Identificacion=" + idBuscar);
 
 			while (resultado.next()) {
 				int id = resultado.getInt("Cod_Cliente");

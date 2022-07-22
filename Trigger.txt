@@ -1,0 +1,8 @@
+DELIMITER //
+CREATE TRIGGER Asignar_Referencia BEFORE INSERT ON Diseños FOR EACH ROW
+BEGIN
+	DECLARE siguiente_id INT;
+	SET siguiente_id = (SELECT MAX(Cod_Diseño)+1 ultimo FROM Diseños);
+	SET NEW.Referencia = CONCAT('DIS-', LPAD(siguiente_id, 4, '0'));
+END //
+DELIMITER ;

@@ -8,16 +8,16 @@ public class DiseñoVo {
 	private String tipo;
 	private String urlImagen;
 
-	public DiseñoVo( String referencia, String nombre, String tipo, String urlImagen) {
-		this.referencia = referencia;
+	public DiseñoVo( String nombre, String tipo, String urlImagen) {
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.urlImagen = urlImagen;
 	}
 
 	public DiseñoVo(int id, String referencia, String nombre, String tipo, String urlImagen) {
-		this(referencia, nombre, tipo, urlImagen);
+		this(nombre, tipo, urlImagen);
 		this.id = id;
+		this.referencia = referencia;
 	}
 
 	public int getId() {

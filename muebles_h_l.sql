@@ -31,7 +31,7 @@ CREATE TABLE `clientes` (
   `Direccion` varchar(50) NOT NULL,
   PRIMARY KEY (`Cod_Cliente`),
   UNIQUE KEY `Identificacion` (`Identificacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Anastasia','del Socorro',1234567890,'3200000000','Calle 5 # 8 - 25, Tangamandapio'),(2,'Petronio','Euclides',1234567891,'3100000000','Cra 15 # 24 -14, Somondoco'),(3,'Jacinta','Trinidad Díaz',1234567892,'3120000000','Calle 8 # 8 - 8, Cucaita'),(4,'Rupertino','Feo',1234567893,'3180000000','Calle 13 # 23 - 12, Sutamarchan'),(5,'Satellizer','L. Bridget',1124253423,'3203604234','Freezing'),(6,'Pepito','Eutanasio',124234254,'3212143446','Calle siempre viva # 32 - 71'),(7,'Yilver','Risafloja',564564,'564564','Calle'),(8,'Modificación','sdfsd',23453,'345','dfg'),(14,'Hermelindo','Ortiz',4574,'56745','Calle'),(15,'Eustaquio','PK',9788,'897','kl;jm'),(16,'Prueba 100','sdf',4,'34','df'),(18,'Camila','Herminda',675,'678','Cle'),(19,'Hola','Mundo',897,'87','Cla'),(21,'Ramiriqui ','sdg',8972345,'980','sdf'),(22,'Ramiiy asf ','sdg',89723455,'980','sdf'),(23,'Daniel','Parra',4564,'3456798','dfgjhd'),(28,'Anatoli','dfgsdfg',111111111,'324523','dsfgdfg'),(29,'agregado','sdg',564545646,'564','xcv'),(32,'Percy','wertwert',554,'23453','sdgfsdfg'),(37,'sdfsd','dfsdfs',3434,'34534','3gdgd'),(38,'srfserf','sdfsdf',34534,'4355','rgtet'),(40,'dfgdf','dfgdfg',456456,'45645','dfgdfg'),(41,'Luis Alfredo Parra Jorge','sefw',23452,'342','wewe'),(42,'dfg','dfgdfg',5645645,'67867','dfgf');
+INSERT INTO `clientes` VALUES (1,'Anastasia','del Socorro',1234567890,'3200000000','Calle 5 # 8 - 25, Tangamandapio'),(2,'Petronio','Euclides',1234567891,'3100000000','Cra 15 # 24 -14, Somondoco'),(3,'Jacinta','Trinidad Díaz',1234567892,'3120000000','Calle 8 # 8 - 8, Cucaita'),(4,'Rupertino','Feo',1234567893,'3180000000','Calle 13 # 23 - 12, Sutamarchan'),(5,'Satellizer','L. Bridget',1124253423,'3203604234','Freezing'),(6,'Pepito','Eutanasio',124234254,'3212143446','Calle siempre viva # 32 - 71'),(7,'Yilver','Risafloja',564564,'564564','Calle'),(8,'Modificación','sdfsd',23453,'345','dfg'),(14,'Hermelindo','Ortiz',4574,'56745','Calle'),(15,'Eustaquio','PK',9788,'897','kl;jm'),(16,'Prueba 100','sdf',4,'34','df'),(18,'Camila','Herminda',675,'678','Cle'),(19,'Hola','Mundo',897,'87','Cla'),(21,'Ramiriqui ','sdg',8972345,'980','sdf'),(22,'Ramiiy asf ','sdg',89723455,'980','sdf'),(23,'Daniel','Parra',4564,'3456798','dfgjhd'),(28,'Anatoli','dfgsdfg',111111111,'324523','dsfgdfg'),(29,'agregado','sdg',564545646,'564','xcv'),(32,'Percy','wertwert',554,'23453','sdgfsdfg'),(37,'sdfsd','dfsdfs',3434,'34534','3gdgd'),(38,'srfserf','sdfsdf',34534,'4355','rgtet'),(40,'dfgdf','dfgdfg',456456,'45645','dfgdfg'),(41,'Luis Alfredo Parra Jorge','sefw',23452,'342','wewe'),(42,'dfg','dfgdfg',5645645,'67867','dfgf'),(43,'Sthepany','Tamayo',12345,'00000','Calle falsa');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `diseños` (
   PRIMARY KEY (`Cod_Diseño`),
   UNIQUE KEY `Referencia` (`Referencia`),
   UNIQUE KEY `Nombre` (`Nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `diseños` (
 
 LOCK TABLES `diseños` WRITE;
 /*!40000 ALTER TABLE `diseños` DISABLE KEYS */;
-INSERT INTO `diseños` VALUES (1,'Sala','sala_L_001','Sala en L roja','sdfsdf'),(2,'abc','ghi','def','jklmnñ'),(4,'refere','Nombreee','Tipoooooooooo','imagen'),(5,'referen','nombre','tipo','imagen'),(7,'sdfgdf','dfg','dfgdsfg','dfgsdfg');
+INSERT INTO `diseños` VALUES (1,'Sala','sala_L_001','Sala en L roja','sdfsdf'),(2,'abc','ghi','def','jklmnñ'),(4,'refere','Nombreee','Tipoooooooooo','imagen'),(5,'referen','nombre','tipo','imagen'),(7,'sdfgdf','dfg','dfgdsfg','dfgsdfg'),(8,'DIS-0001','dfgd','dfgdf','dfgd'),(14,'DIS-0009','ftghr','rtyhr','rtyhrt'),(15,'DIS-0015','dfgdf','dfgdf','dfgdf'),(17,'DIS-0016','erter','ertere','ert');
 /*!40000 ALTER TABLE `diseños` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,7 +236,7 @@ CREATE TABLE `productos` (
   PRIMARY KEY (`Cod_Producto`),
   UNIQUE KEY `Referencia` (`Referencia`),
   UNIQUE KEY `Nombre` (`Nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,7 +245,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'sdfg','sdfgsdfhg','sdfghsdf',456456,1,1),(2,'aaaaaa','werwerwe','dfwe',12312,15,123);
+INSERT INTO `productos` VALUES (1,'sdfg','sdfgsdfhg','sdfghsdf',456456,1,1),(2,'aaaaaa','werwerwe','dfwe',12312,15,123),(4,'sdfghfg','fdghfg','fghfg',56757,4,3453);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +258,7 @@ DROP TABLE IF EXISTS `ventas`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ventas` (
   `Cod_Venta` int NOT NULL AUTO_INCREMENT,
-  `FacturaID` int NOT NULL,
+  `FacturaID` varchar(10) NOT NULL,
   `Cod_OrdComp` int NOT NULL,
   `Fecha` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Cod_Venta`),
@@ -285,4 +285,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-17 18:56:41
+-- Dump completed on 2022-07-22  9:19:19

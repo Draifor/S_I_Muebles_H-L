@@ -84,7 +84,7 @@ public class VistaClienteControl {
 		String[][] matrizClientes = new String[clientes.size()][ColumnasClientes.TITULOS_COLUMNAS.length];
 
 		for (int i = 0; i < matrizClientes.length; i++) {
-			matrizClientes[i][ColumnasClientes.CODIGO] = ((ClienteVo) clientes.get(i)).getId() + "";
+			matrizClientes[i][ColumnasClientes.CODIGO] = "CLI-" + MetodosAuxiliares.formatearNumero(((ClienteVo) clientes.get(i)).getId() + "");
 			matrizClientes[i][ColumnasClientes.NOMBRE] = ((ClienteVo) clientes.get(i)).getNombre() + "";
 			matrizClientes[i][ColumnasClientes.APELLIDO] = ((ClienteVo) clientes.get(i)).getApellido() + "";
 			matrizClientes[i][ColumnasClientes.IDENTIFICACION] = ((ClienteVo) clientes.get(i)).getIdentificacion() + "";
