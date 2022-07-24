@@ -22,35 +22,33 @@ public class DialogClienteControl {
 		ClienteVo cliente = null;
 
 		String identificacion = DialogClienteControl.ventana.getIdentificacionInput().trim();
-		
-		if (MetodosAuxiliares.esNumeroDouble(identificacion)) {
-		String celular = DialogClienteControl.ventana.getCelularInput().trim();
 
-		if (MetodosAuxiliares.esNumeroInt(celular)) {
-			String nombre = DialogClienteControl.ventana.getNombreInput().trim();
-			String apellido = DialogClienteControl.ventana.getApellidoInput().trim();
-			String direccion = DialogClienteControl.ventana.getDireccionInput().trim();
-			if (MetodosAuxiliares.esNumeroInt(DialogClienteControl.ventana.getCodigoInput())) {
-				int id = Integer.parseInt(DialogClienteControl.ventana.getCodigoInput());
-				cliente = new ClienteVo(id, nombre, apellido, identificacion, celular, direccion);
+		if (MetodosAuxiliares.esNumeroDouble(identificacion)) {
+			String celular = DialogClienteControl.ventana.getCelularInput().trim();
+
+			if (MetodosAuxiliares.esNumeroInt(celular)) {
+				String nombre = DialogClienteControl.ventana.getNombreInput().trim();
+				String apellido = DialogClienteControl.ventana.getApellidoInput().trim();
+				String direccion = DialogClienteControl.ventana.getDireccionInput().trim();
+				if (!DialogClienteControl.ventana.getCodigoInput().equals("Generado automáticamente")) {
+					String codigo = DialogClienteControl.ventana.getCodigoInput();
+					cliente = new ClienteVo(codigo, nombre, apellido, identificacion, celular, direccion);
+				} else {
+					cliente = new ClienteVo(nombre, apellido, identificacion, celular, direccion);
+				}
 			} else {
-				cliente = new ClienteVo(nombre, apellido, identificacion, celular, direccion);
+				VentanaPrincipalControl.dialogoAlerta(
+						"¡Debe escribir el número de celular sin caracteres especiales ni espacios!", "Advertencia");
 			}
 		} else {
-			VentanaPrincipalControl.dialogoAlerta(
-					"¡Debe escribir el número de celular sin caracteres especiales ni espacios!", "Advertencia");
-		}
-		} else {
-			
-			VentanaPrincipalControl.dialogoAlerta(
-					"¡El número de identificacion no es válido!", "Advertencia");
+
+			VentanaPrincipalControl.dialogoAlerta("¡El número de identificacion no es válido!", "Advertencia");
 		}
 		return cliente;
 	}
 
 	public static void setDatosCliente(ClienteVo cliente) {
-		DialogClienteControl.ventana
-				.setCodigoInput(MetodosAuxiliares.formatearNumero((Object) (cliente.getId() + "")).toString());
+		DialogClienteControl.ventana.setCodigoInput(cliente.getCodigo());
 		DialogClienteControl.ventana.setNombreInput(cliente.getNombre());
 		DialogClienteControl.ventana.setApellidoInput(cliente.getApellido());
 		DialogClienteControl.ventana.setIdentificacionInput(cliente.getIdentificacion() + "");
