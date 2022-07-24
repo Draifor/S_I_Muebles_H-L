@@ -44,14 +44,14 @@ public class ClienteDao {
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(
-					"UPDATE clientes SET Nombre=?, Apellido=?, Identificacion=?, Celular=?, Direccion=? WHERE Cod_Cliente=?");
+					"UPDATE clientes SET Nombre=?, Apellido=?, Identificacion=?, Celular=?, Direccion=? WHERE Codigo=?");
 
 			statement.setString(1, clienteActualizado.getNombre());
 			statement.setString(2, clienteActualizado.getApellido());
 			statement.setInt(3, Integer.parseInt(clienteActualizado.getIdentificacion()));
 			statement.setString(4, clienteActualizado.getCelular());
 			statement.setString(5, clienteActualizado.getDireccion());
-			statement.setInt(6, clienteActualizado.getId());
+			statement.setString(6, clienteActualizado.getCodigo());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -64,7 +64,7 @@ public class ClienteDao {
 		return resultadoOperacion;
 	}
 
-	public int eliminar(int idEliminar) {
+	public int eliminar(String codigoEliminar) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
@@ -72,7 +72,8 @@ public class ClienteDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			resultadoOperacion = statement.executeUpdate("DELETE FROM clientes WHERE Cod_Cliente=" + idEliminar);
+			System.out.println(codigoEliminar);
+			resultadoOperacion = statement.executeUpdate("DELETE FROM clientes WHERE Codigo='" + codigoEliminar + "'");
 
 			statement.close();
 			conexion.desconectar();
@@ -96,14 +97,14 @@ public class ClienteDao {
 			ResultSet resultado = statement.executeQuery("SELECT * FROM clientes WHERE Identificacion=" + idBuscar);
 
 			while (resultado.next()) {
-				int id = resultado.getInt("Cod_Cliente");
+				String codigo = resultado.getString("Codigo");
 				String nombre = resultado.getString("Nombre");
 				String apellido = resultado.getString("Apellido");
 				String identificacion = resultado.getInt("Identificacion") + "";
 				String celular = resultado.getString("Celular");
 				String direccion = resultado.getString("Direccion");
 
-				cliente = new ClienteVo(id, nombre, apellido, identificacion, celular, direccion);
+				cliente = new ClienteVo(codigo, nombre, apellido, identificacion, celular, direccion);
 			}
 
 			statement.close();
@@ -127,7 +128,7 @@ public class ClienteDao {
 			Statement statement = connection.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM clientes");
 
-			int id;
+			String codigo;
 			String nombre;
 			String apellido;
 			String identificacion;
@@ -136,14 +137,14 @@ public class ClienteDao {
 			ClienteVo cliente;
 
 			while (resultado.next()) {
-				id = resultado.getInt("Cod_Cliente");
+				codigo = resultado.getString("Codigo");
 				nombre = resultado.getString("Nombre");
 				apellido = resultado.getString("Apellido");
 				identificacion = resultado.getInt("Identificacion") + "";
 				celular = resultado.getString("Celular");
 				direccion = resultado.getString("Direccion");
 
-				cliente = new ClienteVo(id, nombre, apellido, identificacion, celular, direccion);
+				cliente = new ClienteVo(codigo, nombre, apellido, identificacion, celular, direccion);
 
 				clientes.add(cliente);
 			}

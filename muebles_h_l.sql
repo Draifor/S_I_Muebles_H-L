@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: muebles_h_l
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,15 +23,17 @@ DROP TABLE IF EXISTS `clientes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clientes` (
-  `Cod_Cliente` int NOT NULL AUTO_INCREMENT,
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Codigo` varchar(8) NOT NULL,
   `Nombre` varchar(30) NOT NULL,
   `Apellido` varchar(30) NOT NULL,
   `Identificacion` int NOT NULL,
   `Celular` varchar(15) NOT NULL,
   `Direccion` varchar(50) NOT NULL,
-  PRIMARY KEY (`Cod_Cliente`),
-  UNIQUE KEY `Identificacion` (`Identificacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Identificacion` (`Identificacion`),
+  UNIQUE KEY `Codigo_UNIQUE` (`Codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,9 +42,28 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Anastasia','del Socorro',1234567890,'3200000000','Calle 5 # 8 - 25, Tangamandapio'),(2,'Petronio','Euclides',1234567891,'3100000000','Cra 15 # 24 -14, Somondoco'),(3,'Jacinta','Trinidad Díaz',1234567892,'3120000000','Calle 8 # 8 - 8, Cucaita'),(4,'Rupertino','Feo',1234567893,'3180000000','Calle 13 # 23 - 12, Sutamarchan'),(5,'Satellizer','L. Bridget',1124253423,'3203604234','Freezing'),(6,'Pepito','Eutanasio',124234254,'3212143446','Calle siempre viva # 32 - 71'),(7,'Yilver','Risafloja',564564,'564564','Calle'),(8,'Modificación','sdfsd',23453,'345','dfg'),(14,'Hermelindo','Ortiz',4574,'56745','Calle'),(15,'Eustaquio','PK',9788,'897','kl;jm'),(16,'Prueba 100','sdf',4,'34','df'),(18,'Camila','Herminda',675,'678','Cle'),(19,'Hola','Mundo',897,'87','Cla'),(21,'Ramiriqui ','sdg',8972345,'980','sdf'),(22,'Ramiiy asf ','sdg',89723455,'980','sdf'),(23,'Daniel','Parra',4564,'3456798','dfgjhd'),(28,'Anatoli','dfgsdfg',111111111,'324523','dsfgdfg'),(29,'agregado','sdg',564545646,'564','xcv'),(32,'Percy','wertwert',554,'23453','sdgfsdfg'),(37,'sdfsd','dfsdfs',3434,'34534','3gdgd'),(38,'srfserf','sdfsdf',34534,'4355','rgtet'),(40,'dfgdf','dfgdfg',456456,'45645','dfgdfg'),(41,'Luis Alfredo Parra Jorge','sefw',23452,'342','wewe'),(42,'dfg','dfgdfg',5645645,'67867','dfgf'),(43,'Sthepany','Tamayo',12345,'00000','Calle falsa');
+INSERT INTO `clientes` VALUES (1,'CLI-0001','Anastasia','del Socorro',1234567890,'3200000000','Calle 5 # 8 - 25, Tangamandapio'),(2,'CLI-0002','Petronio','Euclides',1234567891,'3100000000','Cra 15 # 24 -14, Somondoco'),(3,'CLI-0003','Jacinta','Trinidad Díaz',1234567892,'3120000000','Calle 8 # 8 - 8, Cucaita'),(4,'CLI-0004','Rupertino','Feo',1234567893,'3180000000','Calle 13 # 23 - 12, Sutamarchan'),(5,'CLI-0005','Satellizer','L. Bridget',1124253423,'3203604234','Freezing'),(6,'CLI-0006','Pepito','Eutanasio',124234254,'3212143446','Calle siempre viva # 32 - 71'),(7,'CLI-0007','Yilver','Risafloja',564564,'564564','Calle'),(8,'CLI-0008','Modificación','sdfsd',23453,'345','dfg'),(14,'CLI-0014','Hermelindo','Ortiz',4574,'56745','Calle'),(15,'CLI-0015','Eustaquio','PK',9788,'897','kl;jm'),(16,'CLI-0016','Prueba 100','sdf',4,'34','df'),(18,'CLI-0018','Camila','Herminda',675,'678','Cle'),(19,'CLI-0019','Hola','Mundo',897,'87','Cla'),(21,'CLI-0021','Ramiriqui ','sdg',8972345,'980','sdf'),(22,'CLI-0022','Ramiiy asf ','sdg',89723455,'980','sdf'),(23,'CLI-0023','Daniel','Parra',4564,'3456798','dfgjhd'),(28,'CLI-0028','Anatoli','dfgsdfg',111111111,'324523','dsfgdfg'),(29,'CLI-0029','agregado','sdg',564545646,'564','xcv'),(32,'CLI-0032','Percy','wertwert',554,'23453','sdgfsdfg'),(40,'CLI-0040','dfgdf','dfgdfg',456456,'45645','dfgdfg'),(41,'CLI-0041','Luis Alfredo Parra Jorge','sefw',23452,'342','wewe'),(42,'CLI-0042','Cliente','42',5645645,'67867','dfgf'),(43,'CLI-0043','Sthepany','Tamayo',12345,'00000','Calle falsa'),(45,'CLI-0045','pedillo','dfgdf',40564,'4564','ghfg'),(46,'CLI-0046','Prueba 500','awefse',345345,'345','tgr'),(47,'CLI-0047','Gualá','jujuj',9845,'4564','gfhf'),(49,'CLI-0048','sdfsdf','sdfsdf',123,'345345','sdfsdf');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `Asignar_Codigo` BEFORE INSERT ON `clientes` FOR EACH ROW BEGIN
+	DECLARE siguiente_id INT;
+	SET siguiente_id = (SELECT MAX(Id)+1 ultimo FROM Clientes);
+	SET NEW.Codigo = CONCAT('CLI-', LPAD(siguiente_id, 4, '0'));
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `diseños`
@@ -60,7 +81,7 @@ CREATE TABLE `diseños` (
   PRIMARY KEY (`Cod_Diseño`),
   UNIQUE KEY `Referencia` (`Referencia`),
   UNIQUE KEY `Nombre` (`Nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,9 +90,28 @@ CREATE TABLE `diseños` (
 
 LOCK TABLES `diseños` WRITE;
 /*!40000 ALTER TABLE `diseños` DISABLE KEYS */;
-INSERT INTO `diseños` VALUES (1,'Sala','sala_L_001','Sala en L roja','sdfsdf'),(2,'abc','ghi','def','jklmnñ'),(4,'refere','Nombreee','Tipoooooooooo','imagen'),(5,'referen','nombre','tipo','imagen'),(7,'sdfgdf','dfg','dfgdsfg','dfgsdfg'),(8,'DIS-0001','dfgd','dfgdf','dfgd'),(14,'DIS-0009','ftghr','rtyhr','rtyhrt'),(15,'DIS-0015','dfgdf','dfgdf','dfgdf'),(17,'DIS-0016','erter','ertere','ert');
+INSERT INTO `diseños` VALUES (1,'Sala','sala_L_001','Sala en L roja','sdfsdf'),(2,'abc','ghi','def','jklmnñ'),(4,'refere','Nombreee','Tipoooooooooo','imagen'),(5,'referen','nombre','tipo','imagen'),(7,'sdfgdf','dfg','dfgdsfg','dfgsdfg'),(8,'DIS-0001','dfgd','dfgdf','dfgd'),(14,'DIS-0009','ftghr','rtyhr','rtyhrt'),(15,'DIS-0015','dfgdf','dfgdf','dfgdf'),(17,'DIS-0016','erter','ertere','ert'),(18,'DIS-0018','rtyt','tryurt','tyut'),(19,'DIS-0019','tydrt','tryrt','rtytry');
 /*!40000 ALTER TABLE `diseños` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `Asignar_Referencia` BEFORE INSERT ON `diseños` FOR EACH ROW BEGIN
+	DECLARE siguiente_id INT;
+	SET siguiente_id = (SELECT MAX(Cod_Diseño)+1 ultimo FROM Diseños);
+	SET NEW.Referencia = CONCAT('DIS-', LPAD(siguiente_id, 4, '0'));
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `materiales`
@@ -175,7 +215,7 @@ CREATE TABLE `ordenescompra` (
   `VentaEfectiva` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`Cod_OrdComp`),
   KEY `FK_Ordenes_Compra_Clientes_Cod_Cliente_idx` (`Cod_Cliente`),
-  CONSTRAINT `FK_OrdenesCompra_Clientes_Cod_Cliente` FOREIGN KEY (`Cod_Cliente`) REFERENCES `clientes` (`Cod_Cliente`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_OrdenesCompra_Clientes_Cod_Cliente` FOREIGN KEY (`Cod_Cliente`) REFERENCES `clientes` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -285,4 +325,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-22  9:19:19
+-- Dump completed on 2022-07-24 18:45:53

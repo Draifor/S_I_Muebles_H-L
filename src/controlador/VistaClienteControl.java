@@ -64,7 +64,7 @@ public class VistaClienteControl {
 		if (opcionElegida == 0) {
 			ClienteVo clientePorEliminar = DialogClienteControl.getDatosCliente();
 
-			int resultadoOperacion = VistaClienteControl.clienteDao.eliminar(clientePorEliminar.getId());
+			int resultadoOperacion = VistaClienteControl.clienteDao.eliminar(clientePorEliminar.getCodigo());
 
 			if (resultadoOperacion > 0) {
 				VistaClienteControl.actualizarVista();
@@ -84,7 +84,7 @@ public class VistaClienteControl {
 		String[][] matrizClientes = new String[clientes.size()][ColumnasClientes.TITULOS_COLUMNAS.length];
 
 		for (int i = 0; i < matrizClientes.length; i++) {
-			matrizClientes[i][ColumnasClientes.CODIGO] = "CLI-" + MetodosAuxiliares.formatearNumero(((ClienteVo) clientes.get(i)).getId() + "");
+			matrizClientes[i][ColumnasClientes.CODIGO] = ((ClienteVo) clientes.get(i)).getCodigo();
 			matrizClientes[i][ColumnasClientes.NOMBRE] = ((ClienteVo) clientes.get(i)).getNombre() + "";
 			matrizClientes[i][ColumnasClientes.APELLIDO] = ((ClienteVo) clientes.get(i)).getApellido() + "";
 			matrizClientes[i][ColumnasClientes.IDENTIFICACION] = ((ClienteVo) clientes.get(i)).getIdentificacion() + "";
@@ -135,14 +135,14 @@ public class VistaClienteControl {
 
 		try {
 		if (filaSeleccionada != -1) {
-			int IdCliente = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasClientes.CODIGO).toString());
+			String codigo = (String) tabla.getValueAt(filaSeleccionada, ColumnasClientes.CODIGO);
 			String nombre = (String) tabla.getValueAt(filaSeleccionada, ColumnasClientes.NOMBRE);
 			String apellido = (String) tabla.getValueAt(filaSeleccionada, ColumnasClientes.APELLIDO);
 			String identificacion = (String) tabla.getValueAt(filaSeleccionada, ColumnasClientes.IDENTIFICACION);
 			String celular = (String) tabla.getValueAt(filaSeleccionada, ColumnasClientes.CELULAR);
 			String direccion = (String) tabla.getValueAt(filaSeleccionada, ColumnasClientes.DIRECCION);
 
-			cliente = new ClienteVo(IdCliente, nombre, apellido, identificacion, celular, direccion);
+			cliente = new ClienteVo(codigo, nombre, apellido, identificacion, celular, direccion);
 		}
 		} catch(Exception e) {}
 		return cliente;
