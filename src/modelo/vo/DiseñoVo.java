@@ -2,7 +2,6 @@ package modelo.vo;
 
 public class DiseñoVo {
 
-	private int id;
 	private String referencia;
 	private String nombre;
 	private String tipo;
@@ -14,24 +13,15 @@ public class DiseñoVo {
 		this.urlImagen = urlImagen;
 	}
 
-	public DiseñoVo(int id, String referencia, String nombre, String tipo, String urlImagen) {
+	public DiseñoVo(String referencia, String nombre, String tipo, String urlImagen) {
 		this(nombre, tipo, urlImagen);
-		this.id = id;
 		this.referencia = referencia;
 	}
 
-	public int getId() {
-		return this.id;
-	}
-	
 	public String getReferencia() {
 		return this.referencia;
 	}
 	
-	public void setReferencia(String referencia) {
-		this.referencia = referencia;
-	}
-
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -60,7 +50,6 @@ public class DiseñoVo {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Diseño{");
-		sb.append("Id: ").append(id);
 		sb.append(", nombre: ").append(nombre);
 		sb.append(", tipo: ").append(tipo);
 		sb.append(", referencia: ").append(referencia);

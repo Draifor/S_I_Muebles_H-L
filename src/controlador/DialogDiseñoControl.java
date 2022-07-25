@@ -18,16 +18,15 @@ public class DialogDiseñoControl {
 	}
 
 	public static DiseñoVo getDatosDiseño() {
-		String referencia = DialogDiseñoControl.ventana.getReferenciaInput().trim();
+		String referencia = DialogDiseñoControl.ventana.getReferenciaInput();
 		String nombre = DialogDiseñoControl.ventana.getNombreInput().trim();
 		String tipo = DialogDiseñoControl.ventana.getTipoInput().trim();
 		String urlImagen = DialogDiseñoControl.ventana.getImagenInput().trim();
 
 		DiseñoVo diseño;
 
-		if (MetodosAuxiliares.esNumeroInt(DialogDiseñoControl.ventana.getCodigoInput())) {
-			int idDiseño = Integer.parseInt(DialogDiseñoControl.ventana.getCodigoInput());
-			diseño = new DiseñoVo(idDiseño, referencia, nombre, tipo, urlImagen);
+		if (!referencia.equals("Generado automáticamente")) {
+			diseño = new DiseñoVo(referencia, nombre, tipo, urlImagen);
 		} else {
 			diseño = new DiseñoVo( nombre, tipo, urlImagen);
 		}
@@ -40,8 +39,6 @@ public class DialogDiseñoControl {
 	}
 
 	public static void setDatosDiseño(DiseñoVo diseño) {
-		DialogDiseñoControl.ventana
-				.setCodigoInput(MetodosAuxiliares.formatearNumero((Object) (diseño.getId() + "")).toString());
 		DialogDiseñoControl.ventana.setReferenciaInput(diseño.getReferencia());
 		DialogDiseñoControl.ventana.setNombreInput(diseño.getNombre());
 		DialogDiseñoControl.ventana.setTipoInput(diseño.getTipo());
@@ -49,7 +46,6 @@ public class DialogDiseñoControl {
 	}
 
 	public static boolean validarCampos(DiseñoVo diseño) {
-//		String referencia = diseño.getReferencia();
 		String nombre = diseño.getNombre();
 		String tipo = diseño.getTipo();
 		String urlImagen = diseño.getUrlImagen();
@@ -62,7 +58,6 @@ public class DialogDiseñoControl {
 	}
 
 	public static void limpiarDatos() {
-		DialogDiseñoControl.ventana.setCodigoInput("");
 		DialogDiseñoControl.ventana.setReferenciaInput("");
 		DialogDiseñoControl.ventana.setNombreInput("");
 		DialogDiseñoControl.ventana.setTipoInput("");

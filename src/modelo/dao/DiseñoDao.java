@@ -15,12 +15,11 @@ public class DiseñoDao {
 
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO Diseños (Referencia, Nombre, Tipo, Imagen) values (?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO Diseños (Nombre, Tipo, Imagen) values (?, ?, ?)");
 
-			statement.setString(1, nuevoDiseño.getReferencia());
-			statement.setString(2, nuevoDiseño.getNombre());
-			statement.setString(3, nuevoDiseño.getTipo());
-			statement.setString(4, nuevoDiseño.getUrlImagen());
+			statement.setString(1, nuevoDiseño.getNombre());
+			statement.setString(2, nuevoDiseño.getTipo());
+			statement.setString(3, nuevoDiseño.getUrlImagen());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -42,13 +41,12 @@ public class DiseñoDao {
 
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("UPDATE Diseños SET Referencia=?, Nombre=?, Tipo=?, Imagen=? WHERE Cod_Diseño=?");
+					.prepareStatement("UPDATE Diseños SET Nombre=?, Tipo=?, Imagen=? WHERE Referencia=?");
 
-			statement.setString(1, diseñoActualizado.getReferencia());
-			statement.setString(2, diseñoActualizado.getNombre());
-			statement.setString(3, diseñoActualizado.getTipo());
-			statement.setString(4, diseñoActualizado.getUrlImagen());
-			statement.setInt(5, diseñoActualizado.getId());
+			statement.setString(1, diseñoActualizado.getNombre());
+			statement.setString(2, diseñoActualizado.getTipo());
+			statement.setString(3, diseñoActualizado.getUrlImagen());
+			statement.setString(4, diseñoActualizado.getReferencia());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -61,7 +59,7 @@ public class DiseñoDao {
 		return resultadoOperacion;
 	}
 
-	public int eliminar(int idEliminar) {
+	public int eliminar(String referenciaEliminar) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
@@ -69,7 +67,7 @@ public class DiseñoDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			resultadoOperacion = statement.executeUpdate("DELETE FROM Diseños WHERE Cod_Diseño=" + idEliminar);
+			resultadoOperacion = statement.executeUpdate("DELETE FROM Diseños WHERE Referencia='" + referenciaEliminar + "'");
 
 			statement.close();
 			conexion.desconectar();
@@ -94,13 +92,12 @@ public class DiseñoDao {
 					.executeQuery("SELECT * FROM Diseños WHERE Referencia='" + referenciaBuscar + "';");
 
 			while (resultado.next()) {
-				int id = resultado.getInt("Cod_Diseño");
-				String referencia = resultado.getString("Referencia") == null ? resultado.getString("Referencia") : "DIS-" + referenciaBuscar;
+				String referencia = resultado.getString("Referencia");
 				String nombre = resultado.getString("Nombre");
 				String tipo = resultado.getString("Tipo");
 				String urlImagen = resultado.getString("Imagen");
 
-				diseño = new DiseñoVo(id, referencia, nombre, tipo, urlImagen);
+				diseño = new DiseñoVo(referencia, nombre, tipo, urlImagen);
 			}
 
 			statement.close();
@@ -124,7 +121,6 @@ public class DiseñoDao {
 			Statement statement = connection.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM Diseños");
 
-			int id;
 			String referencia;
 			String nombre;
 			String tipo;
@@ -132,13 +128,12 @@ public class DiseñoDao {
 			DiseñoVo diseño;
 
 			while (resultado.next()) {
-				id = resultado.getInt("Cod_Diseño");
 				referencia = resultado.getString("Referencia");
 				nombre = resultado.getString("Nombre");
 				tipo = resultado.getString("Tipo");
 				urlImagen = resultado.getString("Imagen");
 
-				diseño = new DiseñoVo(id, referencia, nombre, tipo, urlImagen);
+				diseño = new DiseñoVo(referencia, nombre, tipo, urlImagen);
 
 				diseños.add(diseño);
 			}

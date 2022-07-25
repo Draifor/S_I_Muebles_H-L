@@ -27,11 +27,11 @@ public class DialogClienteControl {
 			String celular = DialogClienteControl.ventana.getCelularInput().trim();
 
 			if (MetodosAuxiliares.esNumeroInt(celular)) {
+				String codigo = DialogClienteControl.ventana.getCodigoInput();
 				String nombre = DialogClienteControl.ventana.getNombreInput().trim();
 				String apellido = DialogClienteControl.ventana.getApellidoInput().trim();
 				String direccion = DialogClienteControl.ventana.getDireccionInput().trim();
-				if (!DialogClienteControl.ventana.getCodigoInput().equals("Generado automáticamente")) {
-					String codigo = DialogClienteControl.ventana.getCodigoInput();
+				if (!codigo.equals("Generado automáticamente")) {
 					cliente = new ClienteVo(codigo, nombre, apellido, identificacion, celular, direccion);
 				} else {
 					cliente = new ClienteVo(nombre, apellido, identificacion, celular, direccion);

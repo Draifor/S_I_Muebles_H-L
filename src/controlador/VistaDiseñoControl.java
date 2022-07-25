@@ -53,7 +53,7 @@ public class VistaDiseñoControl {
 		if (opcionElegida == 0) {
 			DiseñoVo diseñoPorEliminar = DialogDiseñoControl.getDatosDiseño();
 
-			int resultadoOperacion = VistaDiseñoControl.diseñoDao.eliminar(diseñoPorEliminar.getId());
+			int resultadoOperacion = VistaDiseñoControl.diseñoDao.eliminar(diseñoPorEliminar.getReferencia());
 
 			if (resultadoOperacion > 0) {
 				VistaDiseñoControl.actualizarVista();
@@ -73,7 +73,6 @@ public class VistaDiseñoControl {
 		String[][] matrizDiseños = new String[diseños.size()][ColumnasDiseños.TITULOS_COLUMNAS.length];
 
 		for (int i = 0; i < matrizDiseños.length; i++) {
-			matrizDiseños[i][ColumnasDiseños.CODIGO] = ((DiseñoVo) diseños.get(i)).getId() + "";
 			matrizDiseños[i][ColumnasDiseños.REFERENCIA] = ((DiseñoVo) diseños.get(i)).getReferencia();
 			matrizDiseños[i][ColumnasDiseños.NOMBRE] = ((DiseñoVo) diseños.get(i)).getNombre();
 			matrizDiseños[i][ColumnasDiseños.TIPO] = ((DiseñoVo) diseños.get(i)).getTipo();
@@ -93,20 +92,13 @@ public class VistaDiseñoControl {
 			tabla.getColumnModel().getColumn(ColumnasDiseños.TIPO_TEXTO[i]).setCellRenderer(new GestionCeldas("texto"));
 		}
 
-		// Se crean las columnas numericas
-		for (int i = 0; i < ColumnasDiseños.TIPO_NUMERO.length; i++) {
-			tabla.getColumnModel().getColumn(ColumnasDiseños.TIPO_NUMERO[i])
-					.setCellRenderer(new GestionCeldas("numero"));
-		}
-
 		// Se define el tamaño de las filas y columnas
 		tabla.getTableHeader().setReorderingAllowed(false);
 		tabla.setRowHeight(25);
 		tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
-		tabla.getColumnModel().getColumn(ColumnasDiseños.CODIGO).setPreferredWidth(84);
-		tabla.getColumnModel().getColumn(ColumnasDiseños.REFERENCIA).setPreferredWidth(130);
-		tabla.getColumnModel().getColumn(ColumnasDiseños.NOMBRE).setPreferredWidth(420);
+		tabla.getColumnModel().getColumn(ColumnasDiseños.REFERENCIA).setPreferredWidth(100);
+		tabla.getColumnModel().getColumn(ColumnasDiseños.NOMBRE).setPreferredWidth(450);
 		tabla.getColumnModel().getColumn(ColumnasDiseños.TIPO).setPreferredWidth(170);
 		tabla.getColumnModel().getColumn(ColumnasDiseños.URL_IMAGEN).setPreferredWidth(150);
 	}
@@ -121,13 +113,12 @@ public class VistaDiseñoControl {
 
 		try {
 		if (filaSeleccionada != -1) {
-			int idDiseño = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasDiseños.CODIGO).toString());
 			String referencia = (String) tabla.getValueAt(filaSeleccionada, ColumnasDiseños.REFERENCIA);
 			String nombre = (String) tabla.getValueAt(filaSeleccionada, ColumnasDiseños.NOMBRE);
 			String tipo = (String) tabla.getValueAt(filaSeleccionada, ColumnasDiseños.TIPO);
 			String urlImagen = (String) tabla.getValueAt(filaSeleccionada, ColumnasDiseños.URL_IMAGEN);
 
-			diseño = new DiseñoVo(idDiseño, referencia, nombre, tipo, urlImagen);
+			diseño = new DiseñoVo(referencia, nombre, tipo, urlImagen);
 		}
 		} catch(Exception e) {}
 		return diseño;
