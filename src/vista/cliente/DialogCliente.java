@@ -47,7 +47,7 @@ public class DialogCliente extends JDialog {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
 		this.titulo = new Texto("", 1, 24);
-		this.titulo.setBounds(2, 11, 396, 35);
+		this.titulo.setBounds(35, 11, 396, 35);
 
 		this.codigo = new Label("Código:");
 		this.codigo.setBounds(36, 78, 115, 29);

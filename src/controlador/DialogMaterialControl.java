@@ -27,11 +27,10 @@ public class DialogMaterialControl {
 			double costo = Double.parseDouble(costoInput);
 			int cantidad = DialogMaterialControl.ventana.getCantidadInput();
 
-			if (MetodosAuxiliares.esNumeroInt(DialogMaterialControl.ventana.getCodigoInput())) {
-				int id = Integer.parseInt(DialogMaterialControl.ventana.getCodigoInput());
-				material = new MaterialVo(id, referencia, nombre, costo, cantidad);
-			} else {
+			if (!referencia.equals("Generado automáticamente")) {
 				material = new MaterialVo(referencia, nombre, costo, cantidad);
+			} else {
+				material = new MaterialVo(nombre, costo, cantidad);
 			}
 			if (!DialogMaterialControl.validarCampos(material)) {
 				VentanaPrincipalControl.dialogoAlerta("¡Debe diligenciar todos los campos!", "Campos vacíos");
@@ -46,8 +45,6 @@ public class DialogMaterialControl {
 	}
 
 	public static void setDatosMaterial(MaterialVo material) {
-		DialogMaterialControl.ventana
-				.setCodigoInput(MetodosAuxiliares.formatearNumero((Object) (material.getId() + "")).toString());
 		DialogMaterialControl.ventana.setReferenciaInput(material.getReferencia());
 		DialogMaterialControl.ventana.setNombreInput(material.getNombre());
 		DialogMaterialControl.ventana.setCostoInput(material.getCosto() + "");
@@ -55,7 +52,6 @@ public class DialogMaterialControl {
 	}
 
 	public static void limpiarDatos() {
-		DialogMaterialControl.ventana.setCodigoInput("");
 		DialogMaterialControl.ventana.setReferenciaInput("");
 		DialogMaterialControl.ventana.setNombreInput("");
 		DialogMaterialControl.ventana.setCostoInput("");
@@ -66,13 +62,12 @@ public class DialogMaterialControl {
 		boolean camposValidos = false;
 
 		if (material != null) {
-			String referencia = material.getReferencia();
 			String nombre = material.getNombre();
 			double costo = material.getCosto();
 			int cantidad = material.getCantidad();
 
-			System.out.println(referencia + " - " + nombre + " - " + costo + " - " + cantidad);
-			if (!referencia.equals("") && !nombre.equals("") && costo > 0 && cantidad > 0) {
+			System.out.println(nombre + " - " + costo + " - " + cantidad);
+			if (!nombre.equals("") && costo > 0 && cantidad > 0) {
 				camposValidos = true;
 			}
 		}

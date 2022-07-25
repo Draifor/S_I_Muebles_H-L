@@ -12,4 +12,11 @@ BEGIN
 	SET siguiente_id = (SELECT MAX(Id)+1 ultimo FROM Clientes);
 	SET NEW.Codigo = CONCAT('CLI-', LPAD(siguiente_id, 4, '0'));
 END //
+
+CREATE TRIGGER Asignar_Referencia_Material BEFORE INSERT ON Materiales FOR EACH ROW
+BEGIN
+	DECLARE siguiente_id INT;
+	SET siguiente_id = (SELECT MAX(Id)+1 ultimo FROM Materiales);
+	SET NEW.Referencia = CONCAT('MAT-', LPAD(siguiente_id, 4, '0'));
+END //
 DELIMITER ;

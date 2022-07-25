@@ -14,13 +14,12 @@ public class MaterialDao {
 		int resultadoOperacion = 0;
 
 		try {
-			PreparedStatement statement = connection.prepareStatement(
-					"INSERT INTO Materiales (Referencia, Nombre, Costo, Cantidad) values (?, ?, ?, ?)");
+			PreparedStatement statement = connection
+					.prepareStatement("INSERT INTO Materiales (Nombre, Costo, Cantidad) values (?, ?, ?)");
 
-			statement.setString(1, nuevoMaterial.getReferencia());
-			statement.setString(2, nuevoMaterial.getNombre());
-			statement.setDouble(3, nuevoMaterial.getCosto());
-			statement.setInt(4, nuevoMaterial.getCantidad());
+			statement.setString(1, nuevoMaterial.getNombre());
+			statement.setDouble(2, nuevoMaterial.getCosto());
+			statement.setInt(3, nuevoMaterial.getCantidad());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -41,14 +40,13 @@ public class MaterialDao {
 		int resultadoOperacion = 0;
 
 		try {
-			PreparedStatement statement = connection.prepareStatement(
-					"UPDATE Materiales SET Referencia=?, Nombre=?, Costo=?, Cantidad=? WHERE Cod_Material=?");
+			PreparedStatement statement = connection
+					.prepareStatement("UPDATE Materiales SET Nombre=?, Costo=?, Cantidad=? WHERE Referencia=?");
 
-			statement.setString(1, materialActualizado.getReferencia());
-			statement.setString(2, materialActualizado.getNombre());
-			statement.setDouble(3, materialActualizado.getCosto());
-			statement.setInt(4, materialActualizado.getCantidad());
-			statement.setInt(5, materialActualizado.getId());
+			statement.setString(1, materialActualizado.getNombre());
+			statement.setDouble(2, materialActualizado.getCosto());
+			statement.setInt(3, materialActualizado.getCantidad());
+			statement.setString(4, materialActualizado.getReferencia());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -61,7 +59,7 @@ public class MaterialDao {
 		return resultadoOperacion;
 	}
 
-	public int eliminar(int idEliminar) {
+	public int eliminar(String referenciaEliminar) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
@@ -69,7 +67,8 @@ public class MaterialDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			resultadoOperacion = statement.executeUpdate("DELETE FROM Materiales WHERE Cod_Material=" + idEliminar);
+			resultadoOperacion = statement
+					.executeUpdate("DELETE FROM Materiales WHERE Referencia='" + referenciaEliminar + "'");
 
 			statement.close();
 			conexion.desconectar();
@@ -93,20 +92,18 @@ public class MaterialDao {
 			ResultSet resultado = statement
 					.executeQuery("SELECT * FROM Materiales WHERE Referencia='" + referenciaBuscar + "';");
 
-			int id;
 			String referencia;
 			String nombre;
 			double costo;
 			int cantidad;
 
 			while (resultado.next()) {
-				id = resultado.getInt("Cod_Material");
 				referencia = resultado.getString("Referencia");
 				nombre = resultado.getString("Nombre");
 				costo = resultado.getDouble("Costo");
 				cantidad = resultado.getInt("Cantidad");
 
-				material = new MaterialVo(id, referencia, nombre, costo, cantidad);
+				material = new MaterialVo(referencia, nombre, costo, cantidad);
 			}
 
 			statement.close();
@@ -130,7 +127,6 @@ public class MaterialDao {
 			Statement statement = connection.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM Materiales");
 
-			int id;
 			String referencia;
 			String nombre;
 			double costo;
@@ -138,13 +134,12 @@ public class MaterialDao {
 			MaterialVo material;
 
 			while (resultado.next()) {
-				id = resultado.getInt("Cod_Material");
 				referencia = resultado.getString("Referencia");
 				nombre = resultado.getString("Nombre");
 				costo = resultado.getDouble("Costo");
 				cantidad = resultado.getInt("Cantidad");
 
-				material = new MaterialVo(id, referencia, nombre, costo, cantidad);
+				material = new MaterialVo(referencia, nombre, costo, cantidad);
 				materiales.add(material);
 			}
 

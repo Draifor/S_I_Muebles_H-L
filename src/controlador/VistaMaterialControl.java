@@ -53,7 +53,7 @@ public class VistaMaterialControl {
 		if (opcionElegida == 0) {
 			MaterialVo materialPorEliminar = DialogMaterialControl.getDatosMaterial();
 
-			int resultadoOperacion = VistaMaterialControl.materialDao.eliminar(materialPorEliminar.getId());
+			int resultadoOperacion = VistaMaterialControl.materialDao.eliminar(materialPorEliminar.getReferencia());
 
 			if (resultadoOperacion > 0) {
 				VistaMaterialControl.actualizarVista();
@@ -72,7 +72,6 @@ public class VistaMaterialControl {
 		String[][] matrizMateriales = new String[materiales.size()][ColumnasMateriales.TITULOS_COLUMNAS.length];
 
 		for (int i = 0; i < matrizMateriales.length; i++) {
-			matrizMateriales[i][ColumnasMateriales.CODIGO] = ((MaterialVo) materiales.get(i)).getId() + "";
 			matrizMateriales[i][ColumnasMateriales.REFERENCIA] = ((MaterialVo) materiales.get(i)).getReferencia();
 			matrizMateriales[i][ColumnasMateriales.NOMBRE] = ((MaterialVo) materiales.get(i)).getNombre();
 			matrizMateriales[i][ColumnasMateriales.COSTO] = ((MaterialVo) materiales.get(i)).getCosto() + "";
@@ -87,9 +86,6 @@ public class VistaMaterialControl {
 	}
 
 	public static void construirTabla(JTable tabla) {
-		// Se crea la columna tipo numero
-		tabla.getColumnModel().getColumn(ColumnasMateriales.CODIGO).setCellRenderer(new GestionCeldas("numero"));
-
 		// Se crean las columnas tipo texto
 		for (int i = 0; i < ColumnasMateriales.TIPO_TEXTO.length; i++) {
 			tabla.getColumnModel().getColumn(ColumnasMateriales.TIPO_TEXTO[i])
@@ -108,9 +104,8 @@ public class VistaMaterialControl {
 		tabla.setRowHeight(25);
 		tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
-		tabla.getColumnModel().getColumn(ColumnasMateriales.CODIGO).setPreferredWidth(84);
-		tabla.getColumnModel().getColumn(ColumnasMateriales.REFERENCIA).setPreferredWidth(130);
-		tabla.getColumnModel().getColumn(ColumnasMateriales.NOMBRE).setPreferredWidth(420);
+		tabla.getColumnModel().getColumn(ColumnasMateriales.REFERENCIA).setPreferredWidth(100);
+		tabla.getColumnModel().getColumn(ColumnasMateriales.NOMBRE).setPreferredWidth(450);
 		tabla.getColumnModel().getColumn(ColumnasMateriales.COSTO).setPreferredWidth(170);
 		tabla.getColumnModel().getColumn(ColumnasMateriales.CANTIDAD).setPreferredWidth(150);
 	}
@@ -125,13 +120,12 @@ public class VistaMaterialControl {
 
 		try {
 		if (filaSeleccionada != -1) {
-			int id = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasMateriales.CODIGO).toString());
 			String referencia = (String) tabla.getValueAt(filaSeleccionada, ColumnasMateriales.REFERENCIA);
 			String nombre = (String) tabla.getValueAt(filaSeleccionada, ColumnasMateriales.NOMBRE);
 			double costo = Double.parseDouble(tabla.getValueAt(filaSeleccionada, ColumnasMateriales.COSTO).toString());
 			int cantidad = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasMateriales.CANTIDAD).toString());
 
-			material = new MaterialVo(id, referencia, nombre, costo, cantidad);
+			material = new MaterialVo(referencia, nombre, costo, cantidad);
 		}
 		} catch(Exception e) {}
 		return material;

@@ -81,7 +81,7 @@ CREATE TABLE `diseños` (
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Referencia` (`Referencia`),
   UNIQUE KEY `Nombre` (`Nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `diseños` (
 
 LOCK TABLES `diseños` WRITE;
 /*!40000 ALTER TABLE `diseños` DISABLE KEYS */;
-INSERT INTO `diseños` VALUES (1,'DIS-0001','sala_L_001','Sala en L roja','sdfsdf'),(2,'DIS-0002','ghi','def','jklmnñ'),(4,'DIS-0004','Nombreee','Tipoooooooooo','imagen'),(5,'DIS-0005','nombre','tipo','imagen'),(7,'DIS-0007','dfg','dfgdsfg','dfgsdfg'),(8,'DIS-0008','dfgd','dfgdf','dfgd'),(14,'DIS-0014','ftghr','rtyhr','rtyhrt'),(15,'DIS-0015','dfgdf','dfgdf','dfgdf'),(17,'DIS-0017','erter','ertere','ert'),(18,'DIS-0018','rtyt','tryurt','tyut'),(19,'DIS-0019','tydrt','tryrt','rtytry'),(20,'DIS-0020','Diseño','aaaaa','cccccc');
+INSERT INTO `diseños` VALUES (1,'DIS-0001','sala_L_001','Sala en L roja','sdfsdf'),(2,'DIS-0002','ghi','def','jklmnñ'),(4,'DIS-0004','Nombreee','Tipoooooooooo','imagen'),(5,'DIS-0005','nombre','tipo','imagen'),(7,'DIS-0007','dfg','dfgdsfg','dfgsdfg'),(8,'DIS-0008','dfgd','dfgdf','dfgd'),(14,'DIS-0014','ftghr','rtyhr','rtyhrt'),(15,'DIS-0015','aaaaa','bbbbb','ccccc'),(18,'DIS-0018','rtyt','tryurt','tyut'),(19,'DIS-0019','tydrt','tryrt','lllll'),(20,'DIS-0020','Diseño','aaaaa','cccccc'),(22,'DIS-0021','Prueba','Diseño','sefdf');
 /*!40000 ALTER TABLE `diseños` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -121,15 +121,15 @@ DROP TABLE IF EXISTS `materiales`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `materiales` (
-  `Cod_Material` int NOT NULL AUTO_INCREMENT,
+  `Id` int NOT NULL AUTO_INCREMENT,
   `Referencia` varchar(8) NOT NULL,
   `Nombre` varchar(40) NOT NULL,
   `Costo` double NOT NULL,
   `Cantidad` int NOT NULL,
-  PRIMARY KEY (`Cod_Material`),
+  PRIMARY KEY (`Id`),
   UNIQUE KEY `Referencia` (`Referencia`),
   UNIQUE KEY `Nombre` (`Nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,9 +138,28 @@ CREATE TABLE `materiales` (
 
 LOCK TABLES `materiales` WRITE;
 /*!40000 ALTER TABLE `materiales` DISABLE KEYS */;
-INSERT INTO `materiales` VALUES (1,'aglom01','Aglomerado',50000,5),(2,'mad001','Madera',100000,9),(3,'adasa','asdasfas',1000000,90),(4,'aaaaa','bbbbbb',1111111,6),(6,'sdfg','dfgdf',34534,1001),(8,'sefsdf','sdfsdcvbn',34534,41),(10,'sdfgds','dfgdaaaaf',9075,101),(11,'dfghfg','456456',234454545,3),(12,'sdfs','sdfsde',4334,11);
+INSERT INTO `materiales` VALUES (1,'MAT-0001','Aglomerado',50000,5),(2,'MAT-0002','Madera',100000,9),(3,'MAT-0003','asdasfas',1000000,90),(4,'MAT-0004','bbbbbb',1111111,6),(6,'MAT-0006','dfgdf',34534,1001),(8,'MAT-0008','sdfsdcvbn',34534,40),(10,'MAT-0010','dfgdaaaaf',9075,101),(11,'MAT-0011','456456',234454545,3),(13,'MAT-0013','Material',1254,3),(15,'MAT-0014','mmmmmm',11111,8);
 /*!40000 ALTER TABLE `materiales` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `Asignar_Referencia_Material` BEFORE INSERT ON `materiales` FOR EACH ROW BEGIN
+	DECLARE siguiente_id INT;
+	SET siguiente_id = (SELECT MAX(Id)+1 ultimo FROM Materiales);
+	SET NEW.Referencia = CONCAT('MAT-', LPAD(siguiente_id, 4, '0'));
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `ordencompra_diseños`
@@ -244,7 +263,7 @@ CREATE TABLE `producto_materiales` (
   PRIMARY KEY (`Cod_Prod_Material`),
   KEY `FK_producto_Materiales_Producto_Cod_Producto_idx` (`Cod_Producto`),
   KEY `FK_Producto_Materiales_Materiales_Cod_Material_idx` (`Cod_Material`),
-  CONSTRAINT `FK_Producto_Materiales_Materiales_Cod_Material` FOREIGN KEY (`Cod_Material`) REFERENCES `materiales` (`Cod_Material`),
+  CONSTRAINT `FK_Producto_Materiales_Materiales_Cod_Material` FOREIGN KEY (`Cod_Material`) REFERENCES `materiales` (`Id`),
   CONSTRAINT `FK_producto_Materiales_Producto_Cod_Producto` FOREIGN KEY (`Cod_Producto`) REFERENCES `productos` (`Cod_Producto`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -325,4 +344,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-24 19:46:39
+-- Dump completed on 2022-07-24 20:53:59
