@@ -16,8 +16,6 @@ public class DialogProducto extends JDialog {
 	private JPanel contenedor;
 	private JPanel contenedorPrincipal;
 	private Texto titulo;
-	private Label codigo;
-	private CampoInput codigoInput;
 	private Label referencia;
 	private CampoInput referenciaInput;
 	private Label nombre;
@@ -39,7 +37,7 @@ public class DialogProducto extends JDialog {
 
 		iniciarComponentes();
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setSize(650, 610);
+		setSize(650, 560);
 		setResizable(false);
 		setLocationRelativeTo(null);
 	}
@@ -48,68 +46,60 @@ public class DialogProducto extends JDialog {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
 		this.titulo = new Texto("", 1, 24);
-		this.titulo.setBounds(2, 11, 396, 35);
-
-		this.codigo = new Label("Código:");
-		this.codigo.setBounds(36, 78, 115, 29);
-
-		this.codigoInput = new CampoInput("texto");
-		this.codigoInput.setBounds(183, 78, 233, 29);
-		this.codigoInput.desactivarCampo();
+		this.titulo.setBounds(35, 11, 396, 35);
 
 		this.referencia = new Label("Referencia:");
-		this.referencia.setBounds(36, 133, 115, 29);
+		this.referencia.setBounds(36, 78, 115, 29);
 
 		this.referenciaInput = new CampoInput("texto");
-		this.referenciaInput.setBounds(183, 133, 233, 29);
+		this.referenciaInput.setBounds(183, 78, 233, 29);
+		this.referenciaInput.desactivarCampo();
 		
 		this.nombre = new Label("Nombre:");
-		this.nombre.setBounds(36, 188, 115, 29);
+		this.nombre.setBounds(36, 133, 115, 29);
 		
 		this.nombreInput = new CampoInput("texto");
-		this.nombreInput.setBounds(183, 188, 233, 29);
+		this.nombreInput.setBounds(183, 133, 233, 29);
 
 		this.tipo = new Label("Tipo:");
-		this.tipo.setBounds(36, 243, 115, 29);
+		this.tipo.setBounds(36, 188, 115, 29);
 
 		this.tipoInput = new CampoInput("texto");
-		this.tipoInput.setBounds(183, 243, 233, 29);
+		this.tipoInput.setBounds(183, 188, 233, 29);
 
 		this.precio = new Label("Precio: $");
-		this.precio.setBounds(36, 298, 115, 29);
+		this.precio.setBounds(36, 243, 115, 29);
 
 		this.precioInput = new CampoInput("texto");
-		this.precioInput.setBounds(183, 298, 233, 29);
+		this.precioInput.setBounds(183, 243, 233, 29);
 		
 		this.cantidad = new Label("Cantidad:");
-		this.cantidad.setBounds(36, 353, 115, 29);
+		this.cantidad.setBounds(36, 298, 115, 29);
 		
 		this.cantidadInput = new Spinner();
-		this.cantidadInput.setBounds(183, 353, 83, 29);
+		this.cantidadInput.setBounds(183, 298, 83, 29);
 
 		this.idDiseño = new Label("Id Diseño:");
-		this.idDiseño.setBounds(36, 408, 115, 29);
+		this.idDiseño.setBounds(36, 353, 115, 29);
 		
 		this.idDiseñoInput = new CampoInput("texto");
-		this.idDiseñoInput.setBounds(183, 408, 233, 29);
+		this.idDiseñoInput.setBounds(183, 353, 233, 29);
 
 		this.boton1 = new Boton("Botón 1", () -> setTitle(""));
-		this.boton1.setBounds(45, 465, 105, 27);
+		this.boton1.setBounds(45, 412, 105, 27);
 
 		this.boton2 = new Boton("Botón 2", () -> setTitle(""));
-		this.boton2.setBounds(178, 465, 105, 27);
+		this.boton2.setBounds(178, 412, 105, 27);
 
 		this.cancelar = new Boton("Cancelar", () -> DialogProductoControl.ocultar());
-		this.cancelar.setBounds(311, 465, 105, 27);
+		this.cancelar.setBounds(311, 412, 105, 27);
 
 		this.contenedorPrincipal = new JPanel();
 		this.contenedorPrincipal.setBackground(Color.AZUL_30.getColor());
 		this.contenedorPrincipal.setBorder(BorderFactory.createLineBorder(Color.AZUL_100.getColor(), 2));
-		this.contenedorPrincipal.setPreferredSize(new Dimension(450, 520));
+		this.contenedorPrincipal.setPreferredSize(new Dimension(450, 470));
 		this.contenedorPrincipal.setLayout(null);
 		this.contenedorPrincipal.add(this.titulo);
-		this.contenedorPrincipal.add(this.codigo);
-		this.contenedorPrincipal.add(this.codigoInput);
 		this.contenedorPrincipal.add(this.referencia);
 		this.contenedorPrincipal.add(this.referenciaInput);
 		this.contenedorPrincipal.add(this.nombre);
@@ -138,22 +128,14 @@ public class DialogProducto extends JDialog {
 		JOptionPane.showMessageDialog(this, new Texto(mensaje, 0, 18), titulo, JOptionPane.PLAIN_MESSAGE);
 	}
 
-	public String getCodigoInput() {
-		return this.codigoInput.getTextInput();
-	}
-
-	public void setCodigoInput(String codigo) {
-		this.codigoInput.setTextInput(codigo);
-	}
-
 	public String getReferenciaInput() {
 		return this.referenciaInput.getTextInput();
 	}
 
-	public void setReferenciaInput(String referenciaInput) {
-		this.referenciaInput.setTextInput(referenciaInput);
+	public void setReferenciaInput(String referencia) {
+		this.referenciaInput.setTextInput(referencia);
 	}
-	
+
 	public String getNombreInput() {
 		return this.nombreInput.getTextInput();
 	}
@@ -190,7 +172,7 @@ public class DialogProducto extends JDialog {
 		return this.idDiseñoInput.getTextInput();
 	}
 	
-	public void setIdDiseñoInput(String idDiseñoInput) {
+	public void setRefDiseñoInput(String idDiseñoInput) {
 		this.idDiseñoInput.setTextInput(idDiseñoInput);
 	}
 
@@ -217,19 +199,18 @@ public class DialogProducto extends JDialog {
 
 	public void ocultarBoton2() {
 		this.boton2.setVisible(false);
-		this.boton1.setBounds(96, 465, 105, 27);
-		this.cancelar.setBounds(258, 465, 105, 27);
+		this.boton1.setBounds(96, 412, 105, 27);
+		this.cancelar.setBounds(258, 412, 105, 27);
 	}
 
 	public void mostrarBoton2() {
-		this.boton1.setBounds(45, 465, 105, 27);
-		this.boton2.setBounds(178, 465, 105, 27);
+		this.boton1.setBounds(45, 412, 105, 27);
+		this.boton2.setBounds(178, 412, 105, 27);
 		this.boton2.setVisible(true);
-		this.cancelar.setBounds(311, 465, 105, 27);
+		this.cancelar.setBounds(311, 412, 105, 27);
 	}
 
 	public void desactivarCampos() {
-		this.referenciaInput.desactivarCampo();
 		this.nombreInput.desactivarCampo();
 		this.tipoInput.desactivarCampo();
 		this.precioInput.desactivarCampo();
@@ -238,7 +219,6 @@ public class DialogProducto extends JDialog {
 	}
 
 	public void activarCampos() {
-		this.referenciaInput.activarCampo();
 		this.nombreInput.activarCampo();
 		this.tipoInput.activarCampo();
 		this.precioInput.activarCampo();
@@ -247,7 +227,7 @@ public class DialogProducto extends JDialog {
 	}
 
 	public void codigoPorDefecto() {
-		this.codigoInput.setTextInput("Generado automáticamente");
-		this.codigoInput.modificarFuente(new Font("Times New Roman", 2, 15));
+		this.referenciaInput.setTextInput("Generado automáticamente");
+		this.referenciaInput.modificarFuente(new Font("Times New Roman", 2, 15));
 	}
 }

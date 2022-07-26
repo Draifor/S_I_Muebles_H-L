@@ -53,7 +53,7 @@ public class VistaProductoControl {
 		if (opcionElegida == 0) {
 			ProductoVo productoPorEliminar = DialogProductoControl.getDatosProducto();
 
-			int resultadoOperacion = VistaProductoControl.productoDao.eliminar(productoPorEliminar.getId());
+			int resultadoOperacion = VistaProductoControl.productoDao.eliminar(productoPorEliminar.getReferencia());
 
 			if (resultadoOperacion > 0) {
 				VistaProductoControl.actualizarVista();
@@ -72,13 +72,12 @@ public class VistaProductoControl {
 		String[][] matrizProductos = new String[productos.size()][ColumnasProductos.TITULOS_COLUMNAS.length];
 
 		for (int i = 0; i < matrizProductos.length; i++) {
-			matrizProductos[i][ColumnasProductos.CODIGO] = ((ProductoVo) productos.get(i)).getId() + "";
 			matrizProductos[i][ColumnasProductos.REFERENCIA] = ((ProductoVo) productos.get(i)).getReferencia();
 			matrizProductos[i][ColumnasProductos.NOMBRE] = ((ProductoVo) productos.get(i)).getNombre();
 			matrizProductos[i][ColumnasProductos.TIPO] = ((ProductoVo) productos.get(i)).getTipo();
 			matrizProductos[i][ColumnasProductos.PRECIO] = ((ProductoVo) productos.get(i)).getPrecio() + "";
 			matrizProductos[i][ColumnasProductos.CANTIDAD] = ((ProductoVo) productos.get(i)).getCantidad() + "";
-			matrizProductos[i][ColumnasProductos.ID_DISEÑO] = ((ProductoVo) productos.get(i)).getIdDiseño() + "";
+			matrizProductos[i][ColumnasProductos.REF_DISEÑO] = ((ProductoVo) productos.get(i)).getRefDiseño();
 		}
 
 		return matrizProductos;
@@ -96,9 +95,6 @@ public class VistaProductoControl {
 					.setCellRenderer(new GestionCeldas("texto"));
 		}
 
-		// Se crean las columnas tipo numero
-		tabla.getColumnModel().getColumn(ColumnasProductos.CODIGO).setCellRenderer(new GestionCeldas("numero"));
-
 		// Se crea la columna tipo precio
 		tabla.getColumnModel().getColumn(ColumnasProductos.PRECIO).setCellRenderer(new GestionCeldas("precio"));
 
@@ -111,13 +107,12 @@ public class VistaProductoControl {
 		tabla.setRowHeight(25);
 		tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
-		tabla.getColumnModel().getColumn(ColumnasProductos.CODIGO).setPreferredWidth(84);
 		tabla.getColumnModel().getColumn(ColumnasProductos.REFERENCIA).setPreferredWidth(130);
-		tabla.getColumnModel().getColumn(ColumnasProductos.NOMBRE).setPreferredWidth(420);
+		tabla.getColumnModel().getColumn(ColumnasProductos.NOMBRE).setPreferredWidth(450);
 		tabla.getColumnModel().getColumn(ColumnasProductos.TIPO).setPreferredWidth(200);
 		tabla.getColumnModel().getColumn(ColumnasProductos.PRECIO).setPreferredWidth(160);
 		tabla.getColumnModel().getColumn(ColumnasProductos.CANTIDAD).setPreferredWidth(80);
-		tabla.getColumnModel().getColumn(ColumnasProductos.ID_DISEÑO).setPreferredWidth(90);
+		tabla.getColumnModel().getColumn(ColumnasProductos.REF_DISEÑO).setPreferredWidth(90);
 	}
 
 	public static void actualizarVista() {
@@ -130,15 +125,14 @@ public class VistaProductoControl {
 		
 		try {
 		if (filaSeleccionada != -1) {
-			int id = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasProductos.CODIGO).toString());
 			String referencia = (String) tabla.getValueAt(filaSeleccionada, ColumnasProductos.REFERENCIA);
 			String nombre = (String) tabla.getValueAt(filaSeleccionada, ColumnasProductos.NOMBRE);
 			String tipo = (String) tabla.getValueAt(filaSeleccionada, ColumnasProductos.TIPO);
 			double precio = Double.parseDouble(tabla.getValueAt(filaSeleccionada, ColumnasProductos.PRECIO).toString());
 			int cantidad = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasProductos.CANTIDAD).toString());
-			int idDiseño = Integer.parseInt(tabla.getValueAt(filaSeleccionada, ColumnasProductos.ID_DISEÑO).toString());
+			String refDiseño = (String) tabla.getValueAt(filaSeleccionada, ColumnasProductos.REF_DISEÑO);
 
-			producto = new ProductoVo(id, referencia, nombre, tipo, precio, cantidad, idDiseño);
+			producto = new ProductoVo(referencia, nombre, tipo, precio, cantidad, refDiseño);
 		}
 		} catch(Exception e) {}
 		return producto;

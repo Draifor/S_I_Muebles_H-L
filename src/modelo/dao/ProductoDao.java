@@ -15,14 +15,13 @@ public class ProductoDao {
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(
-					"INSERT INTO Productos (Referencia, Nombre, Tipo, Precio, Cantidad, Cod_Diseño) values (?, ?, ?, ?, ?, ?)");
+					"INSERT INTO Productos (Nombre, Tipo, Precio, Cantidad, Ref_Diseño) values (?, ?, ?, ?, ?)");
 
-			statement.setString(1, nuevoProducto.getReferencia());
-			statement.setString(2, nuevoProducto.getNombre());
-			statement.setString(3, nuevoProducto.getTipo());
-			statement.setDouble(4, nuevoProducto.getPrecio());
-			statement.setInt(5, nuevoProducto.getCantidad());
-			statement.setInt(6, nuevoProducto.getIdDiseño());
+			statement.setString(1, nuevoProducto.getNombre());
+			statement.setString(2, nuevoProducto.getTipo());
+			statement.setDouble(3, nuevoProducto.getPrecio());
+			statement.setInt(4, nuevoProducto.getCantidad());
+			statement.setString(5, nuevoProducto.getRefDiseño());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -44,15 +43,14 @@ public class ProductoDao {
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(
-					"UPDATE Productos SET Referencia=?, Nombre=?, Tipo=?, Precio=?, Cantidad=?, Cod_Diseño=? WHERE Cod_Producto=?");
+					"UPDATE Productos SET Nombre=?, Tipo=?, Precio=?, Cantidad=?, Ref_Diseño=? WHERE Referencia=?");
 
-			statement.setString(1, productoActualizado.getReferencia());
-			statement.setString(2, productoActualizado.getNombre());
-			statement.setString(3, productoActualizado.getTipo());
-			statement.setDouble(4, productoActualizado.getPrecio());
-			statement.setInt(5, productoActualizado.getCantidad());
-			statement.setInt(6, productoActualizado.getIdDiseño());
-			statement.setInt(7, productoActualizado.getId());
+			statement.setString(1, productoActualizado.getNombre());
+			statement.setString(2, productoActualizado.getTipo());
+			statement.setDouble(3, productoActualizado.getPrecio());
+			statement.setInt(4, productoActualizado.getCantidad());
+			statement.setString(5, productoActualizado.getRefDiseño());
+			statement.setString(6, productoActualizado.getReferencia());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -65,7 +63,7 @@ public class ProductoDao {
 		return resultadoOperacion;
 	}
 	
-	public int eliminar(int idEliminar) {
+	public int eliminar(String referenciaEliminar) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
@@ -73,7 +71,7 @@ public class ProductoDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			resultadoOperacion = statement.executeUpdate("DELETE FROM Productos WHERE Cod_Producto=" + idEliminar);
+			resultadoOperacion = statement.executeUpdate("DELETE FROM Productos WHERE Referencia='" + referenciaEliminar + "'");
 
 			statement.close();
 			conexion.desconectar();
@@ -97,24 +95,22 @@ public class ProductoDao {
 			ResultSet resultado = statement
 					.executeQuery("SELECT * FROM Productos WHERE Referencia='" + referenciaBuscar + "';");
 
-			int id;
 			String referencia;
 			String nombre;
 			String tipo;
 			double precio;
 			int cantidad;
-			int idDiseño;
+			String refDiseño;
 
 			while (resultado.next()) {
-				id = resultado.getInt("Cod_Producto");
 				referencia = resultado.getString("Referencia");
 				nombre = resultado.getString("Nombre");
 				tipo = resultado.getString("Tipo");
 				precio = resultado.getDouble("Precio");
 				cantidad = resultado.getInt("Cantidad");
-				idDiseño = resultado.getInt("Cod_Diseño");
+				refDiseño = resultado.getString("Ref_Diseño");
 
-				producto = new ProductoVo(id, referencia, nombre, tipo, precio, cantidad, idDiseño);
+				producto = new ProductoVo(referencia, nombre, tipo, precio, cantidad, refDiseño);
 			}
 
 			statement.close();
@@ -138,25 +134,23 @@ public class ProductoDao {
 			Statement statement = connection.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM Productos");
 
-			int id;
 			String referencia;
 			String nombre;
 			String tipo;
 			double precio;
 			int cantidad;
-			int idDiseño;
+			String refDiseño;
 			ProductoVo producto;
 
 			while (resultado.next()) {
-				id = resultado.getInt("Cod_Producto");
 				referencia = resultado.getString("Referencia");
 				nombre = resultado.getString("Nombre");
 				tipo = resultado.getString("Tipo");
 				precio = resultado.getDouble("Precio");
 				cantidad = resultado.getInt("Cantidad");
-				idDiseño = resultado.getInt("Cod_Diseño");
+				refDiseño = resultado.getString("Ref_Diseño");
 
-				producto = new ProductoVo(id, referencia, nombre, tipo, precio, cantidad, idDiseño);
+				producto = new ProductoVo(referencia, nombre, tipo, precio, cantidad, refDiseño);
 				productos.add(producto);
 			}
 

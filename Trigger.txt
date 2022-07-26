@@ -19,4 +19,11 @@ BEGIN
 	SET siguiente_id = (SELECT MAX(Id)+1 ultimo FROM Materiales);
 	SET NEW.Referencia = CONCAT('MAT-', LPAD(siguiente_id, 4, '0'));
 END //
+
+CREATE TRIGGER Asignar_Referencia_Producto BEFORE INSERT ON Productos FOR EACH ROW
+BEGIN
+	DECLARE siguiente_id INT;
+	SET siguiente_id = (SELECT MAX(Id)+1 ultimo FROM Productos);
+	SET NEW.Referencia = CONCAT('PRO-', LPAD(siguiente_id, 4, '0'));
+END //
 DELIMITER ;

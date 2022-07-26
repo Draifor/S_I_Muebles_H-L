@@ -206,7 +206,7 @@ CREATE TABLE `ordencompra_productos` (
   KEY `FK_OrdenCompra_Productos_Productos_Cod_Producto_idx` (`Cod_Producto`),
   KEY `FK_OrdenCompra_Productos_OrdenesCompra_Cod_OrdComp_idx` (`Cod_OrdComp`),
   CONSTRAINT `Cod_OrdComp` FOREIGN KEY (`Cod_OrdComp`) REFERENCES `ordenescompra` (`Cod_OrdComp`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Cod_Producto` FOREIGN KEY (`Cod_Producto`) REFERENCES `productos` (`Cod_Producto`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `Cod_Producto` FOREIGN KEY (`Cod_Producto`) REFERENCES `productos` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -264,7 +264,7 @@ CREATE TABLE `producto_materiales` (
   KEY `FK_producto_Materiales_Producto_Cod_Producto_idx` (`Cod_Producto`),
   KEY `FK_Producto_Materiales_Materiales_Cod_Material_idx` (`Cod_Material`),
   CONSTRAINT `FK_Producto_Materiales_Materiales_Cod_Material` FOREIGN KEY (`Cod_Material`) REFERENCES `materiales` (`Id`),
-  CONSTRAINT `FK_producto_Materiales_Producto_Cod_Producto` FOREIGN KEY (`Cod_Producto`) REFERENCES `productos` (`Cod_Producto`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_producto_Materiales_Producto_Cod_Producto` FOREIGN KEY (`Cod_Producto`) REFERENCES `productos` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -285,17 +285,18 @@ DROP TABLE IF EXISTS `productos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `productos` (
-  `Cod_Producto` int NOT NULL AUTO_INCREMENT,
+  `Id` int NOT NULL AUTO_INCREMENT,
   `Referencia` varchar(8) NOT NULL,
   `Nombre` varchar(40) NOT NULL,
   `Tipo` varchar(30) NOT NULL,
   `Precio` double NOT NULL,
   `Cantidad` int NOT NULL,
-  `Cod_Diseño` int NOT NULL,
-  PRIMARY KEY (`Cod_Producto`),
+  `Ref_Diseño` varchar(8) NOT NULL,
+  PRIMARY KEY (`Id`),
   UNIQUE KEY `Referencia` (`Referencia`),
-  UNIQUE KEY `Nombre` (`Nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `Nombre` (`Nombre`),
+  KEY `FK_Productos_Diseños_Referencia_idx` (`Ref_Diseño`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -304,9 +305,28 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'sdfg','sdfgsdfhg','sdfghsdf',456456,1,1),(2,'aaaaaa','werwerwe','dfwe',12312,15,123),(4,'sdfghfg','fdghfg','fghfg',56757,4,3453);
+INSERT INTO `productos` VALUES (1,'sdfg','sdfgsdfhg','sdfghsdf',456456,1,'1'),(2,'aaaaaa','werwerwe','dfwe',12312,15,'123'),(4,'sdfghfg','fdghfg','fghfg',56757,4,'3453'),(5,'PRO-0005','dfsgdf','dsfgsd',343,1,'fgdg'),(6,'PRO-0006','aaaaaaaaa','bbbbbbbbbb',111111111,1,'sssssss');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `Asignar_Referencia_Producto` BEFORE INSERT ON `productos` FOR EACH ROW BEGIN
+	DECLARE siguiente_id INT;
+	SET siguiente_id = (SELECT MAX(Id)+1 ultimo FROM Productos);
+	SET NEW.Referencia = CONCAT('PRO-', LPAD(siguiente_id, 4, '0'));
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `ventas`
@@ -344,4 +364,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-24 20:53:59
+-- Dump completed on 2022-07-25 21:43:31

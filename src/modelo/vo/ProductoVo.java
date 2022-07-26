@@ -2,40 +2,29 @@ package modelo.vo;
 
 public class ProductoVo {
 
-    private int id;
     private String referencia;
     private String nombre;
     private String tipo;
     private double precio;
     private  int cantidad;
-    private int idDiseño;
+    private String refDiseño;
 
-    public ProductoVo(String referencia, String nombre, String tipo, double precio, int cantidad, int idDiseño) {
-    	this.referencia = referencia;
+    public ProductoVo(String nombre, String tipo, double precio, int cantidad, String refDiseño) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.idDiseño = idDiseño;
+        this.refDiseño = refDiseño;
     }
     
-    public ProductoVo(int id, String referencia, String nombre, String tipo, double precio, int cantidad, int idDiseño) {
-    	this(referencia, nombre, tipo, precio, cantidad, idDiseño);
-    	this.id = id;
-    }
-
-    public int getId() {
-        return this.id;
+    public ProductoVo(String referencia, String nombre, String tipo, double precio, int cantidad, String refDiseño) {
+    	this(nombre, tipo, precio, cantidad, refDiseño);
+    	this.referencia = referencia;
     }
     
     public String getReferencia() {
     	return this.referencia;
     }
-    
-    public void setReferencia(String referencia) {
-    	this.referencia = referencia;
-    }
-
 
     public String getNombre() {
         return this.nombre;
@@ -69,22 +58,21 @@ public class ProductoVo {
     	this.cantidad = cantidad;
     }
     
-    public int getIdDiseño() {
-    	return this.idDiseño;
+    public String getRefDiseño() {
+    	return this.refDiseño;
     }
     
-    public void setIdDiseño(int IdDiseño) {
-    	this.idDiseño = IdDiseño;
+    public void setRefDiseño(String refDiseño) {
+    	this.refDiseño = refDiseño;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Producto {");
-        sb.append("IdProducto: ").append(id);
+        sb.append("Referencia: ").append(referencia);
         sb.append(", nombre: ").append(nombre);
         sb.append(", tipo: ").append(tipo);
-        sb.append(", referencia: ").append(referencia);
         sb.append(", precio: ").append(precio);
         sb.append('}');
         return sb.toString();
