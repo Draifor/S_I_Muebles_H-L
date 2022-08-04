@@ -68,7 +68,7 @@ public class MaterialDao {
 		try {
 			Statement statement = connection.createStatement();
 			resultadoOperacion = statement
-					.executeUpdate("DELETE FROM Materiales WHERE Referencia='" + referenciaEliminar + "'");
+					.executeUpdate("DELETE FROM Materiales WHERE Referencia='" + referenciaEliminar + "';");
 
 			statement.close();
 			conexion.desconectar();

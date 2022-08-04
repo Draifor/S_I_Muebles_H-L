@@ -15,13 +15,13 @@ public class ProductoDao {
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(
-					"INSERT INTO Productos (Nombre, Tipo, Precio, Cantidad, Ref_Diseño) values (?, ?, ?, ?, ?)");
+					"INSERT INTO Productos (Nombre, Tipo, Precio, Cantidad, Diseño_id) values (?, ?, ?, ?, ?)");
 
 			statement.setString(1, nuevoProducto.getNombre());
 			statement.setString(2, nuevoProducto.getTipo());
 			statement.setDouble(3, nuevoProducto.getPrecio());
 			statement.setInt(4, nuevoProducto.getCantidad());
-			statement.setString(5, nuevoProducto.getRefDiseño());
+			statement.setString(5, "(SELECT Diseño_id FROM Diseños WHERE Referencia='" + nuevoProducto.getRefDiseño() + "')");
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -43,13 +43,13 @@ public class ProductoDao {
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(
-					"UPDATE Productos SET Nombre=?, Tipo=?, Precio=?, Cantidad=?, Ref_Diseño=? WHERE Referencia=?");
+					"UPDATE Productos SET Nombre=?, Tipo=?, Precio=?, Cantidad=?, Diseño_id=? WHERE Referencia=?");
 
 			statement.setString(1, productoActualizado.getNombre());
 			statement.setString(2, productoActualizado.getTipo());
 			statement.setDouble(3, productoActualizado.getPrecio());
 			statement.setInt(4, productoActualizado.getCantidad());
-			statement.setString(5, productoActualizado.getRefDiseño());
+			statement.setString(5, "(SELECT Diseño_id FROM Diseños WHERE Referencia='" + productoActualizado.getRefDiseño() + "')");
 			statement.setString(6, productoActualizado.getReferencia());
 
 			resultadoOperacion = statement.executeUpdate();
@@ -71,7 +71,7 @@ public class ProductoDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			resultadoOperacion = statement.executeUpdate("DELETE FROM Productos WHERE Referencia='" + referenciaEliminar + "'");
+			resultadoOperacion = statement.executeUpdate("DELETE FROM Productos WHERE Referencia='" + referenciaEliminar + "';");
 
 			statement.close();
 			conexion.desconectar();
@@ -132,7 +132,7 @@ public class ProductoDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet resultado = statement.executeQuery("SELECT * FROM Productos");
+			ResultSet resultado = statement.executeQuery("SELECT * FROM Productos;");
 
 			String referencia;
 			String nombre;
@@ -148,10 +148,11 @@ public class ProductoDao {
 				tipo = resultado.getString("Tipo");
 				precio = resultado.getDouble("Precio");
 				cantidad = resultado.getInt("Cantidad");
-				refDiseño = resultado.getString("Ref_Diseño");
+				refDiseño = resultado.getString("Diseño_id");
 
 				producto = new ProductoVo(referencia, nombre, tipo, precio, cantidad, refDiseño);
 				productos.add(producto);
+				System.out.println(producto);
 			}
 
 			statement.close();

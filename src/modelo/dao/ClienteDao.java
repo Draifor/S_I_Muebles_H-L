@@ -64,7 +64,7 @@ public class ClienteDao {
 		return resultadoOperacion;
 	}
 
-	public int eliminar(String codigoEliminar) {
+	public int eliminar(String referenciaEliminar) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
@@ -72,8 +72,7 @@ public class ClienteDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			System.out.println(codigoEliminar);
-			resultadoOperacion = statement.executeUpdate("DELETE FROM clientes WHERE Codigo='" + codigoEliminar + "'");
+			resultadoOperacion = statement.executeUpdate("DELETE FROM clientes WHERE Referencia='" + referenciaEliminar + "';");
 
 			statement.close();
 			conexion.desconectar();

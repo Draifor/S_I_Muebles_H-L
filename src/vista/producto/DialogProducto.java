@@ -79,7 +79,7 @@ public class DialogProducto extends JDialog {
 		this.cantidadInput = new Spinner();
 		this.cantidadInput.setBounds(183, 298, 83, 29);
 
-		this.idDiseño = new Label("Id Diseño:");
+		this.idDiseño = new Label("Ref Diseño:");
 		this.idDiseño.setBounds(36, 353, 115, 29);
 		
 		this.idDiseñoInput = new CampoInput("texto");

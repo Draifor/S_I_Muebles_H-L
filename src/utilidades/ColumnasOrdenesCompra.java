@@ -13,7 +13,7 @@ public class ColumnasOrdenesCompra {
 	public static final int[] TIPO_NUMERO = { 0, 1 };
 	public static final int[] TIPO_TEXTO = { 2, 4, 5, 6 };
 
-	public static final String[] TITULOS_COLUMNAS = { "CODIGO", "COD CLIENTE", "LISTA PRODUCTOS", "PRECIO", "FECHA", "ESTADO PRODUCTOS", "ESTADO FACTURA" };
+	public static final String[] TITULOS_COLUMNAS = { "CODIGO", "COD CLIENTE", "DETALLES", "PRECIO", "FECHA", "ESTADO PRODUCTOS", "ESTADO FACTURA" };
 
 	public static int filaSeleccionada;
 }

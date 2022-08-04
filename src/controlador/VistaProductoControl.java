@@ -78,6 +78,7 @@ public class VistaProductoControl {
 			matrizProductos[i][ColumnasProductos.PRECIO] = ((ProductoVo) productos.get(i)).getPrecio() + "";
 			matrizProductos[i][ColumnasProductos.CANTIDAD] = ((ProductoVo) productos.get(i)).getCantidad() + "";
 			matrizProductos[i][ColumnasProductos.REF_DISEÑO] = ((ProductoVo) productos.get(i)).getRefDiseño();
+			System.out.println(productos.get(i).toString());
 		}
 
 		return matrizProductos;
