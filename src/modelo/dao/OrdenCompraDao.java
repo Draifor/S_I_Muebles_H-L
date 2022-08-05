@@ -18,7 +18,7 @@ public class OrdenCompraDao {
 			PreparedStatement statement = connection.prepareStatement(
 					"INSERT INTO OrdenesCompra (Cod_Cliente) values (?)");
 
-			statement.setInt(1, nuevaOrdenCompra.getIdCliente());
+			statement.setInt(1, nuevaOrdenCompra.getCodCliente());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -42,8 +42,8 @@ public class OrdenCompraDao {
 			PreparedStatement statement = connection.prepareStatement(
 					"UPDATE OrdenesCompra SET Cod_Cliente=? WHERE Cod_OrdComp=?");
 
-			statement.setInt(1, ordenCompraActualizada.getIdCliente());
-			statement.setInt(2, ordenCompraActualizada.getId());
+			statement.setInt(1, ordenCompraActualizada.getCodCliente());
+			statement.setInt(2, ordenCompraActualizada.getReferencia());
 
 			resultadoOperacion = statement.executeUpdate();
 

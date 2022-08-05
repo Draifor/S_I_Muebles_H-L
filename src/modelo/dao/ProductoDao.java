@@ -13,33 +13,41 @@ public class ProductoDao {
 		connection = conexion.getConexion();
 		int resultadoOperacion = 0;
 
-		try {
-			PreparedStatement statement = connection.prepareStatement(
-					"INSERT INTO Productos (Nombre, Tipo, Precio, Cantidad, Diseño_id) values (?, ?, ?, ?, ?)");
+		int diseñoId = this.getId(nuevoProducto.getRefDiseño());
 
-			statement.setString(1, nuevoProducto.getNombre());
-			statement.setString(2, nuevoProducto.getTipo());
-			statement.setDouble(3, nuevoProducto.getPrecio());
-			statement.setInt(4, nuevoProducto.getCantidad());
-			statement.setString(5, "(SELECT Diseño_id FROM Diseños WHERE Referencia='" + nuevoProducto.getRefDiseño() + "')");
+		if (diseñoId != 0) {
+			try {
+				PreparedStatement statement = connection.prepareStatement(
+						"INSERT INTO Productos (Nombre, Tipo, Precio, Cantidad, Diseño_id) values (?, ?, ?, ?, ?)");
 
-			resultadoOperacion = statement.executeUpdate();
+				statement.setString(1, nuevoProducto.getNombre());
+				statement.setString(2, nuevoProducto.getTipo());
+				statement.setDouble(3, nuevoProducto.getPrecio());
+				statement.setInt(4, nuevoProducto.getCantidad());
+				statement.setInt(5, diseñoId);
 
-			statement.close();
-			conexion.desconectar();
+				resultadoOperacion = statement.executeUpdate();
 
-		} catch (SQLException e) {
-			System.out.println("Ocurrió un SQLException en ProductoDao.agregar(): " + e.getMessage() + "\n\n" + e);
+				statement.close();
+				conexion.desconectar();
+
+			} catch (SQLException e) {
+				System.out.println("Ocurrió un SQLException en ProductoDao.agregar(): " + e.getMessage() + "\n\n" + e);
+			}
+		} else {
+			System.out.println("No se encontró un diseño con la referencia: " + nuevoProducto.getRefDiseño());
 		}
 
 		return resultadoOperacion;
 	}
-	
+
 	public int modificar(ProductoVo productoActualizado) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
 		int resultadoOperacion = 0;
+
+		int diseñoId = this.getId(productoActualizado.getRefDiseño());
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(
@@ -49,7 +57,7 @@ public class ProductoDao {
 			statement.setString(2, productoActualizado.getTipo());
 			statement.setDouble(3, productoActualizado.getPrecio());
 			statement.setInt(4, productoActualizado.getCantidad());
-			statement.setString(5, "(SELECT Diseño_id FROM Diseños WHERE Referencia='" + productoActualizado.getRefDiseño() + "')");
+			statement.setInt(5, diseñoId);
 			statement.setString(6, productoActualizado.getReferencia());
 
 			resultadoOperacion = statement.executeUpdate();
@@ -62,7 +70,7 @@ public class ProductoDao {
 
 		return resultadoOperacion;
 	}
-	
+
 	public int eliminar(String referenciaEliminar) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
@@ -71,7 +79,8 @@ public class ProductoDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			resultadoOperacion = statement.executeUpdate("DELETE FROM Productos WHERE Referencia='" + referenciaEliminar + "';");
+			resultadoOperacion = statement
+					.executeUpdate("DELETE FROM Productos WHERE Referencia='" + referenciaEliminar + "';");
 
 			statement.close();
 			conexion.desconectar();
@@ -81,7 +90,7 @@ public class ProductoDao {
 
 		return resultadoOperacion;
 	}
-	
+
 	public ProductoVo buscar(String referenciaBuscar) {
 
 		ProductoVo producto = null;
@@ -121,7 +130,30 @@ public class ProductoDao {
 
 		return producto;
 	}
-	
+
+	public int getId(String referencia) {
+		int id = 0;
+
+		Connection connection = null;
+		Conexion conexion = new Conexion();
+		connection = conexion.getConexion();
+
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultado = statement
+					.executeQuery("SELECT Diseño_id FROM Diseños WHERE Referencia='" + referencia + "';");
+			while (resultado.next()) {
+				id = resultado.getInt("Diseño_id");
+			}
+			statement.close();
+			conexion.desconectar();
+		} catch (SQLException e) {
+			System.out.println("Ocurrió una SQLException en ProductoDao.getId():\n" + e.getMessage());
+		}
+
+		return id;
+	}
+
 	public List<ProductoVo> obtenerRegistros() {
 
 		List<ProductoVo> productos = new ArrayList<>();
@@ -132,7 +164,9 @@ public class ProductoDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet resultado = statement.executeQuery("SELECT * FROM Productos;");
+			ResultSet resultado = statement.executeQuery(
+					"SELECT Productos.Referencia, Productos.Nombre, Productos.Tipo, Productos.Precio, Productos.Cantidad, Diseños.Referencia FROM Productos\n"
+							+ "INNER JOIN Diseños ON Productos.Diseño_id = Diseños.Diseño_id; ");
 
 			String referencia;
 			String nombre;
@@ -143,16 +177,15 @@ public class ProductoDao {
 			ProductoVo producto;
 
 			while (resultado.next()) {
-				referencia = resultado.getString("Referencia");
-				nombre = resultado.getString("Nombre");
-				tipo = resultado.getString("Tipo");
-				precio = resultado.getDouble("Precio");
-				cantidad = resultado.getInt("Cantidad");
-				refDiseño = resultado.getString("Diseño_id");
+				referencia = resultado.getString(1);
+				nombre = resultado.getString(2);
+				tipo = resultado.getString(3);
+				precio = resultado.getDouble(4);
+				cantidad = resultado.getInt(5);
+				refDiseño = resultado.getString(6);
 
 				producto = new ProductoVo(referencia, nombre, tipo, precio, cantidad, refDiseño);
 				productos.add(producto);
-				System.out.println(producto);
 			}
 
 			statement.close();

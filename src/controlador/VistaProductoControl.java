@@ -78,7 +78,6 @@ public class VistaProductoControl {
 			matrizProductos[i][ColumnasProductos.PRECIO] = ((ProductoVo) productos.get(i)).getPrecio() + "";
 			matrizProductos[i][ColumnasProductos.CANTIDAD] = ((ProductoVo) productos.get(i)).getCantidad() + "";
 			matrizProductos[i][ColumnasProductos.REF_DISEÑO] = ((ProductoVo) productos.get(i)).getRefDiseño();
-			System.out.println(productos.get(i).toString());
 		}
 
 		return matrizProductos;
@@ -109,11 +108,11 @@ public class VistaProductoControl {
 		tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
 		tabla.getColumnModel().getColumn(ColumnasProductos.REFERENCIA).setPreferredWidth(130);
-		tabla.getColumnModel().getColumn(ColumnasProductos.NOMBRE).setPreferredWidth(450);
-		tabla.getColumnModel().getColumn(ColumnasProductos.TIPO).setPreferredWidth(200);
+		tabla.getColumnModel().getColumn(ColumnasProductos.NOMBRE).setPreferredWidth(360);
+		tabla.getColumnModel().getColumn(ColumnasProductos.TIPO).setPreferredWidth(170);
 		tabla.getColumnModel().getColumn(ColumnasProductos.PRECIO).setPreferredWidth(160);
 		tabla.getColumnModel().getColumn(ColumnasProductos.CANTIDAD).setPreferredWidth(80);
-		tabla.getColumnModel().getColumn(ColumnasProductos.REF_DISEÑO).setPreferredWidth(90);
+		tabla.getColumnModel().getColumn(ColumnasProductos.REF_DISEÑO).setPreferredWidth(130);
 	}
 
 	public static void actualizarVista() {

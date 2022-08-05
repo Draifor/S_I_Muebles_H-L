@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `muebles_h_l` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `muebles_h_l`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: muebles_h_l
@@ -116,7 +118,7 @@ CREATE TABLE `diseños` (
   PRIMARY KEY (`Diseño_id`),
   UNIQUE KEY `Referencia` (`Referencia`),
   UNIQUE KEY `Nombre` (`Nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +127,7 @@ CREATE TABLE `diseños` (
 
 LOCK TABLES `diseños` WRITE;
 /*!40000 ALTER TABLE `diseños` DISABLE KEYS */;
-INSERT INTO `diseños` VALUES (1,'DIS-0001','sala_L_001','Sala en L roja','sdfsdf'),(2,'DIS-0002','ghi','def','jklmnñ'),(4,'DIS-0004','Nombreee','Tipoooooooooo','imagen'),(5,'DIS-0005','nombre','tipo','imagen'),(7,'DIS-0007','Juego de Muebles en L Azul - Cuero','Sala','dfgsdfg'),(8,'DIS-0008','Juego de muebles en L Rojo - Gamuza','Sala','dfgd'),(14,'DIS-0014','Armario rojo','Closets','rtyhrt'),(15,'DIS-0015','aaaaa','bbbbb','ccccc'),(18,'DIS-0018','rtyt','tryurt','tyut'),(19,'DIS-0019','tydrt','tryrt','lllll'),(20,'DIS-0020','Diseño','aaaaa','cccccc'),(22,'DIS-0021','Prueba','Diseño','sefdf'),(24,'DIS-0023','Juego de Muebles en L Azul - Gamuza','Gamuza','rtyhtjfg'),(25,'DIS-0024','aaaaaa','fgd','dfgdf');
+INSERT INTO `diseños` VALUES (1,'DIS-0001','sala_L_001','Sala en L roja','sdfsdf'),(2,'DIS-0002','ghi','def','jklmnñ'),(4,'DIS-0004','Nombreee','Tipoooooooooo','imagen'),(5,'DIS-0005','nombre','tipo','imagen'),(7,'DIS-0007','Juego de Muebles en L Azul - Cuero','Sala','dfgsdfg'),(8,'DIS-0008','Juego de muebles en L Rojo - Gamuza','Sala','dfgd'),(14,'DIS-0014','Armario rojo','Closets','rtyhrt'),(15,'DIS-0015','aaaaa','bbbbb','ccccc'),(18,'DIS-0018','rtyt','tryurt','tyut'),(19,'DIS-0019','tydrt','tryrt','lllll'),(20,'DIS-0020','Diseño','aaaaa','cccccc'),(22,'DIS-0021','Prueba','Diseño','sefdf'),(24,'DIS-0023','Juego de Muebles en L Azul - Gamuza','Gamuza','rtyhtjfg'),(25,'DIS-0024','aaaaaa','fgd','dfgdf'),(26,'DIS-0026','Nuevo Diseño','Nuevo','aaaaaaaa');
 /*!40000 ALTER TABLE `diseños` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -275,6 +277,7 @@ CREATE TABLE `ordenescompra` (
   `OrdComp_id` int NOT NULL AUTO_INCREMENT,
   `Referencia` varchar(8) NOT NULL,
   `Cliente_id` int NOT NULL,
+  `Precio` double DEFAULT NULL,
   `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Completada` tinyint(1) DEFAULT '0',
   `VentaEfectiva` tinyint(1) DEFAULT '0',
@@ -290,7 +293,7 @@ CREATE TABLE `ordenescompra` (
 
 LOCK TABLES `ordenescompra` WRITE;
 /*!40000 ALTER TABLE `ordenescompra` DISABLE KEYS */;
-INSERT INTO `ordenescompra` VALUES (1,'ORD-0001',54,'2022-07-17 02:42:27',0,0),(3,'ORD-0003',54,'2022-08-03 01:20:26',0,0);
+INSERT INTO `ordenescompra` VALUES (1,'ORD-0001',54,NULL,'2022-07-17 02:42:27',0,0),(3,'ORD-0003',54,NULL,'2022-08-03 01:20:26',0,0);
 /*!40000 ALTER TABLE `ordenescompra` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -337,7 +340,7 @@ CREATE TABLE `productos` (
   UNIQUE KEY `Nombre` (`Nombre`),
   KEY `fk_productos_diseños_diseño_id_idx` (`Diseño_id`),
   CONSTRAINT `fk_productos_diseños_diseño_id` FOREIGN KEY (`Diseño_id`) REFERENCES `diseños` (`Diseño_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -346,7 +349,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'PRO-0001','sdfgsdfhg','sdfghsdf',456456,1,1),(4,'PRO-0004','fdghfg','fghfg',56757,4,3453),(5,'PRO-0005','dfsgdf','dsfgsd',343,1,4),(6,'PRO-0006','aaaaaaaaa','bbbbbbbbbb',111111111,1,5),(7,'PRO-0007','gggggg','aaaaaa',124,8,8),(8,'PRO-0008','Sala','asds',34564,4,7),(10,'PRO-0010','aaaaa','ccccc',334,3,25);
+INSERT INTO `productos` VALUES (1,'PRO-0001','sdfgsdfhg','sdfghsdf',456456,1,1),(4,'PRO-0004','fdghfg','fghfg',56757,4,18),(5,'PRO-0005','Producto','dsfgsd',343,1,20),(6,'PRO-0006','aaaaaaaaa','bbbbbbbbbb',111111111,1,5),(7,'PRO-0007','gggggg','aaaaaa',124,8,8),(8,'PRO-0008','Sala','asds',34564,4,7),(10,'PRO-0010','aaaaa','ccccc',334,3,25),(11,'PRO-0011','Armario Rojo','Closet',50000,2,14),(12,'PRO-0012','Comedor Circular','Comedor',400000,2,15);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -435,4 +438,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-03 21:33:59
+-- Dump completed on 2022-08-04 21:38:25

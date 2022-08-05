@@ -27,3 +27,23 @@ BEGIN
 	SET NEW.Referencia = CONCAT('PRO-', LPAD(siguiente_id, 4, '0'));
 END //
 DELIMITER ;
+
+
+
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `Asignar_Referencia_Material` BEFORE INSERT ON `materiales` FOR EACH ROW BEGIN
+	DECLARE siguiente_id INT;
+    IF (SELECT MAX(Material_id) FROM Materiales) > 0 THEN
+		SET siguiente_id = (SELECT MAX(Material_id) + 1 FROM Materiales);
+	ELSE
+		SET siguiente_id = 1;
+	END IF;
+	SET NEW.Referencia = CONCAT('MAT-', LPAD(siguiente_id, 4, '0'));
+END
+
+
+SELECT OrdenesCompra.Referencia, Clientes.Nombre, Productos.Nombre FROM OrdenCompra_Productos 
+INNER JOIN ordenescompra ON  ordencompra_productos.ordcomp_id = ordenescompra.ordcomp_id
+INNER JOIN Clientes ON OrdenesCompra.Cliente_id = Clientes.Cliente_id
+INNER JOIN Productos ON ordencompra_productos.Producto_id = Productos.Producto_id
+WHERE OrdenesCompra.Referencia = 'ORD-0003';

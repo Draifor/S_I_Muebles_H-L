@@ -4,36 +4,34 @@ import java.util.*;
 
 public class OrdenCompraVo {
 
-    private int id;
-    private int idCliente;
-    private List<ProductoVo> productos; 
-    private List<DiseñoVo> diseños; 
+    private int referencia;
+    private int codCliente;
     private Date fecha; 
     private boolean completada;
     private boolean ventaEfectiva;
 
-	public OrdenCompraVo(int idCliente, Date fecha, boolean completada, boolean ventaEfectiva) {
-    	this.idCliente = idCliente;
+	public OrdenCompraVo(int codCliente, Date fecha, boolean completada, boolean ventaEfectiva) {
+    	this.codCliente = codCliente;
     	this.fecha = fecha;
     	this.completada = completada;
     	this.ventaEfectiva = ventaEfectiva;
     }
 	
-	public OrdenCompraVo(int id, int idCliente, Date fecha, boolean completada, boolean ventaEfectiva) {
-		this(idCliente, fecha, completada, ventaEfectiva);
-		this.id = id;
+	public OrdenCompraVo(int referencia, int codCliente, Date fecha, boolean completada, boolean ventaEfectiva) {
+		this(codCliente, fecha, completada, ventaEfectiva);
+		this.referencia = referencia;
 	}
 
-    public int getId() {
-    	return this.id;
+    public int getReferencia() {
+    	return this.referencia;
     }
 
-    public int getIdCliente() {
-        return this.idCliente;
+    public int getCodCliente() {
+        return this.codCliente;
     }
     
-    public void setIdCliente(int idCliente) {
-    	this.idCliente = idCliente;
+    public void setCodCliente(int idCliente) {
+    	this.codCliente = idCliente;
     }
 
     public Date getFecha() {
@@ -43,22 +41,6 @@ public class OrdenCompraVo {
     public void setFecha(Date fecha) {
     	this.fecha = fecha;
     }
-
-	public List<ProductoVo> getProductos() {
-		return this.productos;
-	}
-
-	public void setProductos(List<ProductoVo> productos) {
-		this.productos = productos;
-	}
-	
-	public List<DiseñoVo> getDiseños() {
-		return this.diseños;
-	}
-	
-	public void setDiseños(List<DiseñoVo> diseños) {
-		this.diseños = diseños;
-	}
 
 	public boolean isCompletada() {
 		return this.completada;
@@ -79,10 +61,9 @@ public class OrdenCompraVo {
 	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("OrdenCompra numero: ").append(this.id);
+        sb.append("OrdenCompra numero: ").append(this.referencia);
         sb.append(" {");
-        sb.append("IdCliente: ").append(this.idCliente);
-        sb.append(", Productos: ").append(this.productos);
+        sb.append("IdCliente: ").append(this.codCliente);
         sb.append(", fecha: ").append(this.fecha);
         sb.append('}');
         return sb.toString();
