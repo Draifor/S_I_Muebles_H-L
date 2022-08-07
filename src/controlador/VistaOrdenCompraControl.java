@@ -68,19 +68,20 @@ public class VistaOrdenCompraControl {
 
 	public static String[][] obtenerOrdenesCompra() {
 		List<OrdenCompraVo> ordenesCompra = VistaOrdenCompraControl.ordenCompraDao.obtenerRegistros();
-		String[][] matrizProductos = new String[ordenesCompra.size()][ColumnasOrdenesCompra.TITULOS_COLUMNAS.length];
+		String[][] matrizOrdenesCompra = new String[ordenesCompra.size()][ColumnasOrdenesCompra.TITULOS_COLUMNAS.length];
 
-		for (int i = 0; i < matrizProductos.length; i++) {
-//			matrizProductos[i][OrdenesCompraColumnas.CODIGO] = ((OrdenCompraVo) ordenesCompra.get(i)).getId() + "";
-//			matrizProductos[i][OrdenesCompraColumnas.REFERENCIA] = ((OrdenCompraVo) ordenesCompra.get(i)).getReferencia();
-//			matrizProductos[i][OrdenesCompraColumnas.NOMBRE] = ((OrdenCompraVo) ordenesCompra.get(i)).getNombre();
-//			matrizProductos[i][OrdenesCompraColumnas.TIPO] = ((OrdenCompraVo) ordenesCompra.get(i)).getTipo();
-//			matrizProductos[i][OrdenesCompraColumnas.PRECIO] = ((OrdenCompraVo) ordenesCompra.get(i)).getPrecio() + "";
-//			matrizProductos[i][OrdenesCompraColumnas.CANTIDAD] = ((OrdenCompraVo) ordenesCompra.get(i)).getCantidad() + "";
-//			matrizProductos[i][OrdenesCompraColumnas.ID_DISEÑO] = ((OrdenCompraVo) ordenesCompra.get(i)).getIdDiseño() + "";
+		for (int i = 0; i < matrizOrdenesCompra.length; i++) {
+			matrizOrdenesCompra[i][ColumnasOrdenesCompra.REFERENCIA] = ((OrdenCompraVo) ordenesCompra.get(i)).getReferencia();
+			matrizOrdenesCompra[i][ColumnasOrdenesCompra.CLIENTE_CEDULA] = ((OrdenCompraVo) ordenesCompra.get(i)).getClienteCedula();
+			matrizOrdenesCompra[i][ColumnasOrdenesCompra.NOMBRE] = ((OrdenCompraVo) ordenesCompra.get(i)).getNombre();
+			matrizOrdenesCompra[i][ColumnasOrdenesCompra.DETALLES] = ((OrdenCompraVo) ordenesCompra.get(i)).getReferencia();
+			matrizOrdenesCompra[i][ColumnasOrdenesCompra.PRECIO] = ((OrdenCompraVo) ordenesCompra.get(i)).getPrecio() + "";
+			matrizOrdenesCompra[i][ColumnasOrdenesCompra.FECHA] = ((OrdenCompraVo) ordenesCompra.get(i)).getFecha() + "";
+			matrizOrdenesCompra[i][ColumnasOrdenesCompra.ESTADO_PRODUCTOS] = ((OrdenCompraVo) ordenesCompra.get(i)).isCompletada() + "";
+			matrizOrdenesCompra[i][ColumnasOrdenesCompra.ESTADO_FACTURA] = ((OrdenCompraVo) ordenesCompra.get(i)).isVentaEfectiva() + "";
 		}
 
-		return matrizProductos;
+		return matrizOrdenesCompra;
 	}
 
 	public static String[] obtenerTitulosColumnas() {
@@ -94,11 +95,6 @@ public class VistaOrdenCompraControl {
 					.setCellRenderer(new GestionCeldas("texto"));
 		}
 
-		// Se crean las columnas tipo numero
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.CODIGO).setCellRenderer(new GestionCeldas("numero"));
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.COD_CLIENTE)
-				.setCellRenderer(new GestionCeldas("numero"));
-
 		// Se crea la columna tipo precio
 		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.PRECIO).setCellRenderer(new GestionCeldas("precio"));
 
@@ -107,11 +103,12 @@ public class VistaOrdenCompraControl {
 		tabla.setRowHeight(25);
 		tabla.setGridColor(new java.awt.Color(0, 0, 0));
 		// Se define el tama�o de largo para cada columna y su contenido
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.CODIGO).setPreferredWidth(84);
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.COD_CLIENTE).setPreferredWidth(84);
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.LISTA_PRODUCTOS).setPreferredWidth(410);
+		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.REFERENCIA).setPreferredWidth(84);
+		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.CLIENTE_CEDULA).setPreferredWidth(110);
+		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.NOMBRE).setPreferredWidth(160);
+		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.DETALLES).setPreferredWidth(180);
 		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.PRECIO).setPreferredWidth(110);
-		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.FECHA).setPreferredWidth(110);
+		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.FECHA).setPreferredWidth(90);
 		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.ESTADO_PRODUCTOS).setPreferredWidth(130);
 		tabla.getColumnModel().getColumn(ColumnasOrdenesCompra.ESTADO_FACTURA).setPreferredWidth(120);
 	}

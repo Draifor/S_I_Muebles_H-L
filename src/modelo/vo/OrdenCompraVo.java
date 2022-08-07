@@ -4,34 +4,54 @@ import java.util.*;
 
 public class OrdenCompraVo {
 
-    private int referencia;
-    private int codCliente;
+    private String referencia;
+    private String clienteCedula;
+    private String nombre;
+    private Double precio;
     private Date fecha; 
     private boolean completada;
     private boolean ventaEfectiva;
 
-	public OrdenCompraVo(int codCliente, Date fecha, boolean completada, boolean ventaEfectiva) {
-    	this.codCliente = codCliente;
+	public OrdenCompraVo(String clienteCedula, String nombre, Double precio, Date fecha, boolean completada, boolean ventaEfectiva) {
+    	this.clienteCedula = clienteCedula;
+    	this.nombre = nombre;
+    	this.precio = precio;
     	this.fecha = fecha;
     	this.completada = completada;
     	this.ventaEfectiva = ventaEfectiva;
     }
 	
-	public OrdenCompraVo(int referencia, int codCliente, Date fecha, boolean completada, boolean ventaEfectiva) {
-		this(codCliente, fecha, completada, ventaEfectiva);
+	public OrdenCompraVo(String referencia, String clienteCedula, String nombre, Double precio, Date fecha, boolean completada, boolean ventaEfectiva) {
+		this(clienteCedula, nombre, precio, fecha, completada, ventaEfectiva);
 		this.referencia = referencia;
 	}
 
-    public int getReferencia() {
+    public String getReferencia() {
     	return this.referencia;
     }
 
-    public int getCodCliente() {
-        return this.codCliente;
+    public String getClienteCedula() {
+        return this.clienteCedula;
     }
     
-    public void setCodCliente(int idCliente) {
-    	this.codCliente = idCliente;
+    public void setClienteCedula(String clienteCedula) {
+    	this.clienteCedula = clienteCedula;
+    }
+    
+    public String getNombre() {
+    	return this.nombre;
+    }
+    
+    public void setNombre(String nombre) {
+    	this.nombre = nombre;
+    }
+    
+    public Double getPrecio() {
+    	return this.precio;
+    }
+    
+    public void setPrecio(Double precio) {
+    	this.precio = precio;
     }
 
     public Date getFecha() {
@@ -63,7 +83,7 @@ public class OrdenCompraVo {
         StringBuilder sb = new StringBuilder();
         sb.append("OrdenCompra numero: ").append(this.referencia);
         sb.append(" {");
-        sb.append("IdCliente: ").append(this.codCliente);
+        sb.append("IdCliente: ").append(this.clienteCedula);
         sb.append(", fecha: ").append(this.fecha);
         sb.append('}');
         return sb.toString();

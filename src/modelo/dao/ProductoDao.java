@@ -102,7 +102,9 @@ public class ProductoDao {
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet resultado = statement
-					.executeQuery("SELECT * FROM Productos WHERE Referencia='" + referenciaBuscar + "';");
+					.executeQuery("SELECT Productos.Referencia, Productos.Nombre, Productos.Tipo, Productos.Precio, Productos.Cantidad, Diseños.Referencia FROM Productos "
+							+ "INNER JOIN Diseños ON Productos.Diseño_id = Diseños.Diseño_id "
+							+ "WHERE Productos.Referencia='" + referenciaBuscar + "';");
 
 			String referencia;
 			String nombre;
@@ -112,12 +114,12 @@ public class ProductoDao {
 			String refDiseño;
 
 			while (resultado.next()) {
-				referencia = resultado.getString("Referencia");
-				nombre = resultado.getString("Nombre");
-				tipo = resultado.getString("Tipo");
-				precio = resultado.getDouble("Precio");
-				cantidad = resultado.getInt("Cantidad");
-				refDiseño = resultado.getString("Ref_Diseño");
+				referencia = resultado.getString(1);
+				nombre = resultado.getString(2);
+				tipo = resultado.getString(3);
+				precio = resultado.getDouble(4);
+				cantidad = resultado.getInt(5);
+				refDiseño = resultado.getString(6);
 
 				producto = new ProductoVo(referencia, nombre, tipo, precio, cantidad, refDiseño);
 			}

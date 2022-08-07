@@ -14,11 +14,15 @@ public class OrdenCompraDao {
 		connection = conexion.getConexion();
 		int resultadoOperacion = 0;
 
-		try {
-			PreparedStatement statement = connection.prepareStatement(
-					"INSERT INTO OrdenesCompra (Cod_Cliente) values (?)");
+		int clienteId = this.getClienteId(nuevaOrdenCompra.getClienteCedula());
 
-			statement.setInt(1, nuevaOrdenCompra.getCodCliente());
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("INSERT INTO OrdenesCompra (Cliente_id, Precio, Completada) values (?, ?, ?)");
+
+			statement.setInt(1, clienteId);
+			statement.setDouble(2, nuevaOrdenCompra.getPrecio());
+			statement.setBoolean(3, nuevaOrdenCompra.isCompletada());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -31,19 +35,22 @@ public class OrdenCompraDao {
 
 		return resultadoOperacion;
 	}
-	
+
 	public int modificar(OrdenCompraVo ordenCompraActualizada) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
 		int resultadoOperacion = 0;
 
+		int clienteId = this.getClienteId(ordenCompraActualizada.getClienteCedula());
 		try {
 			PreparedStatement statement = connection.prepareStatement(
-					"UPDATE OrdenesCompra SET Cod_Cliente=? WHERE Cod_OrdComp=?");
+					"UPDATE OrdenesCompra SET Cliente_id=?, Precio=?, Completada=? WHERE Referencia=?");
 
-			statement.setInt(1, ordenCompraActualizada.getCodCliente());
-			statement.setInt(2, ordenCompraActualizada.getReferencia());
+			statement.setInt(1, clienteId);
+			statement.setDouble(2, ordenCompraActualizada.getPrecio());
+			statement.setBoolean(3, ordenCompraActualizada.isCompletada());
+			statement.setString(4, ordenCompraActualizada.getReferencia());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -55,8 +62,8 @@ public class OrdenCompraDao {
 
 		return resultadoOperacion;
 	}
-	
-	public int eliminar(int idEliminar) {
+
+	public int eliminar(String referenciaEliminar) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
@@ -64,7 +71,8 @@ public class OrdenCompraDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			resultadoOperacion = statement.executeUpdate("DELETE FROM OrdenesCompra WHERE Cod_OrdComp=" + idEliminar);
+			resultadoOperacion = statement
+					.executeUpdate("DELETE FROM OrdenesCompra WHERE Referencia=" + referenciaEliminar);
 
 			statement.close();
 			conexion.desconectar();
@@ -74,7 +82,7 @@ public class OrdenCompraDao {
 
 		return resultadoOperacion;
 	}
-	
+
 	public OrdenCompraVo buscar(String referenciaBuscar) {
 
 		OrdenCompraVo ordenCompra = null;
@@ -85,23 +93,30 @@ public class OrdenCompraDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet resultado = statement
-					.executeQuery("SELECT * FROM OrdenesCompra WHERE Cod_Cliente='" + referenciaBuscar + "';");
+			ResultSet resultado = statement.executeQuery(
+					"SELECT OrdenesCompra.Referencia, Clientes.Identificacion, Clientes.Nombre, Clientes.Apellido, OrdenesCompra.Precio, OrdenesCompra.Fecha, OrdenesCompra.Completada, OrdenesCompra.VentaEfectiva FROM OrdenesCompra"
+							+ "INNER JOIN Clientes ON OrdenesCompra.Cliente_id = Clientes.Cliente_id"
+							+ "WHERE OrdenesCompra.Referencia='" + referenciaBuscar + "';");
 
-			int id;
-			int idCliente;
+			String referencia;
+			String clienteCedula;
+			String nombre;
+			Double precio;
 			Date fecha;
 			boolean completada;
 			boolean ventaEfectiva;
 
-//			while (resultado.next()) {
-//				id = resultado.getInt("Cod_OrdComp");
-//				idCliente = resultado.getInt("Cod_Cliente");
-//				fecha = resultado.getDate("fecha");
-//				idDiseño = resultado.getInt("Cod_Diseño");
-//
-//				ordenCompra = new OrdenCompraVo(id, referencia, nombre, tipo, precio, cantidad, idDiseño);
-//			}
+			while (resultado.next()) {
+				referencia = resultado.getString(1);
+				clienteCedula = resultado.getString(2);
+				nombre = resultado.getString(3) + " " + resultado.getString(4);
+				precio = resultado.getDouble(5);
+				fecha = resultado.getDate(6);
+				completada = resultado.getBoolean(7);
+				ventaEfectiva = resultado.getBoolean(8);
+
+				ordenCompra = new OrdenCompraVo(referencia, clienteCedula, nombre, precio, fecha, completada, ventaEfectiva);
+			}
 
 			statement.close();
 			conexion.desconectar();
@@ -111,7 +126,30 @@ public class OrdenCompraDao {
 
 		return ordenCompra;
 	}
-	
+
+	public int getClienteId(String identificacion) {
+		int id = 0;
+
+		Connection connection = null;
+		Conexion conexion = new Conexion();
+		connection = conexion.getConexion();
+
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultado = statement
+					.executeQuery("SELECT Cliente_id FROM Clientes WHERE Identificacion='" + identificacion + "';");
+			while (resultado.next()) {
+				id = resultado.getInt("Cliente_id");
+			}
+			statement.close();
+			conexion.desconectar();
+		} catch (SQLException e) {
+			System.out.println("Ocurrió una SQLException en ProductoDao.getId():\n" + e.getMessage());
+		}
+
+		return id;
+	}
+
 	public List<OrdenCompraVo> obtenerRegistros() {
 
 		List<OrdenCompraVo> ordenesCompra = new ArrayList<>();
@@ -121,31 +159,32 @@ public class OrdenCompraDao {
 		connection = conexion.getConexion();
 
 		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultado = statement.executeQuery("SELECT * FROM Productos");
+				Statement statement = connection.createStatement();
+				ResultSet resultado = statement.executeQuery(
+						"SELECT OrdenesCompra.Referencia, Clientes.Identificacion, Clientes.Nombre, Clientes.Apellido, OrdenesCompra.Precio, OrdenesCompra.Fecha, OrdenesCompra.Completada, OrdenesCompra.VentaEfectiva FROM OrdenesCompra "
+								+ "INNER JOIN Clientes ON OrdenesCompra.Cliente_id = Clientes.Cliente_id;");
 
-//			int id;
-//			String referencia;
-//			String nombre;
-//			String tipo;
-//			double precio;
-//			int cantidad;
-//			int idDiseño;
-//			OrdenCompraVo producto;
-//
-//			while (resultado.next()) {
-//				id = resultado.getInt("Cod_Producto");
-//				referencia = resultado.getString("Referencia");
-//				nombre = resultado.getString("Nombre");
-//				tipo = resultado.getString("Tipo");
-//				precio = resultado.getDouble("Precio");
-//				cantidad = resultado.getInt("Cantidad");
-//				idDiseño = resultado.getInt("Cod_Diseño");
-//
-//				producto = new OrdenCompraVo(id, referencia, nombre, tipo, precio, cantidad, idDiseño);
-//				ordenesCompra.add(producto);
-//			}
+				String referencia;
+				String clienteCedula;
+				String nombre;
+				Double precio;
+				Date fecha;
+				boolean completada;
+				boolean ventaEfectiva;
+				OrdenCompraVo ordenCompra;
 
+				while (resultado.next()) {
+					referencia = resultado.getString(1);
+					clienteCedula = resultado.getString(2);
+					nombre = resultado.getString(3) + " " + resultado.getString(4);
+					precio = resultado.getDouble(5);
+					fecha = resultado.getDate(6);
+					completada = resultado.getBoolean(7);
+					ventaEfectiva = resultado.getBoolean(8);
+
+					ordenCompra = new OrdenCompraVo(referencia, clienteCedula, nombre, precio, fecha, completada, ventaEfectiva);
+					ordenesCompra.add(ordenCompra);
+				}
 			statement.close();
 			conexion.desconectar();
 		} catch (SQLException e) {
