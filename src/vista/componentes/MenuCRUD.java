@@ -3,7 +3,6 @@ package vista.componentes;
 import javax.swing.*;
 import java.awt.FlowLayout;
 
-import controlador.*;
 import utilidades.*;
 
 public class MenuCRUD extends JPanel {

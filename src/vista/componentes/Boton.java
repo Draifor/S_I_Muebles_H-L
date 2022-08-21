@@ -23,7 +23,9 @@ public class Boton extends JPanel implements MouseListener {
 		setBorder(BorderFactory.createLineBorder(Color.VERDE_100.getColor(), 2));
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		setDoubleBuffered(false);
+		setFocusable(true);
 		addMouseListener(this);
+//		this.hacerEnfocable();
 
 		this.onClick = onClick;
 		this.botonTxt = new Texto(name, 0, 15);
@@ -31,6 +33,20 @@ public class Boton extends JPanel implements MouseListener {
 
 		add(botonTxt);
 	}
+	
+//	public void hacerEnfocable() {
+//		Action enviarFormulario = new AbstractAction() {
+//			private static final long serialVersionUID = 1L;
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				onClick.onMouseClicked();
+//			}
+//		};
+//		enviarFormulario.setEnabled(true);
+//		this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("Enter"), "enviarFormulario");
+//		this.getActionMap().put("enviarFormulario",	enviarFormulario);
+//	}
 
 	public void setOnClick(Operacion onClick) {
 		this.onClick = onClick;
@@ -39,6 +55,7 @@ public class Boton extends JPanel implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		this.onClick.onMouseClicked();
+		requestFocusInWindow();
 	}
 
 	@Override

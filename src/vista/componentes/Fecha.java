@@ -23,32 +23,32 @@ public class Fecha extends JPanel implements Runnable {
 	private Calendar calendario;
 	private Date fechaHoraActual;
 
-	private static JPanel contenedor;
-	private static Texto lblFecha;
-	private static Texto lblHora;
-	private static Thread reloj;
+	private JPanel contenedor;
+	private Texto lblFecha;
+	private Texto lblHora;
+	private Thread reloj;
 
 	public Fecha() {
 		this.setLayout(new BorderLayout(0, 0));
 		this.setOpaque(false);
 
-		Fecha.reloj = new Thread(this);
-		Fecha.reloj.start();
+		this.reloj = new Thread(this);
+		this.reloj.start();
 
-		Fecha.lblFecha = new Texto("DIA MES AÑO", 1, 18);
-		Fecha.lblFecha.setHorizontalAlignment(SwingConstants.CENTER);
+		this.lblFecha = new Texto("DIA MES AÑO", 1, 18);
+		this.lblFecha.setHorizontalAlignment(SwingConstants.CENTER);
 
-		Fecha.lblHora = new Texto("HH:MM:SS AM", 1, 18);
-		Fecha.lblHora.setHorizontalAlignment(SwingConstants.CENTER);
+		this.lblHora = new Texto("HH:MM:SS AM", 1, 18);
+		this.lblHora.setHorizontalAlignment(SwingConstants.CENTER);
 
-		Fecha.contenedor = new JPanel();
-		Fecha.contenedor.setLayout(new BorderLayout(0, 0));
-		Fecha.contenedor.setOpaque(false);
-		Fecha.contenedor.add(Fecha.lblFecha, BorderLayout.NORTH);
-		Fecha.contenedor.add(Fecha.lblHora, BorderLayout.CENTER);
+		this.contenedor = new JPanel();
+		this.contenedor.setLayout(new BorderLayout(0, 0));
+		this.contenedor.setOpaque(false);
+		this.contenedor.add(this.lblFecha, BorderLayout.NORTH);
+		this.contenedor.add(this.lblHora, BorderLayout.CENTER);
 
 		this.add(new JLabel(" "), BorderLayout.NORTH);
-		this.add(Fecha.contenedor, BorderLayout.CENTER);
+		this.add(this.contenedor, BorderLayout.CENTER);
 		this.add(new JLabel(" "), BorderLayout.SOUTH);
 
 	}
@@ -57,8 +57,8 @@ public class Fecha extends JPanel implements Runnable {
 	public void run() {
 		while (true) {
 			this.calcularHora();
-			Fecha.lblFecha.setText(this.dia + " " + this.mes + " " + this.año);
-			Fecha.lblHora.setText(this.horas + ":" + this.minutos + ":" + this.segundos + " " + this.ampm);
+			this.lblFecha.setText(this.dia + " " + this.mes + " " + this.año);
+			this.lblHora.setText(this.horas + ":" + this.minutos + ":" + this.segundos + " " + this.ampm);
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

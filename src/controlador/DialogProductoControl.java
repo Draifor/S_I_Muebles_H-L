@@ -27,7 +27,7 @@ public class DialogProductoControl {
 			String tipo = DialogProductoControl.ventana.getTipoInput().trim();
 			double precio = Double.parseDouble(precioInput);
 			int cantidad = DialogProductoControl.ventana.getCantidadInput();
-			String refDiseño = DialogProductoControl.ventana.getIdDiseñoInput();
+			String refDiseño = DialogProductoControl.ventana.getDiseñoInput();
 
 			if (!referencia.equals("Generado automáticamente")) {
 				producto = new ProductoVo(referencia, nombre, tipo, precio, cantidad, refDiseño);
@@ -52,7 +52,7 @@ public class DialogProductoControl {
 		DialogProductoControl.ventana.setTipoInput(producto.getTipo());
 		DialogProductoControl.ventana.setPrecioInput(producto.getPrecio() + "");
 		DialogProductoControl.ventana.setCantidadInput(producto.getCantidad());
-		DialogProductoControl.ventana.setRefDiseñoInput(producto.getRefDiseño() + "");
+		DialogProductoControl.ventana.setDiseñoInput(VistaDiseñoControl.getMatrizRegistros());
 	}
 
 	public static void limpiarDatos() {
@@ -61,7 +61,7 @@ public class DialogProductoControl {
 		DialogProductoControl.ventana.setTipoInput("");
 		DialogProductoControl.ventana.setPrecioInput("");
 		DialogProductoControl.ventana.setCantidadInput(0);
-		DialogProductoControl.ventana.setRefDiseñoInput("");
+		DialogProductoControl.ventana.setDiseñoInput(new String[0][0]);
 	}
 
 	public static boolean validarCampos(ProductoVo producto) {

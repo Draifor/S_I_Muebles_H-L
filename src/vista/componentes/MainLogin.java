@@ -41,7 +41,7 @@ public class MainLogin extends JPanel {
 		this.onClick = () -> LoginControl.iniciarSesion();
 		this.btnIngresar = new Boton("Ingresar", this.onClick);
 		this.btnIngresar.setBounds(150, 206, 105, 27);
-
+		
 		this.contenedorLogin = new JPanel();
 		this.contenedorLogin.setBackground(Color.AZUL_30.getColor());
 		this.contenedorLogin.setBorder(BorderFactory.createLineBorder(Color.AZUL_100.getColor(), 2));
@@ -57,4 +57,17 @@ public class MainLogin extends JPanel {
 		add(this.contenedorLogin);
 	}
 
+	public String getUsuario() {
+		return this.usuarioInput.getTextInput();
+	}
+	
+	public String getContraseña() {
+		return this.contraseñaInput.getTextInput();
+	}
+	
+	public void limpiarDatos() {
+		this.usuarioInput.setTextInput("");
+		this.contraseñaInput.setTextInput("");
+		this.usuarioInput.enfocar();
+	}
 }

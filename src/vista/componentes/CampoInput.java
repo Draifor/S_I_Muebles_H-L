@@ -41,4 +41,8 @@ public class CampoInput extends JPanel {
 	public void modificarFuente(Font font) {
 		this.campoInput.setFont(font);
 	}
+	
+	public void enfocar() {
+		this.campoInput.requestFocus();
+	}
 }

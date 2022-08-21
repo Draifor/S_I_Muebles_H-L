@@ -37,4 +37,19 @@ public class VentanaLogin extends JFrame {
 		this.contenedor.add(this.piePagina, BorderLayout.SOUTH);
 	}
 
+	public String getUsuario() {
+		return this.contenidoPrincipal.getUsuario();
+	}
+	
+	public String getContraseña() {
+		return this.contenidoPrincipal.getContraseña();
+	}
+	
+	public void dialogoAlerta(String mensaje, String titulo) {
+		JOptionPane.showMessageDialog(this, new Texto(mensaje, 0, 18), titulo, JOptionPane.PLAIN_MESSAGE);
+	}
+	
+	public void limpiarDatos() {
+		this.contenidoPrincipal.limpiarDatos();
+	}
 }

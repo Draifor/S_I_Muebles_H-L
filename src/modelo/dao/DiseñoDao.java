@@ -126,7 +126,7 @@ public class DiseñoDao {
 			String tipo;
 			String urlImagen;
 			DiseñoVo diseño;
-
+			
 			while (resultado.next()) {
 				referencia = resultado.getString("Referencia");
 				nombre = resultado.getString("Nombre");
@@ -135,6 +135,37 @@ public class DiseñoDao {
 
 				diseño = new DiseñoVo(referencia, nombre, tipo, urlImagen);
 
+				diseños.add(diseño);
+			}
+
+			statement.close();
+			conexion.desconectar();
+		} catch (SQLException e) {
+			System.out.println("Ocurrió una SQLException en DiseñoDao.obtenerDiseños():\n" + e.getMessage());
+		}
+
+		return diseños;
+	}
+	
+	public List<String[]> getMatrizRegistros() {
+		List<String[]> diseños = new ArrayList<String[]>();
+
+		Connection connection = null;
+		Conexion conexion = new Conexion();
+		connection = conexion.getConexion();
+
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultado = statement.executeQuery("SELECT Referencia, Nombre FROM Diseños");
+
+			String referencia;
+			String nombre;
+
+			while (resultado.next()) {
+				referencia = resultado.getString("Referencia");
+				nombre = resultado.getString("Nombre");
+
+				String[] diseño = {referencia, nombre};
 				diseños.add(diseño);
 			}
 

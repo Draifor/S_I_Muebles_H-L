@@ -82,6 +82,10 @@ public class VistaDiseñoControl {
 		return matrizDiseños;
 	}
 
+	public static String[][] getMatrizRegistros() {
+		return VistaDiseñoControl.diseñoDao.getMatrizRegistros().toArray(new String[0][0]);
+	}
+	
 	public static String[] obtenerTitulosColumnas() {
 		return ColumnasDiseños.TITULOS_COLUMNAS;
 	}

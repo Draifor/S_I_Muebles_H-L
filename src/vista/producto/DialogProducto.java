@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import controlador.DialogProductoControl;
+import controlador.VistaDiseñoControl;
 import utilidades.Color;
 import utilidades.Operacion;
 import vista.componentes.*;
@@ -26,8 +27,9 @@ public class DialogProducto extends JDialog {
 	private CampoInput precioInput;
 	private Label cantidad;
 	private Spinner cantidadInput;
-	private Label idDiseño;
-	private CampoInput idDiseñoInput;
+	private Label refDiseño;
+//	private CampoInput refDiseñoInput;
+	private ComboBox diseñoInput;
 	private Boton boton1;
 	private Boton boton2;
 	private Boton cancelar;
@@ -79,11 +81,15 @@ public class DialogProducto extends JDialog {
 		this.cantidadInput = new Spinner();
 		this.cantidadInput.setBounds(183, 298, 83, 29);
 
-		this.idDiseño = new Label("Ref Diseño:");
-		this.idDiseño.setBounds(36, 353, 115, 29);
+		this.refDiseño = new Label("Ref Diseño:");
+		this.refDiseño.setBounds(36, 353, 115, 29);
 		
-		this.idDiseñoInput = new CampoInput("texto");
-		this.idDiseñoInput.setBounds(183, 353, 233, 29);
+//		this.refDiseñoInput = new CampoInput("texto");
+//		this.refDiseñoInput.setBounds(183, 353, 233, 29);
+		
+		this.diseñoInput = new ComboBox();
+		this.diseñoInput.agregarElementos(VistaDiseñoControl.getMatrizRegistros());
+		this.diseñoInput.setBounds(183, 353, 233, 29);
 
 		this.boton1 = new Boton("Botón 1", () -> setTitle(""));
 		this.boton1.setBounds(45, 412, 105, 27);
@@ -110,8 +116,9 @@ public class DialogProducto extends JDialog {
 		this.contenedorPrincipal.add(this.precioInput);
 		this.contenedorPrincipal.add(this.cantidad);
 		this.contenedorPrincipal.add(this.cantidadInput);
-		this.contenedorPrincipal.add(this.idDiseño);
-		this.contenedorPrincipal.add(this.idDiseñoInput);
+		this.contenedorPrincipal.add(this.refDiseño);
+//		this.contenedorPrincipal.add(this.refDiseñoInput);
+		this.contenedorPrincipal.add(this.diseñoInput);
 		this.contenedorPrincipal.add(this.boton1);
 		this.contenedorPrincipal.add(this.boton2);
 		this.contenedorPrincipal.add(this.cancelar);
@@ -168,12 +175,20 @@ public class DialogProducto extends JDialog {
 		this.cantidadInput.setValue(cantidadInput);
 	}
 	
-	public String getIdDiseñoInput() {
-		return this.idDiseñoInput.getTextInput();
+//	public String getRefDiseñoInput() {
+//		return this.refDiseñoInput.getTextInput();
+//	}
+//	
+//	public void setRefDiseñoInput(String refDiseñoInput) {
+//		this.refDiseñoInput.setTextInput(refDiseñoInput);
+//	}
+	
+	public String getDiseñoInput() {
+		return this.diseñoInput.getSelectedItem().toString();
 	}
 	
-	public void setRefDiseñoInput(String idDiseñoInput) {
-		this.idDiseñoInput.setTextInput(idDiseñoInput);
+	public void setDiseñoInput(String[][] diseñoInput) {
+		this.diseñoInput.agregarElementos(diseñoInput);
 	}
 
 	public void setTitulo(String nombreVentana) {
@@ -215,7 +230,8 @@ public class DialogProducto extends JDialog {
 		this.tipoInput.desactivarCampo();
 		this.precioInput.desactivarCampo();
 		this.cantidadInput.setEnabled(false);
-		this.idDiseñoInput.desactivarCampo();
+//		this.refDiseñoInput.desactivarCampo();
+		this.diseñoInput.desactivarCampo();
 	}
 
 	public void activarCampos() {
@@ -223,7 +239,8 @@ public class DialogProducto extends JDialog {
 		this.tipoInput.activarCampo();
 		this.precioInput.activarCampo();
 		this.cantidadInput.setEnabled(true);
-		this.idDiseñoInput.activarCampo();
+//		this.refDiseñoInput.activarCampo();
+		this.diseñoInput.activarCampo();
 	}
 
 	public void codigoPorDefecto() {
