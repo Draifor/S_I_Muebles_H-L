@@ -6,20 +6,25 @@ import java.util.*;
 
 import modelo.conexion.Conexion;
 import modelo.vo.VentaVo;
+import utilidades.MetodosAuxiliares;
 
 public class VentaDao {
 	public int agregar(VentaVo nuevaVenta) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
+		
 		int resultadoOperacion = 0;
+		int nuevoId = this.obtenerUltimoId(connection) + 1;
+		String referencia = "VEN-" + MetodosAuxiliares.formatearId(nuevoId);
+
 
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO Ventas (Cod_Cliente, FacturaId, Cod_OrdComp) values (?, ?, ?)");
+					.prepareStatement("INSERT INTO Ventas (Referencia, Cod_Cliente, FacturaId, Cod_OrdComp) values (?, ?, ?, ?)");
 
+			statement.setString(1, referencia);
 			statement.setInt(1, nuevaVenta.getIdCliente());
-			statement.setString(1, "FACT-" + nuevaVenta.getId());
 			statement.setInt(1, nuevaVenta.getIdOrden());
 
 			resultadoOperacion = statement.executeUpdate();
@@ -34,6 +39,22 @@ public class VentaDao {
 		return resultadoOperacion;
 	}
 
+	public int obtenerUltimoId(Connection connection) {
+		int ultimoId = 0;
+
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultado = statement.executeQuery("SELECT MAX(Venta_id) FROM Ventas;");
+
+			while (resultado.next()) {
+				ultimoId = resultado.getInt(1);
+			}
+		} catch (Exception error) {
+			System.out.println("Ocurrió una Exception en VentaDao.obtenerUltimoId():\n" + error.getMessage());
+		}
+		return ultimoId;
+	}
+	
 	public VentaVo buscar(String referenciaBuscar) {
 
 		VentaVo ordenCompra = null;

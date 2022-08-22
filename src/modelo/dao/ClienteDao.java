@@ -5,6 +5,7 @@ import java.util.*;
 
 import modelo.conexion.Conexion;
 import modelo.vo.ClienteVo;
+import utilidades.MetodosAuxiliares;
 
 public class ClienteDao {
 
@@ -12,17 +13,21 @@ public class ClienteDao {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
+		
 		int resultadoOperacion = 0;
+		int nuevoId = this.obtenerUltimoId(connection) + 1;
+		String codigo = "CLI-" + MetodosAuxiliares.formatearId(nuevoId);
 
 		try {
 			PreparedStatement statement = connection.prepareStatement(
-					"INSERT INTO clientes (Nombre, Apellido, Identificacion, Celular, Direccion) values (?, ?, ?, ?, ?)");
+					"INSERT INTO clientes (Codigo, Nombre, Apellido, Identificacion, Celular, Direccion) values (?, ?, ?, ?, ?, ?)");
 
-			statement.setString(1, nuevoCliente.getNombre());
-			statement.setString(2, nuevoCliente.getApellido());
-			statement.setInt(3, Integer.parseInt(nuevoCliente.getIdentificacion()));
-			statement.setString(4, nuevoCliente.getCelular());
-			statement.setString(5, nuevoCliente.getDireccion());
+			statement.setString(1, codigo);
+			statement.setString(2, nuevoCliente.getNombre());
+			statement.setString(3, nuevoCliente.getApellido());
+			statement.setInt(4, Integer.parseInt(nuevoCliente.getIdentificacion()));
+			statement.setString(5, nuevoCliente.getCelular());
+			statement.setString(6, nuevoCliente.getDireccion());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -64,7 +69,7 @@ public class ClienteDao {
 		return resultadoOperacion;
 	}
 
-	public int eliminar(String referenciaEliminar) {
+	public int eliminar(String codigoEliminar) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
@@ -72,7 +77,7 @@ public class ClienteDao {
 
 		try {
 			Statement statement = connection.createStatement();
-			resultadoOperacion = statement.executeUpdate("DELETE FROM clientes WHERE Referencia='" + referenciaEliminar + "';");
+			resultadoOperacion = statement.executeUpdate("DELETE FROM clientes WHERE Codigo='" + codigoEliminar + "';");
 
 			statement.close();
 			conexion.desconectar();
@@ -83,6 +88,22 @@ public class ClienteDao {
 		return resultadoOperacion;
 	}
 
+	public int obtenerUltimoId(Connection connection) {
+		int ultimoId = 0;
+		
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultado = statement.executeQuery("SELECT MAX(Cliente_id) FROM Clientes;");
+			
+			while (resultado.next()) {
+				ultimoId = resultado.getInt(1);
+			}
+		} catch (Exception error) {
+			System.out.println("Ocurrió una Exception en ClienteDao.obtenerUltimoId():\n" + error.getMessage());
+		}
+		return ultimoId;
+	}
+	
 	public ClienteVo buscar(int idBuscar) {
 
 		ClienteVo cliente = null;

@@ -6,23 +6,28 @@ import java.util.*;
 
 import modelo.conexion.Conexion;
 import modelo.vo.OrdenCompraVo;
+import utilidades.MetodosAuxiliares;
 
 public class OrdenCompraDao {
 	public int agregar(OrdenCompraVo nuevaOrdenCompra) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
+
 		int resultadoOperacion = 0;
+		int nuevoId = this.obtenerUltimoId(connection) + 1;
+		String referencia = "ORD-" + MetodosAuxiliares.formatearId(nuevoId);
 
 		int clienteId = this.getClienteId(nuevaOrdenCompra.getClienteCedula());
 
 		try {
-			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO OrdenesCompra (Cliente_id, Precio, Completada) values (?, ?, ?)");
+			PreparedStatement statement = connection.prepareStatement(
+					"INSERT INTO OrdenesCompra (Referencia, Cliente_id, Precio, Completada) values (?, ?, ?, ?)");
 
-			statement.setInt(1, clienteId);
-			statement.setDouble(2, nuevaOrdenCompra.getPrecio());
-			statement.setBoolean(3, nuevaOrdenCompra.isCompletada());
+			statement.setString(1, referencia);
+			statement.setInt(2, clienteId);
+			statement.setDouble(3, nuevaOrdenCompra.getPrecio());
+			statement.setBoolean(4, nuevaOrdenCompra.isCompletada());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -83,6 +88,22 @@ public class OrdenCompraDao {
 		return resultadoOperacion;
 	}
 
+	public int obtenerUltimoId(Connection connection) {
+		int ultimoId = 0;
+
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultado = statement.executeQuery("SELECT MAX(OrdComp_id) FROM OrdenesCompra;");
+
+			while (resultado.next()) {
+				ultimoId = resultado.getInt(1);
+			}
+		} catch (Exception error) {
+			System.out.println("Ocurrió una Exception en OrdenCompraDao.obtenerUltimoId():\n" + error.getMessage());
+		}
+		return ultimoId;
+	}
+
 	public OrdenCompraVo buscar(String referenciaBuscar) {
 
 		OrdenCompraVo ordenCompra = null;
@@ -115,7 +136,8 @@ public class OrdenCompraDao {
 				completada = resultado.getBoolean(7);
 				ventaEfectiva = resultado.getBoolean(8);
 
-				ordenCompra = new OrdenCompraVo(referencia, clienteCedula, nombre, precio, fecha, completada, ventaEfectiva);
+				ordenCompra = new OrdenCompraVo(referencia, clienteCedula, nombre, precio, fecha, completada,
+						ventaEfectiva);
 			}
 
 			statement.close();
@@ -159,32 +181,33 @@ public class OrdenCompraDao {
 		connection = conexion.getConexion();
 
 		try {
-				Statement statement = connection.createStatement();
-				ResultSet resultado = statement.executeQuery(
-						"SELECT OrdenesCompra.Referencia, Clientes.Identificacion, Clientes.Nombre, Clientes.Apellido, OrdenesCompra.Precio, OrdenesCompra.Fecha, OrdenesCompra.Completada, OrdenesCompra.VentaEfectiva FROM OrdenesCompra "
-								+ "INNER JOIN Clientes ON OrdenesCompra.Cliente_id = Clientes.Cliente_id;");
+			Statement statement = connection.createStatement();
+			ResultSet resultado = statement.executeQuery(
+					"SELECT OrdenesCompra.Referencia, Clientes.Identificacion, Clientes.Nombre, Clientes.Apellido, OrdenesCompra.Precio, OrdenesCompra.Fecha, OrdenesCompra.Completada, OrdenesCompra.VentaEfectiva FROM OrdenesCompra "
+							+ "INNER JOIN Clientes ON OrdenesCompra.Cliente_id = Clientes.Cliente_id;");
 
-				String referencia;
-				String clienteCedula;
-				String nombre;
-				Double precio;
-				Date fecha;
-				boolean completada;
-				boolean ventaEfectiva;
-				OrdenCompraVo ordenCompra;
+			String referencia;
+			String clienteCedula;
+			String nombre;
+			Double precio;
+			Date fecha;
+			boolean completada;
+			boolean ventaEfectiva;
+			OrdenCompraVo ordenCompra;
 
-				while (resultado.next()) {
-					referencia = resultado.getString(1);
-					clienteCedula = resultado.getString(2);
-					nombre = resultado.getString(3) + " " + resultado.getString(4);
-					precio = resultado.getDouble(5);
-					fecha = resultado.getDate(6);
-					completada = resultado.getBoolean(7);
-					ventaEfectiva = resultado.getBoolean(8);
+			while (resultado.next()) {
+				referencia = resultado.getString(1);
+				clienteCedula = resultado.getString(2);
+				nombre = resultado.getString(3) + " " + resultado.getString(4);
+				precio = resultado.getDouble(5);
+				fecha = resultado.getDate(6);
+				completada = resultado.getBoolean(7);
+				ventaEfectiva = resultado.getBoolean(8);
 
-					ordenCompra = new OrdenCompraVo(referencia, clienteCedula, nombre, precio, fecha, completada, ventaEfectiva);
-					ordenesCompra.add(ordenCompra);
-				}
+				ordenCompra = new OrdenCompraVo(referencia, clienteCedula, nombre, precio, fecha, completada,
+						ventaEfectiva);
+				ordenesCompra.add(ordenCompra);
+			}
 			statement.close();
 			conexion.desconectar();
 		} catch (SQLException e) {

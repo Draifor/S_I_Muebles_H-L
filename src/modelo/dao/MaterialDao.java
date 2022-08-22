@@ -5,21 +5,26 @@ import java.util.*;
 
 import modelo.conexion.Conexion;
 import modelo.vo.MaterialVo;
+import utilidades.MetodosAuxiliares;
 
 public class MaterialDao {
 	public int agregar(MaterialVo nuevoMaterial) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
+		
 		int resultadoOperacion = 0;
+		int nuevoId = this.obtenerUltimoId(connection) + 1;
+		String referencia = "MAT-" + MetodosAuxiliares.formatearId(nuevoId);
 
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO Materiales (Nombre, Costo, Cantidad) values (?, ?, ?)");
+					.prepareStatement("INSERT INTO Materiales (Referencia, Nombre, Costo, Cantidad) values (?, ?, ?, ?)");
 
-			statement.setString(1, nuevoMaterial.getNombre());
-			statement.setDouble(2, nuevoMaterial.getCosto());
-			statement.setInt(3, nuevoMaterial.getCantidad());
+			statement.setString(1, referencia);
+			statement.setString(2, nuevoMaterial.getNombre());
+			statement.setDouble(3, nuevoMaterial.getCosto());
+			statement.setInt(4, nuevoMaterial.getCantidad());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -77,6 +82,22 @@ public class MaterialDao {
 		}
 
 		return resultadoOperacion;
+	}
+	
+	public int obtenerUltimoId(Connection connection) {
+		int ultimoId = 0;
+		
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultado = statement.executeQuery("SELECT MAX(Material_id) FROM Materiales;");
+			
+			while (resultado.next()) {
+				ultimoId = resultado.getInt(1);
+			}
+		} catch (Exception error) {
+			System.out.println("Ocurrió una Exception en MaterialDao.obtenerUltimoId():\n" + error.getMessage());
+		}
+		return ultimoId;
 	}
 
 	public MaterialVo buscar(String referenciaBuscar) {

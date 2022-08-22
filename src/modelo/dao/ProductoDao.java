@@ -5,26 +5,31 @@ import java.util.*;
 
 import modelo.conexion.Conexion;
 import modelo.vo.ProductoVo;
+import utilidades.MetodosAuxiliares;
 
 public class ProductoDao {
 	public int agregar(ProductoVo nuevoProducto) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
+		
 		int resultadoOperacion = 0;
+		int nuevoId = this.obtenerUltimoId(connection) + 1;
+		String referencia = "PRO-" + MetodosAuxiliares.formatearId(nuevoId);
 
 		int diseñoId = this.getId(nuevoProducto.getRefDiseño());
 
 		if (diseñoId != 0) {
 			try {
 				PreparedStatement statement = connection.prepareStatement(
-						"INSERT INTO Productos (Nombre, Tipo, Precio, Cantidad, Diseño_id) values (?, ?, ?, ?, ?)");
+						"INSERT INTO Productos (Referencia, Nombre, Tipo, Precio, Cantidad, Diseño_id) values (?, ?, ?, ?, ?, ?)");
 
-				statement.setString(1, nuevoProducto.getNombre());
-				statement.setString(2, nuevoProducto.getTipo());
-				statement.setDouble(3, nuevoProducto.getPrecio());
-				statement.setInt(4, nuevoProducto.getCantidad());
-				statement.setInt(5, diseñoId);
+				statement.setString(1, referencia);
+				statement.setString(2, nuevoProducto.getNombre());
+				statement.setString(3, nuevoProducto.getTipo());
+				statement.setDouble(4, nuevoProducto.getPrecio());
+				statement.setInt(5, nuevoProducto.getCantidad());
+				statement.setInt(6, diseñoId);
 
 				resultadoOperacion = statement.executeUpdate();
 
@@ -91,6 +96,22 @@ public class ProductoDao {
 		return resultadoOperacion;
 	}
 
+	public int obtenerUltimoId(Connection connection) {
+		int ultimoId = 0;
+
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultado = statement.executeQuery("SELECT MAX(Producto_id) FROM Productos;");
+
+			while (resultado.next()) {
+				ultimoId = resultado.getInt(1);
+			}
+		} catch (Exception error) {
+			System.out.println("Ocurrió una Exception en ProductoDao.obtenerUltimoId():\n" + error.getMessage());
+		}
+		return ultimoId;
+	}
+	
 	public ProductoVo buscar(String referenciaBuscar) {
 
 		ProductoVo producto = null;

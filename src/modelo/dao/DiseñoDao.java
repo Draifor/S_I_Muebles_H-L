@@ -5,21 +5,26 @@ import java.util.*;
 
 import modelo.conexion.Conexion;
 import modelo.vo.DiseñoVo;
+import utilidades.MetodosAuxiliares;
 
 public class DiseñoDao {
 	public int agregar(DiseñoVo nuevoDiseño) {
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		connection = conexion.getConexion();
-		int resultadoOperacion = 0;
 
+		int resultadoOperacion = 0;
+		int nuevoId = this.obtenerUltimoId(connection) + 1;
+		String referencia = "DIS-" + MetodosAuxiliares.formatearId(nuevoId);
+		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO Diseños (Nombre, Tipo, Imagen) values (?, ?, ?)");
+					.prepareStatement("INSERT INTO Diseños (Referencia, Nombre, Tipo, Imagen) values (?, ?, ?, ?)");
 
-			statement.setString(1, nuevoDiseño.getNombre());
-			statement.setString(2, nuevoDiseño.getTipo());
-			statement.setString(3, nuevoDiseño.getUrlImagen());
+			statement.setString(1, referencia);
+			statement.setString(2, nuevoDiseño.getNombre());
+			statement.setString(3, nuevoDiseño.getTipo());
+			statement.setString(4, nuevoDiseño.getUrlImagen());
 
 			resultadoOperacion = statement.executeUpdate();
 
@@ -78,6 +83,22 @@ public class DiseñoDao {
 		return resultadoOperacion;
 	}
 
+	public int obtenerUltimoId(Connection connection) {
+		int ultimoId = 0;
+		
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultado = statement.executeQuery("SELECT MAX(Diseño_id) FROM Diseños;");
+			
+			while (resultado.next()) {
+				ultimoId = resultado.getInt(1);
+			}
+		} catch (Exception error) {
+			System.out.println("Ocurrió una Exception en DiseñoDao.obtenerUltimoId():\n" + error.getMessage());
+		}
+		return ultimoId;
+	}
+	
 	public DiseñoVo buscar(String referenciaBuscar) {
 
 		DiseñoVo diseño = null;
